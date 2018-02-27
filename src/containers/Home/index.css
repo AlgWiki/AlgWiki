@@ -1,0 +1,20 @@
+section {
+  display: flex;
+  align-items: center;
+}
+section img {
+  width: 200px;
+  clear: both;
+}
+section.align-right {
+  text-align: right;
+}
+section.align-right img {
+  order: 2;
+}
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}

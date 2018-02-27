@@ -1,0 +1,17 @@
+# ignore caches
+node_modules/
+.cache/
+
+# ignore builds
+dist/
+
+# ignore all logs
+*.log
+
+# ignore editor generated files
+.vscode
+.idea
+.iml
+
+# ignore OS generated files
+**/.DS_Store
