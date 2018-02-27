@@ -21,7 +21,7 @@ If you are a JavaScript and Git veteran, the sections which will interest you mo
   - Yarn is a package manager for Node.js
   - NPM is the default package manager but Yarn is faster and generally better
   - *Note for MacOS users: If you install Yarn using `brew`, make sure you add the `--without-node` option!*
-- Download the source code of the project: `git clone ...`
+- Download the source code of the project: `git clone https://github.com/jakzo/edgecase.git`
   - You probably know what [Git](https://git-scm.com/) is if you're reading this...
   - But Git can be confusing, so Git commands will be shown throughout this guide
 - Install dependencies by running `yarn` in the root folder of the project
