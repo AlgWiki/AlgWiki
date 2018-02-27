@@ -2,9 +2,9 @@
 This page is designed for people who are new to JS development or unfamiliar with the technologies used in EC. It will give a high-level overview of the tools and technologies used and get you ready to start hacking at the code!
 
 If you are a JavaScript and Git veteran, the sections which will interest you most are:
-- [Directory Structure](#Directory_Structure)
-- [Code Style](#Code_Style)
-- [Committing](#Committing)
+- [Directory Structure](#directory-structure)
+- [Code Style](#code-style)
+- [Committing](#committing)
 
 
 ## Setting Up an Efficient Dev Environment
