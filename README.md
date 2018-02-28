@@ -1,7 +1,7 @@
 # EdgeCase
 *Website for learning algorithms and participating in programming competitions.*
 
-__Under construction! Things will not work or make sense for a while...__
+__Attention: EdgeCase is still in early development and is not yet usable. See the [todo](docs/todo.md) list for things which still need to be done.__
 
 ## Running the server locally
 ``` sh
