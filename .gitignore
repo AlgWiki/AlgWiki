@@ -9,7 +9,7 @@ dist/
 *.log
 
 # ignore editor generated files
-.vscode
+#.vscode # include vscode launch commands
 .idea
 .iml
 
