@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component, ComponentType, Props } from 'react';
 import Loadable from 'react-loadable';
 import { Promise } from 'es6-promise';
 
@@ -8,14 +8,14 @@ export const HOW = 'routes/HOW';
 
 // Route components
 export interface RouteLoaders {
-  [actionType: string]: () => Promise<any>; // TODO: What type are the import results?
+  [actionType: string]: () => any; // Promise<ComponentType<Props<any>>>; // TODO: What type are the import results?
 }
 export const routeLoaders: RouteLoaders = {
-  [HOME]: () => import('../containers/Home/index'),
-  [HOW]: () => import('../containers/How/index'),
+  [HOME]: () => import(/* webpackChunkName: "home" */ '../containers/Home/index'),
+  [HOW]: () => import(/* webpackChunkName: "how" */ '../containers/How/index'),
 };
 export interface RouteComponents {
-  [actionType: string]: React.Component;
+  [actionType: string]: ComponentType;
 }
 export const routeComponents: RouteComponents = {};
 for (const key in routeLoaders) {

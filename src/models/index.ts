@@ -1,6 +1,7 @@
 export interface User {
+  id: string;
   name: string;
-  avatarURL: string;
+  avatarUrl: string;
 }
 
 export type TestCasePrimitive = string | number | boolean;

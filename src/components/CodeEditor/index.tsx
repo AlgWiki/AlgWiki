@@ -21,7 +21,7 @@ export interface CodeEditorDefaultProps {
   autoSaveDelay: number;
 }
 export type CodeEditorPropsWithDefaults = CodeEditorProps & CodeEditorDefaultProps;
-export default class CodeEditor extends Component<CodeEditorProps> {
+export default class CodeEditor extends React.Component<CodeEditorProps> {
   static defaultProps: CodeEditorDefaultProps = {
     code: '',
     onRun: () => {},
@@ -36,10 +36,10 @@ export default class CodeEditor extends Component<CodeEditorProps> {
     onSave(); // auto-save before quit
   }
 
-  initCM = (container: HTMLDivElement) => {
+  initCM = (container: HTMLElement | null) => {
     if (!container) return;
     const { code, onRun, onSave } = this.props as CodeEditorPropsWithDefaults;
-    this.cm = CodeMirror(cm => container.appendChild(cm), {
+    this.cm = CodeMirror((cm: HTMLElement) => container.appendChild(cm), {
       value: code,
       mode: 'javascript',
       extraKeys: {

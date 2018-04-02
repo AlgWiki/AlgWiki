@@ -13,7 +13,6 @@ export default class Home extends React.Component {
   render() {
     return (
       <article>
-
         <section>
           <img src={SVGBuildingFunctionality} />
 
@@ -22,9 +21,9 @@ export default class Home extends React.Component {
             <p>Need an efficient algorithm to X?</p>
             <p>Or maybe you're stumped trying to implement Y?</p>
             <p>
-              With (hopefully in the future) many different computer science problems
-              in the database along with a variety of solutions, you can find the
-              best way to deal with your situation.
+              With (hopefully in the future) many different computer science problems in the
+              database along with a variety of solutions, you can find the best way to deal with
+              your situation.
             </p>
           </div>
         </section>
@@ -36,37 +35,38 @@ export default class Home extends React.Component {
             <h2>Compete to find the most efficient solution</h2>
             <p>Think you know a bit about programming already?</p>
             <p>
-              Win by finding the fastest, shortest (code golf) or most
-              elegant piece of code which solves a task. New competitions start every
-              day with a week to perfect and hone your submission.
+              Win by finding the fastest, shortest (code golf) or most elegant piece of code which
+              solves a task. New competitions start every day with a week to perfect and hone your
+              submission.
             </p>
           </div>
         </section>
 
-        <div style={{
-          height: 400,
-          width: 800,
-          border: '1px solid #ccc',
-          borderRadius: 4,
-          boxShadow:
-          '#ccc 0 0 8px',
-          margin: '0 auto'
-        }}>
-          <Workspace solutions={[]} comments={[]} />
+        <div
+          style={{
+            height: 400,
+            width: 800,
+            border: '1px solid #ccc',
+            borderRadius: 4,
+            boxShadow: '#ccc 0 0 8px',
+            margin: '0 auto',
+          }}
+        >
+          <Workspace solutions={[]} hasComments={true} />
         </div>
-        
+
         <section>
           <img src={SVGGrowing} />
 
           <div>
             <h2>Improve your coding skills</h2>
             <p>
-              Work through a curated set of problems and read explanations of a
-              variety of topics and difficulty levels to build your knowledge.
+              Work through a curated set of problems and read explanations of a variety of topics
+              and difficulty levels to build your knowledge.
             </p>
           </div>
         </section>
-        
+
         <Link to="/how">How does it work?</Link>
       </article>
     );

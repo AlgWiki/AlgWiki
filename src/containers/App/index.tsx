@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component, ComponentType } from 'react';
 import { connect } from 'react-redux';
 // import { TransitionGroup, Transition } from 'transition-group';
 
@@ -23,8 +23,14 @@ import '@atlaskit/css-reset';
 //     error: <p>Error!</p>,
 //   });
 
+class FourOhFour extends React.Component<{}> {
+  render() {
+    return <div>404</div>;
+  }
+}
+
 interface SwitcherProps {
-  pageComponent: React.ComponentClass;
+  pageComponent: ComponentType;
   direction: string;
   isLoading: boolean;
   pageType: string;
@@ -48,14 +54,12 @@ class SwitcherComponent extends React.Component<SwitcherProps> {
     // );
   }
 }
-const Switcher = connect(
-  (state: State): SwitcherProps => ({
-    pageComponent: routeComponents[state.location.type],
-    direction: 'back',
-    isLoading: false,
-    pageType: state.location.type,
-  }),
-)(SwitcherComponent);
+const Switcher = connect((state: State): SwitcherProps => ({
+  pageComponent: routeComponents[state.location.type] || FourOhFour,
+  direction: 'back',
+  isLoading: false,
+  pageType: state.location.type,
+}))(SwitcherComponent);
 
 export default class App extends React.Component {
   render() {

@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  // "compilerOptions": {
+  //   "strict": true,
+  //   "jsx": "react",
+  //   "esModuleInterop": true,
+  //   "experimentalDecorators": true,
+  //   "moduleResolution": "node",
+  //   "importHelpers": true,
+  //   "allowSyntheticDefaultImports": true,
+  //   "sourceMap": true,
+  //   "module": "esnext",
+  //   "isolatedModules": true,
+  //   "lib": ["es2017"],
+  //   "target": "es2017",
+  //   "rootDir": ".",
+  //   "outDir": "./dist",
+  // },
+  "files": ["./src/server/index.ts"],
+  "include": ["./src", "./types"],
+  "exclude": ["node_modules", "./src/client"]
+}

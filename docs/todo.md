@@ -1,35 +1,43 @@
 # TODO
+
 Core functionality which needs to be completed for the minimum viable product.
 
-__General__
-- Server
-- Database (use something like Sequelize?)
-- Server-side rendering
-- Build tools (tslint, prettier, etc.)
-- Build scripts (`yarn commit`, etc.)
-- Website pages (see `pages.md`)
-- User authentication
-- User management UI
-- Notifications UI
-- Email notification service
+**General**
 
-__Programming Competitions__
-- Workspace comments
-- Comment editor (fabric editor)
-- Description editor (fabric editor)
-- Workspace solutions list
-- Workspace description renderer
-- Test case list
-- Test case editor
-- Contest (test runner, separate repo)
+* Server
+* Database (use something like Sequelize?)
+* Server-side rendering
+* Hot module reloading
+* React/Redux dev tools
+* Build tools (tslint, etc.)
+* Build scripts (eg. build prod)
+* Commit hooks (run tests, lint, etc.)
+* Website pages (see `pages.md`)
+* User authentication
+* User management UI
+* Notifications UI
+* Email notification service
 
-__Wiki__
-- Everything
-- It will probably be easier to build it from scratch because of our unique requirements
+**Programming Competitions**
 
-__Tutorials__
-- Everything
+* Workspace comments
+* Description editor (fabric editor)
+* Workspace solutions list
+* Workspace description renderer
+* Test case list
+* Test case editor
+* Contest (test runner, separate repo)
 
-__Chat__
-- Everything
-- Preferably use an external service (which ideally can be embedded in the site)
+**Wiki**
+
+* Everything
+* It will probably be easier to build it from scratch because of our unique requirements
+
+**Tutorials**
+
+* Everything
+
+**Chat**
+
+* Everything
+* Preferably use an external service, though using the fabric components for the UI would be nice
