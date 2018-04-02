@@ -7,8 +7,12 @@ _Website for learning algorithms and participating in programming competitions._
 ## Running the server locally
 
 ```sh
+git clone https://github.com/jakzo/edgecase.git
+cd edgecase
 yarn
 yarn dev
 ```
+
+Then open [http://localhost:54321/](http://localhost:54321/) in your browser!
 
 If these commands are foreign to you, see the [dev guide](docs/dev.md) for detailed instructions.
