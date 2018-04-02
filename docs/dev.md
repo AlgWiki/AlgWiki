@@ -33,7 +33,7 @@ However if you are already a JavaScript and Git veteran, the sections which will
 * Install dependencies by running `yarn` in the root folder of the project
   * All the packages which EC uses to build and run will be installed inside the `node_modules` folder
 * Launch the EC web server locally by running `yarn dev`
-  * VS Code users can also use the `Dev Server` command from the _debug_ tab to start it with the debugger enabled
+  * VS Code users can also use the _"Dev Server"_ command from the _debug_ tab to start it with the debugger enabled
   * If everything works you should see a link in your terminal!
 
 ## Technologies
@@ -42,7 +42,7 @@ However if you are already a JavaScript and Git veteran, the sections which will
 
 * Both the client (web pages) and server are written in the TypeScript programming language
 * Basically it is JavaScript with types (which helps catch errors and makes it clear what certain variables contain)
-* It is transpiled into JavaScript during the build
+* It is transpiled into JavaScript at build time
 
 **Node.js**
 
@@ -72,9 +72,10 @@ When you are ready to add your changes to the main repository:
 
 * Stage your changes
   * `git add -A` will add _all_ of your local changes to the commit
-* Run `git commit "message"`
+* Run `git commit -m "message"`
   * Remember to write your message in the _imperative_ mood (eg. `change background color`, not `changed background color` or `changing background color`)
   * It will run all the tests and code quality checks for the modified files
   * These tests make sure your code will conform to the style and quality of the rest of the EC codebase and should prevent accidentally breaking things
+  * If you really need to bypass the commit hooks, you can run `git commit -n -m "message"` but remember that the pipeline will also run the checks when you push your changes, preventing you from merging it in a pull request
 * ...
 * If you've gotten to here and passed the previous tests then you can be pretty confident that your changes meet the respository's code standards. Congratulations!
