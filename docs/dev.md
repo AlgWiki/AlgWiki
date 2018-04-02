@@ -15,14 +15,13 @@ However if you are already a JavaScript and Git veteran, the sections which will
 * Install [VS Code](https://code.visualstudio.com/)
   * This is a fairly new free and open-source IDE made by Microsoft
   * It is a solid choice for programming in general but is definitely the best for writing [TypeScript](https://www.typescriptlang.org/) (the language EC is written in)
-  * Once it is installed, there are a few extensions you will want to install:
+  * Once it is installed, there are a few extensions you will want to install. Go to the _extensions_ page inside VS Code and type the names of the following extensions into the search and install them:
     * **Prettier - Code formatter**
       * Once it is installed, open settings and set `editor.formatOnType` and `editor.formatOnSave` to `true`
-      * This will enforce and automatically format your code correctly as you type
+      * This is used to enforce correct code formatting and can also automatically format your code as you type
 * Install [nvm](https://github.com/creationix/nvm)
   * This is a version manager for [Node.js](https://nodejs.org/en/)
-  * Node.js runs JavaScript outside of a browser
-  * EC and all of the build tools associated with it run using Node.js
+  * It will let you install the correct version of Node.js for this project
 * Install [avn](https://github.com/wbyoung/avn)
   * This will automatically add the correct version of Node.js to your path when you enter the EC directory in a terminal
 * Install [Yarn](https://yarnpkg.com/en/docs/install)
@@ -30,11 +29,11 @@ However if you are already a JavaScript and Git veteran, the sections which will
   * NPM is the default package manager but Yarn is faster and generally better
   * _Note for MacOS users: If you install Yarn using `brew`, make sure you add the `--without-node` option!_
 * Download the source code of the project: `git clone https://github.com/jakzo/edgecase.git`
-  * You probably know what [Git](https://git-scm.com/) is if you're reading this...
-  * But Git can be confusing, so Git commands will be shown throughout this guide
+  * Install [Git](https://git-scm.com/) first if it is not already installed
 * Install dependencies by running `yarn` in the root folder of the project
   * All the packages which EC uses to build and run will be installed inside the `node_modules` folder
-* Launch the EC web server locally by running `yarn start`
+* Launch the EC web server locally by running `yarn dev`
+  * VS Code users can also use the `Dev Server` command from the _debug_ tab to start it with the debugger enabled
   * If everything works you should see a link in your terminal!
 
 ## Technologies
@@ -42,13 +41,13 @@ However if you are already a JavaScript and Git veteran, the sections which will
 **TypeScript**
 
 * Both the client (web pages) and server are written in the TypeScript programming language
-* Basically it is JavaScript with types (helps catch errors and makes it clear what certain variables are used for)
-* It is transpiled into JavaScript at the build step
+* Basically it is JavaScript with types (which helps catch errors and makes it clear what certain variables contain)
+* It is transpiled into JavaScript during the build
 
 **Node.js**
 
-* The engine which runs the server and runs the build tools
-* It's Google Chrome's V8 JavaScript engine but runs locally without HTML support and has bindings for JS to access OS level operations
+* The engine which runs the server and most of the build tools
+* It's Google Chrome's V8 JavaScript engine but runs locally without HTML/DOM support and has bindings for JS to access OS level operations
 
 ## Making changes
 
@@ -72,10 +71,10 @@ However if you are already a JavaScript and Git veteran, the sections which will
 When you are ready to add your changes to the main repository:
 
 * Stage your changes
-  * `git stage -A` will add _all_ of your local changes to the commit
-* Run `yarn commit "message"` (TODO: Or maybe add a Git hook with `husky`?)
-  * Remember to write your message in the _imperative_ mood (eg. `change background color to green`, not `changed background...` or `changing background...`)
-  * It will run all the tests and code quality checks
+  * `git add -A` will add _all_ of your local changes to the commit
+* Run `git commit "message"`
+  * Remember to write your message in the _imperative_ mood (eg. `change background color`, not `changed background color` or `changing background color`)
+  * It will run all the tests and code quality checks for the modified files
   * These tests make sure your code will conform to the style and quality of the rest of the EC codebase and should prevent accidentally breaking things
-  * ...
-  * If you've gotten to here then you can be pretty confident that your changes meet the respository's code standards. Congratulations!
+* ...
+* If you've gotten to here and passed the previous tests then you can be pretty confident that your changes meet the respository's code standards. Congratulations!
