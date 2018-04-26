@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Link from 'redux-first-router-link';
+import styled from 'styled-components';
 
 import './index.css';
 import SVGBuildingFunctionality from './building-functionality.svg';
@@ -7,6 +8,16 @@ import SVGGrowing from './growing.svg';
 import SVGLaboratory from './laboratory.svg';
 
 import Workspace from '../../components/Workspace';
+
+const WorkspaceContainer = styled.div`
+  height: 400px;
+  width: 800px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: #ccc 0 0 8px;
+  margin: 8px auto;
+  overflow: hidden;
+`;
 
 // TODO: Convert to Markdown or some other templating format nicer than HTML...
 export default class Home extends React.Component {
@@ -42,18 +53,9 @@ export default class Home extends React.Component {
           </div>
         </section>
 
-        <div
-          style={{
-            height: 400,
-            width: 800,
-            border: '1px solid #ccc',
-            borderRadius: 4,
-            boxShadow: '#ccc 0 0 8px',
-            margin: '0 auto',
-          }}
-        >
+        <WorkspaceContainer>
           <Workspace solutions={[]} hasComments={true} />
-        </div>
+        </WorkspaceContainer>
 
         <section>
           <img src={SVGGrowing} />

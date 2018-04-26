@@ -15,6 +15,12 @@
   dependencies:
     prop-types "^15.5.10"
 
+"@atlaskit/analytics-next@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/analytics-next/-/analytics-next-2.0.0.tgz#974e5551fefc78683cf36be4bea1450132e55883"
+  dependencies:
+    prop-types "^15.5.10"
+
 "@atlaskit/analytics@^2.4.5":
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/@atlaskit/analytics/-/analytics-2.4.5.tgz#dec824d6066effea1637f48048d03f8719ee06f0"
@@ -52,6 +58,15 @@
   dependencies:
     "@atlaskit/analytics-next" "^1.1.9"
     "@atlaskit/theme" "^2.4.1"
+    babel-runtime "^6.26.0"
+    styled-components "1.4.6 - 3"
+
+"@atlaskit/button@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/button/-/button-7.0.0.tgz#bf10fc675489e847b49d37aaf31ea4aef2c58b0c"
+  dependencies:
+    "@atlaskit/analytics-next" "^2.0.0"
+    "@atlaskit/theme" "^3.0.0"
     babel-runtime "^6.26.0"
     styled-components "1.4.6 - 3"
 
@@ -616,6 +631,13 @@
 "@atlaskit/theme@^2.2.0", "@atlaskit/theme@^2.3.3", "@atlaskit/theme@^2.3.4", "@atlaskit/theme@^2.4.0", "@atlaskit/theme@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-2.4.1.tgz#a554075068ff4d85542292998f3544160b4a5a73"
+  dependencies:
+    prop-types "^15.5.10"
+    styled-components "1.4.6 - 3"
+
+"@atlaskit/theme@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@atlaskit/theme/-/theme-3.0.0.tgz#1ab9ae3fac1ac2572ff82df9508349880f252e75"
   dependencies:
     prop-types "^15.5.10"
     styled-components "1.4.6 - 3"

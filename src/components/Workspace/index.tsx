@@ -8,6 +8,14 @@ import Description from './Description';
 import SolutionList from './SolutionList';
 import CommentList from './CommentList';
 import { Solution, Comment } from '../../models';
+import { testSolution } from './Description/test-challenge';
+
+const Container = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  text-align: left;
+`;
 
 const TabContent = styled.div`
   display: flex;
@@ -44,14 +52,14 @@ export default class Workspace extends React.Component<WorkspaceProps> {
       });
     }
     return (
-      <div style={{ display: 'flex', height: '100%', width: '100%', textAlign: 'left' }}>
+      <Container>
         <div style={{ flexGrow: 1, minWidth: 400, display: 'flex' }}>
           <Tabs tabs={tabs} />
         </div>
         <div style={{ flexGrow: 1, minWidth: 400 }}>
-          <CodeEditor />
+          <CodeEditor code={testSolution} />
         </div>
-      </div>
+      </Container>
     );
   }
 }

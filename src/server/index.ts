@@ -4,6 +4,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import { listenConversation } from './conversation';
+import { listenEmojiService } from '../mocks/emoji/route';
 
 const server = express();
 server.use(bodyParser.json());
@@ -12,6 +13,7 @@ server.get('/healthcheck', (req, res) => res.send('OK'));
 server.use('/', express.static(path.resolve(__dirname, 'client')));
 
 listenConversation(server);
+listenEmojiService(server);
 
 const html = fs.readFileSync(path.resolve(__dirname, 'client', 'client.html'));
 server.get('*', (req, res) => {

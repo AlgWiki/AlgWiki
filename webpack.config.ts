@@ -10,10 +10,13 @@ interface ConfigurationOptions {
   target: Configuration['target'];
   [otherOptions: string]: any;
 }
-const createConfiguration = (tsConfigFile: string, options: ConfigurationOptions): Configuration => ({
+const createConfiguration = (
+  tsConfigFile: string,
+  options: ConfigurationOptions,
+): Configuration => ({
   mode,
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.css', '.gif', '.png', '.jpg', '.jpeg', '.svg'],
+    extensions: ['.tsx', '.ts', '.js', '.json', '.css', '.gif', '.png', '.jpg', '.jpeg', '.svg'],
   },
   module: {
     rules: [

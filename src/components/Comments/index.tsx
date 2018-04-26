@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Conversation } from '@atlaskit/conversation';
-import { conversationResource } from './providers';
+import { conversationResource, dataProviders } from './providers';
 import { mockContainerId, mockConversationId } from '../../mocks/conversation';
 
 export default class Comments extends React.Component {
@@ -14,6 +14,7 @@ export default class Comments extends React.Component {
         id={mockConversationId}
         containerId={mockContainerId}
         provider={conversationResource}
+        dataProviders={dataProviders}
       />
     );
   }
