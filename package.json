@@ -61,7 +61,7 @@
     "tslint-config-airbnb": "^5.6.0",
     "tslint-config-prettier": "^1.7.0",
     "tslint-react": "^3.4.0",
-    "typescript": "^2.7.2",
+    "typescript": "^2.8.3",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.10",
     "webpack-node-externals": "^1.6.0"

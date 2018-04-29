@@ -31,7 +31,6 @@ export default class Description extends React.Component<DescriptionProps> {
       });
     };
     const onSave = (title: string, doc: any) => {
-      // console.log('DOC', JSON.stringify(doc));
       this.setState({
         isEditing: false,
         savedTitle: title,
@@ -59,12 +58,6 @@ export default class Description extends React.Component<DescriptionProps> {
           onCancel={onCancel}
           isEditing={isEditing}
         />
-        {/* {isEditable &&
-          !isEditing && (
-            <EditButtonContainer>
-              <Button onClick={() => this.setState({ isEditing: true })}>Edit</Button>
-            </EditButtonContainer>
-          )} */}
       </Container>
     );
   }

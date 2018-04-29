@@ -57,7 +57,7 @@ export default class Workspace extends React.Component<WorkspaceProps> {
           <Tabs tabs={tabs} />
         </div>
         <div style={{ flexGrow: 1, minWidth: 400 }}>
-          <CodeEditor code={testSolution} />
+          <CodeEditor defaultValue={testSolution} />
         </div>
       </Container>
     );
