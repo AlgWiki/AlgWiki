@@ -1,5 +1,6 @@
-import { Comment, Conversation, User } from '@atlaskit/conversation/dist/es5/model';
+import { Comment, Conversation } from '@atlaskit/conversation/dist/es5/model';
 import { uuid } from '@atlaskit/conversation/dist/es5/internal/uuid';
+import { User } from '../models';
 
 export const MOCK_USERS: User[] = [
   {

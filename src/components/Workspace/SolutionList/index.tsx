@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import DynamicTable from '@atlaskit/dynamic-table';
+import Avatar, { AvatarItem } from '@atlaskit/avatar';
 import { Solution } from '../../../models';
 
 const EmptySolutionsText = styled.div`
@@ -17,13 +19,34 @@ export interface SolutionListProps {
 export default class SolutionList extends React.Component<SolutionListProps> {
   render() {
     const { solutions } = this.props;
-    if (solutions.length === 0) {
-      return <EmptySolutionsText>No solutions yet...</EmptySolutionsText>;
-    }
     return (
-      <ul>
-        {solutions.map((solution: Solution, i: number) => <li key={i}>solution.user.name</li>)}
-      </ul>
+      <DynamicTable
+        rowsPerPage={5}
+        isFixedSize
+        defaultSortKey="chars"
+        defaultSortOrder="ASC"
+        emptyView={<EmptySolutionsText>No solutions yet...</EmptySolutionsText>}
+        head={{
+          cells: [
+            { key: 'user', content: 'User' },
+            { key: 'chars', isSortable: true, content: 'Chars', width: 25 },
+          ],
+        }}
+        rows={solutions.map(({ user, code }) => ({
+          cells: [
+            {
+              content: (
+                <AvatarItem
+                  avatar={<Avatar src={user.avatarUrl} />}
+                  primaryText={user.name}
+                  backgroundColor="transparent"
+                />
+              ),
+            },
+            { content: code.length },
+          ],
+        }))}
+      />
     );
   }
 }

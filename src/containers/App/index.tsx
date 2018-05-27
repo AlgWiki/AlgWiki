@@ -1,6 +1,7 @@
 import React, { Component, ComponentType } from 'react';
 import { connect } from 'react-redux';
 // import { TransitionGroup, Transition } from 'transition-group';
+import styled from 'styled-components';
 
 // import Workspace from '../workspace';
 

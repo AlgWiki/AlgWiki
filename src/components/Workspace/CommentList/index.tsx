@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Comments from '../../Comments';
 
 const CommentContainer = styled.div`
-  overflow: auto;
   flex: 1;
 `;
 

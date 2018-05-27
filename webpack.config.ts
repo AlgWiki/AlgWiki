@@ -2,6 +2,7 @@ import { Configuration } from 'webpack';
 import { resolve } from 'path';
 import nodeExternals from 'webpack-node-externals';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -89,7 +90,11 @@ export default <Configuration[]>[
         filename: 'client.html',
         chunks: ['client'],
       }),
+      new MonacoWebpackPlugin(),
     ],
+    node: {
+      fs: 'empty',
+    },
     output: {
       filename: '[name].js',
       path: resolve(__dirname, 'dist', 'client'),
