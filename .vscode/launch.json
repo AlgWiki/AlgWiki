@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Dev Server",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/concurrently",
+      "runtimeArgs": [
+        "--kill-others",
+        "-n",
+        "c,s",
+        "-c",
+        "blue.dim,magenta.dim",
+        "yarn dev-client",
+        "yarn dev-server --inspect-brk"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 11039,
+      "restart": true
+    }
+  ]
+}
