@@ -54,7 +54,7 @@ const createConfiguration = (
       },
     ],
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   output: {
     filename: '[name].js',
     path: resolve(__dirname, 'dist'),

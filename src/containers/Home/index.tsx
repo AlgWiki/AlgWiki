@@ -1,7 +1,10 @@
 import * as React from 'react';
 import Link from 'redux-first-router-link';
-import styled, { StyledFunction, StyledComponentClass } from 'styled-components';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
+import Spinner from '@atlaskit/spinner';
 
 import SVGBuildingFunctionality from './building-functionality.svg';
 import SVGGrowing from './growing.svg';
@@ -15,10 +18,13 @@ const WorkspaceContainer = styled.div`
   width: 90%;
   max-width: 1400px;
   border: 1px solid #ccc;
-  border-radius: 4px;
   box-shadow: #ccc 0 0 8px;
   margin: 8px auto;
   clear: both;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Section: any = styled.section`
@@ -33,6 +39,33 @@ const SideImage: any = styled.img`
   max-height: 180px;
   margin: 16px;
   float: ${({ float = 'left' }: any) => float};
+`;
+
+const query = gql`
+  {
+    tasks {
+      name
+      description
+      methods {
+        id
+        name
+        description
+        parameters
+      }
+      testCases {
+        id
+        name
+        isHidden
+        isActive
+        calls {
+          id
+          methodId
+          input
+          expectedOutput
+        }
+      }
+    }
+  }
 `;
 
 export default class Home extends React.Component {
@@ -56,12 +89,19 @@ export default class Home extends React.Component {
           <p>Think you know a bit about programming already?</p>
           <p>
             Win by finding the fastest, shortest (code golf) or most elegant piece of code which
-            solves a task. New competitions start every day with a week to perfect and hone your
-            submission.
+            solves a task. New competitions start every day.
           </p>
+          <p>Give the current problem a try in the panel below:</p>
 
           <WorkspaceContainer>
-            <Workspace solutions={[]} hasComments={true} />
+            <Query query={query}>
+              {({ loading, data }) => {
+                console.log({ loading, data });
+                if (loading) return <Spinner size="large" />;
+                if (!data) return <span>Error loading challenge...</span>;
+                return <Workspace task={data.tasks[0]} />;
+              }}
+            </Query>
           </WorkspaceContainer>
         </Section>
 

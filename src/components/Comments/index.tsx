@@ -15,6 +15,11 @@ export default class Comments extends React.Component {
         containerId={mockContainerId}
         provider={conversationResource}
         dataProviders={dataProviders}
+        renderEditor={(Editor, props) => {
+          // The comment list has `overflow: auto` so this allows displaying menus outside
+          props.popupsMountPoint = document.body;
+          return <Editor {...props} />;
+        }}
       />
     );
   }

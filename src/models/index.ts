@@ -1,3 +1,7 @@
+import { ADDoc } from '@atlaskit/editor-common';
+
+export type UUID = string;
+
 export interface User {
   id: string;
   name: string;
@@ -8,30 +12,71 @@ export type TestCasePrimitive = string | number | boolean;
 export type TestCaseValue = TestCasePrimitive | TestCasePrimitive[] | TestCasePrimitive[][];
 
 export enum ValueType {
-  Integer,
-  Float,
-  String,
-  Array,
+  Integer = 1,
+  Float = 2,
+  String = 3,
+  List = 4,
+  Tuple = 5,
+  Map = 6,
 }
 
 export type Value =
   | {
-      type: Exclude<ValueType, ValueType.Array>;
+      type: ValueType.Integer | ValueType.Float | ValueType.String;
       value: string;
     }
   | {
-      type: ValueType.Array;
-      value: Value[];
+      type: ValueType.List | ValueType.Tuple;
+      values: Value[];
+    }
+  | {
+      type: ValueType.Map;
+      pairs: { key: Value; value: Value }[];
     };
 
-export type MethodId = string;
+export type ValueShape =
+  | {
+      type: ValueType.Integer;
+      constraints?: string[];
+    }
+  | {
+      type: ValueType.Float;
+      constraints?: string[];
+    }
+  | {
+      type: ValueType.String;
+      constraints?: string[];
+    }
+  | {
+      type: ValueType.List;
+      valueTypes: ValueShape[];
+      constraints?: string[];
+    }
+  | {
+      type: ValueType.Tuple;
+      values: { name: string; type: ValueShape }[];
+      constraints?: string[];
+    }
+  | {
+      type: ValueType.Map;
+      keyType: ValueShape;
+      valueType: ValueShape;
+      constraints?: string[];
+    };
+
+export type MethodId = UUID;
 export interface Method {
   id: MethodId;
   name: string;
-  parameters: Parameter[];
+  description: ADDoc | null;
+  parameters: {
+    name: string;
+    description: ADDoc | null;
+    type: ValueShape;
+  }[];
 }
 
-export type TestCaseCallId = string;
+export type TestCaseCallId = UUID;
 export interface TestCaseCall {
   id: TestCaseCallId;
   methodId: MethodId;
@@ -39,13 +84,7 @@ export interface TestCaseCall {
   expectedOutput: Value | null;
 }
 
-export interface Parameter {
-  name: string;
-  type: ValueType;
-  constraints: string | null;
-}
-
-export type TestCaseId = string;
+export type TestCaseId = UUID;
 export interface TestCase {
   id: TestCaseId;
   name: string | null;
@@ -54,10 +93,9 @@ export interface TestCase {
   calls: TestCaseCall[];
 }
 
-export type TaskId = string;
 export interface Task {
-  id: TaskId;
-  description: string;
+  name: string;
+  description: ADDoc;
   methods: Method[];
   testCases: TestCase[];
 }

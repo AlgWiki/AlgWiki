@@ -17,6 +17,13 @@ export default class Monaco extends React.Component<Props> {
     this.editor = editor;
     this.monaco = monaco;
 
+    // Prevent page scrolling when reaching the end of the editor on scroll
+    const editorContainer: HTMLElement = editor.domElement;
+    editorContainer.addEventListener('wheel', e => {
+      e.preventDefault();
+    });
+
+    // Add 'Run Code' action
     editor.addAction({
       id: 'run-code',
       label: 'Run Code',
@@ -33,6 +40,7 @@ export default class Monaco extends React.Component<Props> {
       },
     });
 
+    // Add 'Save Code' action
     editor.addAction({
       id: 'save-code',
       label: 'Save Code',
@@ -65,6 +73,7 @@ export default class Monaco extends React.Component<Props> {
             options={{
               minimap: { enabled: false },
               wordWrap: 'on',
+              fixedOverflowWidgets: true,
             }}
             editorDidMount={this.editorDidMount}
           />

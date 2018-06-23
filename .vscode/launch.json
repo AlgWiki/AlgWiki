@@ -6,10 +6,10 @@
       "request": "launch",
       "name": "Dev Server",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["dev"],
+      "runtimeArgs": ["dev-debug"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "port": 36363,
+      "port": 36366,
       "restart": true
     }
   ]

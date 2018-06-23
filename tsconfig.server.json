@@ -17,6 +17,6 @@
   //   "outDir": "./dist",
   // },
   "files": ["./src/server/index.ts"],
-  "include": ["./src", "./types"],
+  "include": ["./src/server", "./types"],
   "exclude": ["node_modules", "./src/client"]
 }

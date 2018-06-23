@@ -8,11 +8,14 @@
     "jsx": "react",
     "sourceMap": true,
     "strict": true,
-    "noEmitOnError": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": false,
     "lib": ["es2017", "dom"]
   },
   "include": ["./src", "./types"]

@@ -1,2 +1,4 @@
 declare module 'rc-collapse';
-declare module 'particles.js';
+declare module 'koa-body';
+declare module 'koa-sendfile';
+declare module 'mongo-in-memory';

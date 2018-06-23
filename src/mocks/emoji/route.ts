@@ -1,10 +1,10 @@
-import { Express } from 'express';
+import Router from 'koa-router';
 import standardEmojis from './standard.json';
 
-export const listenEmojiService = (server: Express) => {
+export const listenEmojiService = (router: Router) => {
   // Fetch emoji service descriptor
-  server.get('/emojis/standard', (req, res) => {
+  router.get('/emojis/standard', ctx => {
     const response = standardEmojis;
-    res.send(response);
+    ctx.body = response;
   });
 };

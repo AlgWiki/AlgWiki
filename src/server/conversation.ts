@@ -1,4 +1,3 @@
-import { Express } from 'express';
 import { Conversation, Comment } from '@atlaskit/conversation/dist/es5/model';
 import {
   generateMockConversation,
@@ -6,6 +5,7 @@ import {
   mockContainerId,
   mockConversationId,
 } from '../mocks/conversation';
+import Router from 'koa-router';
 
 export interface GetConversations {
   values: Conversation[];
@@ -16,18 +16,18 @@ const allConversations: Conversation[] = [mockConversation];
 
 const generateId = (prefix: string) => `${prefix}-${Math.floor(Math.random() * 1e5).toString(36)}`;
 
-export const listenConversation = (server: Express) => {
+export const listenConversation = (router: Router) => {
   // Fetch conversations associated with a container ID
-  server.get('/conversation', (req, res) => {
+  router.get('/conversation', ctx => {
     const response: GetConversations = {
-      values: allConversations.filter(({ containerId }) => containerId === req.query.containerId),
+      values: allConversations.filter(({ containerId }) => containerId === ctx.query.containerId),
     };
-    res.send(response);
+    ctx.body = response;
   });
 
   // Create a new conversation with a specified container ID
-  server.post('/conversation', (req, res) => {
-    const { containerId, comment } = req.body;
+  router.post('/conversation', ctx => {
+    const { containerId, comment } = (ctx.request as any).body;
     const newConversation: Conversation = {
       containerId,
       conversationId: generateId('conversation-id'),
@@ -43,21 +43,21 @@ export const listenConversation = (server: Express) => {
         ...comment,
       });
     }
-    res.send(newConversation);
+    ctx.body = newConversation;
   });
 
   // Create a new comment
-  server.post('/conversation/:conversationId/comment', (req, res) => {
-    const { conversationId } = req.params;
+  router.post('/conversation/:conversationId/comment', ctx => {
+    const { conversationId } = ctx.params;
     const conversation: Conversation | undefined = allConversations.find(
       ({ conversationId: id }) => id === conversationId,
     );
     if (!conversation) {
-      res.status(204);
-      res.send('conversation not found');
+      ctx.status = 204;
+      ctx.body = 'conversation not found';
       return;
     }
-    const { parentId, document } = req.body;
+    const { parentId, document } = (ctx.request as any).body;
     const comment: Comment = {
       commentId: generateId('comment-id'),
       conversationId,
@@ -68,19 +68,19 @@ export const listenConversation = (server: Express) => {
     };
     if (!conversation.comments) conversation.comments = [];
     conversation.comments.push(comment);
-    res.send(comment);
+    ctx.body = comment;
   });
 
   // Update an existing comment
-  server.put('/conversation/:conversationId/comment/:commentId', (req, res) => {
-    const { conversationId, commentId } = req.params;
+  router.put('/conversation/:conversationId/comment/:commentId', ctx => {
+    const { conversationId, commentId } = ctx.params;
 
     const conversation: Conversation | undefined = allConversations.find(
       ({ conversationId: id }) => id === conversationId,
     );
     if (!conversation) {
-      res.status(204);
-      res.send('conversation not found');
+      ctx.status = 204;
+      ctx.body = 'conversation not found';
       return;
     }
 
@@ -88,31 +88,29 @@ export const listenConversation = (server: Express) => {
       ({ commentId: id }) => id === commentId,
     );
     if (!comment) {
-      res.status(204);
-      res.send('comment not found');
+      ctx.status = 204;
+      ctx.body = 'comment not found';
       return;
     }
 
-    const { document: { adf: document } } = req.body;
+    const { document: { adf: document } } = (ctx.request as any).body;
     comment.document = document;
-    res.send(comment);
+    ctx.body = comment;
   });
 
   // Update an existing comment
-  server.delete('/conversation/:conversationId/comment/:commentId', (req, res) => {
-    const { conversationId, commentId } = req.params;
+  router.delete('/conversation/:conversationId/comment/:commentId', ctx => {
+    const { conversationId, commentId } = ctx.params;
 
     const conversation: Conversation | undefined = allConversations.find(
       ({ conversationId: id }) => id === conversationId,
     );
     if (!conversation) {
-      res.send();
       return;
     }
 
     const comments = conversation.comments;
     if (!comments) {
-      res.send();
       return;
     }
 
@@ -120,11 +118,9 @@ export const listenConversation = (server: Express) => {
       ({ commentId: id }) => id === commentId,
     );
     if (commentIndex === -1) {
-      res.send();
       return;
     }
 
     comments.splice(commentIndex, 1);
-    res.send();
   });
 };

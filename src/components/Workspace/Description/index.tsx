@@ -6,20 +6,31 @@ import Editor from './editor';
 import { testTitle, testDoc } from './test-challenge';
 import { Container, EditButtonContainer } from './styled';
 
-export interface DescriptionProps {
-  content: string;
+export interface Props {
+  title: string;
+  doc: any;
 }
-export default class Description extends React.Component<DescriptionProps> {
-  state = {
-    isEditing: false,
-    savedTitle: testTitle,
-    draftTitle: testTitle,
-    savedDoc: testDoc,
-    draftDoc: testDoc,
-  };
+export interface State {
+  isEditing: boolean;
+  savedTitle: string;
+  draftTitle: string;
+  savedDoc: any;
+  draftDoc: any;
+}
+export default class Description extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    console.log(props);
+    this.state = {
+      isEditing: false,
+      savedTitle: props.title,
+      draftTitle: props.title,
+      savedDoc: props.doc,
+      draftDoc: props.doc,
+    };
+  }
 
   render() {
-    const { content } = this.props;
     const { isEditing, savedTitle, savedDoc, draftTitle, draftDoc } = this.state;
     const isEditable = true;
 

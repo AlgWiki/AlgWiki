@@ -1,14 +1,21 @@
 import React from 'react';
 import { Value, ValueType } from '../../models';
 
-export const prettify = (val: Value): string => {
-  switch (val.type) {
-    case ValueType.Array:
-      return `[${val.value.map(prettify).join(', ')}]`;
+export const prettify = (value: Value): string => {
+  switch (value.type) {
+    case ValueType.Integer:
+    case ValueType.Float:
+      return value.value;
     case ValueType.String:
-      return `"${val.value.replace(/"|\\/g, '\\$&')}"`;
-    default:
-      return val.value;
+      return `"${value.value.replace(/"|\\/g, '\\$&')}"`;
+    case ValueType.List:
+      return `[${value.values.map(prettify).join(', ')}]`;
+    case ValueType.Tuple:
+      return `(${value.values.map(prettify).join(', ')})`;
+    case ValueType.Map:
+      return `{${value.pairs
+        .map(({ key, value }) => `${prettify(key)}: ${prettify(value)}`)
+        .join(', ')}}`;
   }
 };
 

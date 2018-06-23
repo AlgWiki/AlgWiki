@@ -1,6 +1,12 @@
 import {
-  createStore, compose, applyMiddleware, combineReducers,
-  Store, StoreEnhancer, Middleware, Reducer,
+  createStore,
+  compose,
+  applyMiddleware,
+  combineReducers,
+  Store,
+  StoreEnhancer,
+  Middleware,
+  Reducer,
 } from 'redux';
 import thunk from 'redux-thunk';
 import * as RFR from 'redux-first-router';
@@ -15,7 +21,6 @@ export interface State {
 }
 
 export const configureStore = (history: History, initialState?: State): Store<State> => {
-
   const {
     reducer: routeReducer,
     middleware: routeMiddleware,
