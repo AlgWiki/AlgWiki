@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import SizeDetector from '@atlaskit/size-detector';
 
+(window as any).MonacoEnvironment = {
+  getWorker(moduleId: string, label: string): Worker | null {
+    console.log('MONACO', moduleId, label);
+    if (label === 'javascript') {
+      return new Worker(
+        '../../../../../node_modules/monaco-editor/esm/vs/language/typescript/ts.worker',
+      );
+    } else if (label === 'editorWorkerService') {
+      return new Worker('../../../../../node_modules/monaco-editor/esm/vs/editor/editor.worker');
+    }
+    return null;
+  },
+};
+
 export interface Props {
   defaultValue: string;
   onRun: () => void;
@@ -60,7 +74,7 @@ export default class Monaco extends Component<Props> {
   };
 
   render() {
-    const { defaultValue, onRun, onSave } = this.props;
+    const { defaultValue } = this.props;
 
     return (
       <SizeDetector onResize={this.onResize}>

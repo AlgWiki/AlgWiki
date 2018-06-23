@@ -1,8 +1,7 @@
 import styled from 'styled-components';
+import { gridSize } from '@atlaskit/theme';
 
 export const Container = styled.div`
-  display: flex;
-  width: 100%;
-  position: relative;
+  padding: ${gridSize}px 0;
+  flex-grow: 1;
 `;
-Container.displayName = 'Container';

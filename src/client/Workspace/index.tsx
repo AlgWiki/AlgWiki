@@ -3,6 +3,7 @@ import Tabs from '@atlaskit/tabs';
 import styled from 'styled-components';
 import { gridSize } from '@atlaskit/theme';
 
+import { mockSolutions } from '../common/mock-data/challenge';
 import { Task } from '../common/model';
 import CodeEditor from '../common/view/CodeEditor';
 import Description from './view/Description';
@@ -60,7 +61,7 @@ export default class Workspace extends Component<Props> {
       },
       {
         label: 'Solutions',
-        content: <Solutions solutions={[]} />,
+        content: <Solutions solutions={mockSolutions} />,
       },
       {
         label: 'Comments',
