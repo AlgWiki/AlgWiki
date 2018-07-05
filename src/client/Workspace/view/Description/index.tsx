@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ADDoc } from '@atlaskit/editor-common';
 
-// import VisualEditor from '../../../common/view/visual-editor';
+import VisualEditor from '../../../common/view/VisualEditor';
 
 import { Container } from './styled';
 
@@ -38,10 +38,10 @@ export default class Description extends Component<Props, State> {
 
     return (
       <Container>
-        <span>DESCRIPTION</span>
-        {/* <VisualEditor
+        <VisualEditor
           title={title}
           doc={doc}
+          removeContentPadding
           isEditing={isEditing}
           onEdit={() => this.setState({ isEditing: true })}
           onDraftSave={(title: string, doc: any) => {
@@ -68,7 +68,7 @@ export default class Description extends Component<Props, State> {
               draftDoc: null,
             });
           }}
-        /> */}
+        />
       </Container>
     );
   }

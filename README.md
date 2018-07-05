@@ -13,6 +13,6 @@ yarn
 yarn dev
 ```
 
-Then open [http://localhost:36363/](http://localhost:36363/) in your browser!
+Then open [http://localhost:11037/](http://localhost:11037/) in your browser!
 
 If these commands are foreign to you, see the [dev guide](https://github.com/jakzo/alg-wiki/wiki/Setting-Up-an-Efficient-Dev-Environment) for detailed instructions.

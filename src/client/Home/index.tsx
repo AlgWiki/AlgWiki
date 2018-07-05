@@ -12,8 +12,6 @@ import SVGLaboratory from './assets/laboratory.svg';
 import Workspace from '../Workspace/async';
 import { mockTask } from '../common/mock-data/challenge';
 
-// import Workspace from '../../components/Workspace';
-
 const WorkspaceContainer = styled.div`
   display: flex;
   height: 400px;
@@ -96,7 +94,7 @@ export default class Home extends Component {
             Win by finding the fastest, shortest (code golf) or most elegant piece of code which
             solves a task. New competitions start every day.
           </p>
-          <p>Give the current problem a try in the panel below:</p>
+          <p>Give the current problem a try right now:</p>
 
           <WorkspaceContainer>
             {/* <Query query={query}>

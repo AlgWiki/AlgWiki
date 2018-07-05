@@ -44,6 +44,7 @@ export interface Props {
   title: string;
   doc: any;
   isEditing: boolean;
+  removeContentPadding?: boolean;
   onEdit: () => void;
   onSave: (title: string, doc: any) => void;
   onDraftSave: (title: string, doc: any) => void;
@@ -56,10 +57,10 @@ export default class VisualEditor extends React.Component<Props, State> {
   state = { disabled: false };
 
   render() {
-    const { doc, title, onSave, onCancel, isEditing, onEdit } = this.props;
+    const { doc, title, onSave, onCancel, isEditing, onEdit, removeContentPadding } = this.props;
     const { disabled } = this.state;
     return (
-      <Content>
+      <Content removeContentPadding={removeContentPadding}>
         <EditorContext>
           <Editor
             appearance={isEditing ? 'full-page' : 'chromeless'}

@@ -24,6 +24,15 @@ export const Content: any = styled.div`
       border-radius: ${akBorderRadius};
     }
   }
+
+  ${({ removeContentPadding }: any) =>
+    removeContentPadding &&
+    `
+      .content-area {
+        margin: -42px 0;
+        padding: 0 !important;
+      }
+    `};
 `;
 Content.displayName = 'Content';
 

@@ -7,7 +7,7 @@ export interface Props {
   [prop: string]: any;
 }
 
-export default (loader: () => Promise<{ default: ComponentType }>) => {
+export default (loader: () => Promise<{ default: ComponentType<any> }>) => {
   const AsyncComponent = Loadable({
     loader,
     loading: LoadingIndicator,
