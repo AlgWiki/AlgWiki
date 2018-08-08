@@ -4,5 +4,5 @@
     "module": "commonjs"
   },
   "files": ["./src/index.ts"],
-  "include": ["./src", "./types"]
+  "include": ["./src", "./config", "./types"]
 }

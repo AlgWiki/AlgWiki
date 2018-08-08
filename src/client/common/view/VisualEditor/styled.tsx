@@ -29,7 +29,7 @@ export const Content: any = styled.div`
     removeContentPadding &&
     `
       .content-area {
-        margin: -42px 0;
+        margin: -50px 0;
         padding: 0 !important;
       }
     `};

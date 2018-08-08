@@ -1,3 +1,3 @@
 import asyncComponent from '../common/util/async-component';
 
-export default asyncComponent(() => import('./index'));
+export default asyncComponent(() => import('.'));

@@ -1,20 +1,28 @@
 import React, { ComponentType, Component } from 'react';
-import Loadable from 'react-loadable';
+import Loadable, { LoadingComponentProps } from 'react-loadable';
 import LoadingIndicator from './LoadingIndicator';
 import ErrorBoundary from '../../view/ErrorBoundary';
 
-export interface Props {
-  [prop: string]: any;
-}
-
-export default (loader: () => Promise<{ default: ComponentType<any> }>) => {
-  const AsyncComponent = Loadable({
+export default function<P>(
+  loader: () => Promise<{ default: ComponentType<P> }>,
+  loading: ComponentType<LoadingComponentProps> | null = LoadingIndicator,
+) {
+  const LoadableComponent = Loadable({
     loader,
-    loading: LoadingIndicator,
+    loading: loading || (() => null),
   });
-  return (props: Props) => (
-    <ErrorBoundary>
-      <AsyncComponent {...props} />
-    </ErrorBoundary>
-  );
-};
+
+  return class AsyncComponent extends Component<P> {
+    static preload() {
+      LoadableComponent.preload();
+    }
+
+    render() {
+      return (
+        <ErrorBoundary>
+          <LoadableComponent {...this.props} />
+        </ErrorBoundary>
+      );
+    }
+  };
+}

@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-// import Link from 'redux-first-router-link';
-// import { Query } from 'react-apollo';
-// import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
-// import Spinner from '@atlaskit/spinner';
+import Spinner from '@atlaskit/spinner';
 
 import SVGBuildingFunctionality from './assets/building-functionality.svg';
 import SVGGrowing from './assets/growing.svg';
 import SVGLaboratory from './assets/laboratory.svg';
 import Workspace from '../Workspace/async';
-import { mockTask } from '../common/mock-data/challenge';
 
 const WorkspaceContainer = styled.div`
   display: flex;
@@ -25,53 +23,53 @@ const WorkspaceContainer = styled.div`
   background: #fff;
 `;
 
-const Section: any = styled.section`
-  text-align: ${({ align = 'left' }: any) => align};
+const Section = styled.section<{ align?: string; color?: string }>`
+  text-align: ${({ align = 'left' }) => align};
   clear: both;
-  background-color: ${({ color = 'initial' }: any) => color};
+  background-color: ${({ color = 'initial' }) => color};
   padding: 8px;
 `;
 
-const SideImage: any = styled.img`
+const SideImage = styled.img<{ float?: string }>`
   width: 200px;
   max-height: 180px;
   margin: 16px;
-  float: ${({ float = 'left' }: any) => float};
+  float: ${({ float = 'left' }) => float};
 `;
 
-// TODO: Update styled component definition types after upgrading to TS >2.9.1
-// const SideImage = styled.img<{ float?: string }>`
-//   float: ${({ float = 'left' }) => float};
-// `;
-
-// const query = gql`
-//   {
-//     tasks {
-//       name
-//       description
-//       methods {
-//         id
-//         name
-//         description
-//         parameters
-//       }
-//       testCases {
-//         id
-//         name
-//         isHidden
-//         isActive
-//         calls {
-//           id
-//           methodId
-//           input
-//           expectedOutput
-//         }
-//       }
-//     }
-//   }
-// `;
+const getHomePageChallenge = gql`
+  query GetHomePageChallenge {
+    tasks(start: 0, limit: 1) {
+      _id
+      name
+      description
+      methods {
+        id
+        name
+        description
+        parameters
+      }
+      testCases {
+        id
+        name
+        isHidden
+        isActive
+        calls {
+          id
+          methodId
+          input
+          expectedOutput
+        }
+      }
+    }
+  }
+`;
 
 export default class Home extends Component {
+  componentDidMount() {
+    Workspace.preload();
+  }
+
   render() {
     return (
       <article>
@@ -82,7 +80,7 @@ export default class Home extends Component {
           <p>Or maybe you're stumped trying to implement Y?</p>
           <p>
             With many different computer science problems in the database along with a variety of
-            solutions, you can find the best way to deal with your situation.
+            solutions, you can easily find the best way to deal with your situation.
           </p>
         </Section>
 
@@ -97,15 +95,13 @@ export default class Home extends Component {
           <p>Give the current problem a try right now:</p>
 
           <WorkspaceContainer>
-            {/* <Query query={query}>
+            <Query query={getHomePageChallenge}>
               {({ loading, data }) => {
-                console.log({ loading, data });
                 if (loading) return <Spinner size="large" />;
                 if (!data) return <span>Error loading challenge...</span>;
                 return <Workspace task={data.tasks[0]} />;
               }}
-            </Query> */}
-            <Workspace task={mockTask} />
+            </Query>
           </WorkspaceContainer>
         </Section>
 
@@ -113,12 +109,10 @@ export default class Home extends Component {
           <SideImage src={SVGGrowing} />
           <h2>Improve your coding skills</h2>
           <p>
-            Work through a curated set of problems and read explanations of a variety of topics and
+            Work through a curated set of problems and read explanations for a variety of topics and
             difficulty levels to build your knowledge.
           </p>
         </Section>
-
-        {/* <Link to="/how">How does it work?</Link> */}
       </article>
     );
   }

@@ -2,6 +2,8 @@ import { Configuration } from 'webpack';
 import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import WebpackBuildNotifierPlugin from 'webpack-build-notifier';
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -63,6 +65,8 @@ export default {
       inject: 'body',
     }),
     new MonacoWebpackPlugin(),
+    new ProgressBarPlugin(),
+    new WebpackBuildNotifierPlugin(),
   ],
   node: {
     fs: 'empty',

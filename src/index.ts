@@ -3,38 +3,38 @@ process.on('uncaughtException', err => {
 });
 
 import path from 'path';
-
 import Koa from 'koa';
 // import mount from 'koa-mount';
 import serve from 'koa-static';
-// import body from 'koa-body';
+import body from 'koa-bodyparser';
 import Router from 'koa-router';
 import sendfile from 'koa-sendfile';
-// import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
+import session from 'koa-session';
+import passport from 'koa-passport';
+// import { isDev } from './client/common/util/env';
+import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa';
 
 // import { ApolloServer, gql } from 'apollo-server';
 
 // import { listenConversation } from './conversation';
 // import { listenEmojiService } from '../mocks/emoji/route';
-// import { connectDatabase, startTestDatabase } from './db';
-// import { graphqlSchema } from './graphql';
-// import { isDev } from '../utils/env';
+import { connectDatabase } from './db';
+import { schema as graphqlSchema } from './graphql';
+import './auth';
 
 const createWebServer = () => {
   const app = new Koa();
 
-  // Read JSON
-  // app.use(body({ enableTypes: ['json'] }));
+  // Read JSON requests
+  app.use(body({ enableTypes: ['json'] }));
 
-  // GraphQL
-  // app.use(
-  //   mount(
-  //     '/graphql',
-  //     graphqlKoa({
-  //       schema: graphqlSchema,
-  //     }),
-  //   ),
-  // );
+  // Sessions
+  app.keys = ['super-secret-key'];
+  app.use(session(app));
+
+  // Authentication
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   // Serve static assets
   const assetsPath = path.resolve(__dirname, '..', 'public');
@@ -51,7 +51,10 @@ const createWebServer = () => {
   // listenConversation(router);
   // listenEmojiService(router);
 
-  // router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
+  // GraphQL
+  router.get('/graphql', graphqlKoa({ schema: graphqlSchema }));
+  router.post('/graphql', graphqlKoa({ schema: graphqlSchema }));
+  router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
 
   router.get('*', async ctx => {
     await sendfile(ctx, path.resolve(assetsPath, 'index.html'));
@@ -59,6 +62,7 @@ const createWebServer = () => {
   });
 
   app.use(router.routes());
+  app.use(router.allowedMethods());
 
   return app;
 };
@@ -69,12 +73,9 @@ const startWebServer = async (app: Koa, port: number) => {
 };
 
 const startServers = async () => {
-  // let mongoUri = '';
-  // if (isDev()) {
-  //   const devDbPort = parseInt(process.env.AW_DEV_DB_PORT || '') || 11038;
-  //   mongoUri = await startTestDatabase(devDbPort);
-  // }
-  // await connectDatabase(mongoUri);
+  const dbHost = process.env.AW_DEV_DB_HOST || 'localhost';
+  const dbPort = parseInt(process.env.AW_DEV_DB_PORT || '') || 11038;
+  await connectDatabase(dbHost, dbPort);
 
   const app = createWebServer();
   const webServerPort = +(process.env.AW_WEB_PORT || 11037);

@@ -51,6 +51,12 @@ export const NavLink = styled(Link)`
   }
 `;
 
+export const AccountSection = styled.div`
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+`;
+
 export const AccountButtons = styled.ul`
   display: inline-block;
   margin: 0;

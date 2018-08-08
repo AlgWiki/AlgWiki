@@ -1,10 +1,32 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Button from '@atlaskit/button';
-import { Nav, Heading, NavList, NavItem, NavLink, AccountButtons, HeadingLink } from './styled';
+import {
+  Nav,
+  Heading,
+  NavList,
+  NavItem,
+  NavLink,
+  AccountSection,
+  HeadingLink,
+  AccountButtons,
+} from './styled';
+import Login from '../../../Login/async';
 
-export default class Header extends Component {
+export interface Props {}
+export interface State {
+  showLoginDialog: boolean;
+}
+export default class Header extends Component<Props, State> {
+  state: State = {
+    showLoginDialog: false,
+  };
+
+  componentDidMount() {
+    Login.preload();
+  }
+
   render() {
+    const { showLoginDialog } = this.state;
     return (
       <header>
         <Nav>
@@ -24,16 +46,22 @@ export default class Header extends Component {
             </NavItem>
           </NavList>
 
-          <AccountButtons>
-            <NavItem>
-              <Button>Create Account</Button>
-            </NavItem>
-            <NavItem>
-              <Button appearance="primary" onClick={() => {}}>
-                Login
-              </Button>
-            </NavItem>
-          </AccountButtons>
+          <AccountSection>
+            <AccountButtons>
+              <NavItem>
+                <Button onClick={() => this.setState({ showLoginDialog: true })}>Log In</Button>
+              </NavItem>
+              <NavItem>
+                <Button
+                  appearance="primary"
+                  onClick={() => this.setState({ showLoginDialog: true })}
+                >
+                  Sign Up
+                </Button>
+              </NavItem>
+            </AccountButtons>
+            {showLoginDialog && <Login onClose={() => this.setState({ showLoginDialog: false })} />}
+          </AccountSection>
         </Nav>
       </header>
     );

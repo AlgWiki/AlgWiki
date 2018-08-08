@@ -13,9 +13,10 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
+    "noImplicitAny": true,
     "lib": ["es2017", "dom"]
   },
   "files": ["./src/client/index.tsx"],
-  "include": ["./src/client", "./types"],
+  "include": ["./src/client", "./config", "./types"],
   "exclude": ["node_modules"]
 }

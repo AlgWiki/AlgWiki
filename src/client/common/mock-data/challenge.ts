@@ -47,6 +47,7 @@ export const mockTestCases: TestCase[] = [
   },
 ];
 export const mockTask: Task = {
+  _id: null,
   name: 'Nth Prime',
   description: {
     version: 1,

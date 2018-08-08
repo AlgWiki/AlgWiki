@@ -1,9 +1,9 @@
 import { ADDoc } from '@atlaskit/editor-common';
+import { Document } from 'mongoose';
 
 export type UUID = string;
 
 export interface User {
-  id: string;
   name: string;
   avatarUrl: string;
 }
@@ -94,6 +94,7 @@ export interface TestCase {
 }
 
 export interface Task {
+  _id: Document['_id'];
   name: string;
   description: ADDoc;
   methods: Method[];

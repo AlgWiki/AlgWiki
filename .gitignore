@@ -5,13 +5,19 @@ node_modules/
 # ignore builds
 public/
 
+# ignore database
+db-data/
+
 # ignore all logs
 *.log
 
 # ignore editor generated files
-#.vscode # include vscode launch commands
+.vscode
 .idea
 .iml
+
+# keep VSCode debugger command
+!.vscode/launch.json
 
 # ignore OS generated files
 **/.DS_Store
