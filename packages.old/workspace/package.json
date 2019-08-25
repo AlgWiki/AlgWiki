@@ -1,0 +1,33 @@
+{
+  "name": "workspace",
+  "version": "0.0.1",
+  "description": "React components which provide the interface for developing solutions to problems.",
+  "author": "Jack Field <jack@jf.id.au>",
+  "homepage": "https://github.com/jakzo/alg-wiki#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakzo/alg-wiki.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "dev": "start-storybook -p 9001 -c .storybook",
+    "build": "run-s clean build:ts",
+    "build:ts": "tsc",
+    "clean": "rimraf ./dist"
+  },
+  "bugs": {
+    "url": "https://github.com/jakzo/alg-wiki/issues"
+  },
+  "dependencies": {
+    "common": "*"
+  }
+}

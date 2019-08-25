@@ -4,13 +4,25 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "user-service",
+      "cwd": "${workspaceFolder}/packages/services/user-service",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:debug"],
+      "console": "integratedTerminal",
+      "port": 9229
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Dev Server",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["dev-debug"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "args": ["${workspaceFolder}/scripts/dev-server.ts"],
+      "env": { "TS_NODE_PROJECT": "./tsconfig/build.node.json" },
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "port": 11039,
-      "restart": false
+      "restart": false,
+      "autoAttachChildProcesses": false
     }
   ]
 }

@@ -1,0 +1,6 @@
+{
+  "extends": "./build",
+  "compilerOptions": {
+    "module": "commonjs"
+  }
+}

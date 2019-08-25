@@ -1,9 +1,13 @@
 # ignore caches
 node_modules/
+node_modules_docker/
 .cache/
+.next/
+.pulumi/
+*.tsbuildinfo
 
 # ignore builds
-public/
+dist/
 
 # ignore database
 db-data/
@@ -21,3 +25,6 @@ db-data/
 
 # ignore OS generated files
 **/.DS_Store
+
+# ignore generated files
+tsconfig/all-projects.json

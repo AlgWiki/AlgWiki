@@ -1,0 +1,41 @@
+type Mutation {
+  userSignup(user: UserSignupInput!): User!
+}
+
+type Query {
+  user(id: Int!): User
+  users: [User!]!
+}
+
+type User {
+  id: Int!
+  displayName: String!
+  email: String
+  passwordHash: String
+}
+
+input UserSignupInput {
+  displayName: String!
+  email: String
+  password: String
+}
+
+# ---
+
+query GetUserById($id: Int!) {
+  user(id: $id) {
+    id
+    displayName
+    passwordHash
+    email
+  }
+}
+
+mutation UserSignup($user: UserSignupInput!) {
+  userSignup(user: $user) {
+    id
+    displayName
+    passwordHash
+    email
+  }
+}

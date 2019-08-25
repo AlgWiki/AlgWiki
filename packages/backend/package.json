@@ -1,0 +1,24 @@
+{
+  "name": "@alg/backend",
+  "version": "0.0.1",
+  "description": "Backend routes.",
+  "author": "Jack Field <jack@jf.id.au>",
+  "homepage": "https://github.com/jakzo/alg-wiki#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakzo/alg-wiki.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jakzo/alg-wiki/issues"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "tsc -b -w",
+    "dev": "node-dev -r source-map-support/register ./dist/entry.js",
+    "dev:debug": "node-dev --inspect-brk ./dist/entry.js",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig/dev",
+  "include": ["./src", "../../types"],
+  "compilerOptions": {
+    "jsx": "react",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "module": "commonjs"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "The alg.wiki backend.",
+  "author": "Jack Field <jack@jf.id.au>",
+  "homepage": "https://github.com/jakzo/alg-wiki#readme",
+  "license": "MIT",
+  "main": "lib/server.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakzo/alg-wiki.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "dev": "ts-node-dev -P ../../tsconfig/dev.node.json ./src/index.ts",
+    "dev:debug": "ts-node-dev --inspect=11039 --inspect-brk -P ../../tsconfig/dev.node.json ./src/index.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/jakzo/alg-wiki/issues"
+  },
+  "dependencies": {
+    "common": "*"
+  }
+}

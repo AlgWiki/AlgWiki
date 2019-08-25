@@ -1,0 +1,8 @@
+{
+  "extends": "./dev",
+  "include": ["../types", "../packages"],
+  "exclude": ["../**/__test__", "../packages/server", "../packages/wold", "../packages/web/pages"],
+  "compilerOptions": {
+    "jsx": "react"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "extends": "./dev",
+  "compilerOptions": {
+    "module": "commonjs"
+  }
+}
