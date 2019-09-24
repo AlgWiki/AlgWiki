@@ -1,9 +1,0 @@
-{
-  "extends": "../../tsconfig/build.node",
-  "include": ["./src", "../../types"],
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "baseUrl": "."
-  }
-}

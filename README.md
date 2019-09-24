@@ -18,7 +18,6 @@ Or install:
 
 - Node.js
 - Yarn
-- Bolt
 
 **Running:**
 

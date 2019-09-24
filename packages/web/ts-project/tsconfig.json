@@ -1,8 +1,0 @@
-{
-  "extends": "..",
-  "compilerOptions": {
-    "isolatedModules": false,
-    "declaration": true,
-    "composite": true
-  }
-}

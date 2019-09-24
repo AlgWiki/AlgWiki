@@ -1,21 +1,33 @@
 {
-  "include": ["**/*"],
-  "exclude": ["**/*.old"], // TODO: Remove
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "**/*.old"
+  ],
   "compilerOptions": {
     "target": "es2018",
     "module": "esnext",
     "jsx": "preserve",
-    "lib": ["es2018", "dom"],
-    "types": ["node", "react"],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "types": [
+      "node",
+      "react"
+    ],
     "outDir": "./dist",
     "baseUrl": "./",
     "rootDir": "./",
-    "paths": { "*": ["./types/*"] },
+    "paths": {
+      "*": [
+        "./types/*"
+      ]
+    },
     "resolveJsonModule": true,
-    "composite": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "declaration": true,
     "importHelpers": true,
     "removeComments": false,
     "stripInternal": false,
@@ -37,6 +49,9 @@
     "noUnusedParameters": true,
     "strictFunctionTypes": false,
     "strictNullChecks": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "allowJs": true,
+    "noEmit": true,
+    "isolatedModules": true
   }
 }
