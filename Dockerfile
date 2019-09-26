@@ -27,6 +27,6 @@ RUN curl -sSL https://get.docker.com/ | sh
 RUN pulumi login file:///root/alg-wiki
 # pulumi stack init local -C ./packages/backend/infrastructure # requires password entered
 
-EXPOSE 11037
+# EXPOSE 11037
 
 # CMD "localstack" "start"
