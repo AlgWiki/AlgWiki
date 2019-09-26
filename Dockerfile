@@ -1,4 +1,4 @@
-FROM node:dubnium
+FROM node:10
 
 WORKDIR /root/alg-wiki
 

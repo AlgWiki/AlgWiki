@@ -20,7 +20,7 @@
     "dev3": "ts-node --inspect-brk -P ./tsconfig/build.node.json ./scripts/dev-server.ts",
     "dev:old": "concurrently --kill-others npm:dev:db \"lerna run --parallel dev\"",
     "dev:debug": "concurrently --kill-others -n d,c,s -c red.dim,blue.dim,magenta.dim npm:dev:db npm:dev:client npm:dev:server:debug",
-    "build": "tsc -b ./tsconfig/all-projects.json",
+    "build": "tsc -b",
     "build:watch": "tsc -b -w ./tsconfig/all-projects.json",
     "build:watch:log": "tsc -b -w --preserveWatchOutput ./tsconfig/all-projects.json",
     "dev:storybook": "start-storybook -p 9001 -c .storybook",
@@ -34,7 +34,7 @@
     "test": "jest",
     "clean": "rimraf ./public",
     "proxy": "bolt ts-node ./scripts/proxy.ts",
-    "dev": "run-p -r next:dev storybook",
+    "dev": "run-p -r next:dev",
     "next:dev": "next dev -p 11037",
     "storybook": "start-storybook -p 9001",
     "ts-node": "ts-node -P ./tsconfig/build.node.json"
