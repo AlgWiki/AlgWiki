@@ -29,4 +29,4 @@ RUN pulumi login file:///root/alg-wiki
 
 EXPOSE 11037
 
-CMD "localstack" "start"
+# CMD "localstack" "start"
