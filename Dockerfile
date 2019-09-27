@@ -1,6 +1,6 @@
 FROM gitpod/workspace-full:latest
 
-USER root
+USER gitpod
 
 # Install Bolt
 RUN yarn global add "bolt@^0.23.4"
@@ -22,6 +22,7 @@ RUN curl -fsSL https://get.pulumi.com | sh && \
 RUN pulumi login file:///root/alg-wiki
 # pulumi stack init local -C ./packages/backend/infrastructure # requires password entered
 
+USER root
 CMD "localstack" "start"
 
 
