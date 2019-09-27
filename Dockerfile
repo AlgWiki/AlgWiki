@@ -16,7 +16,7 @@ RUN pip3 install localstack
 ENV PATH "/root/.pulumi/bin:${PATH}"
 RUN curl -fsSL https://get.pulumi.com | sh && \
   # TODO: How can we automatically install correct version?
-  pulumi plugin install resource aws v0.18.20
+  sudo pulumi plugin install resource aws v0.18.20
 
 # Set up Pulumi
 RUN pulumi login file:///root/alg-wiki
