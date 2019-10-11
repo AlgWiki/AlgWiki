@@ -41,7 +41,7 @@
     "test": "jest",
     "clean": "rimraf ./public",
     "proxy": "bolt ts-node ./scripts/proxy.ts",
-    "dev": "run-p -r next:dev",
+    "dev": "run-p -r next:dev dev:localstack",
     "next:dev": "next dev -p 11037",
     "storybook": "start-storybook -p 9001",
     "ts-node": "ts-node -P ./tsconfig/build.node.json"
