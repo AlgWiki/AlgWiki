@@ -41,6 +41,5 @@ export const User = v.obj('user', {
   email: Email,
   passwordHash: PasswordHash,
   displayName: DisplayName,
-  avatarUrl: v.opt(AvatarUrl),
 });
 export type User = TypeOf<typeof User>;

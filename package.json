@@ -9,6 +9,12 @@
     "type": "git",
     "url": "git+https://github.com/jakzo/alg-wiki.git"
   },
+  "engines": {
+    "node": "10",
+    "pnpm": "4",
+    "npm": "This project uses pnpm to manage dependencies",
+    "yarn": "This project uses pnpm to manage dependencies"
+  },
   "main": "packages/backend/infrastructure/dist/index.js",
   "scripts": {
     "format": "prettier -l '**/*.{ts,json,md}'",
@@ -29,12 +35,13 @@
     "dev:docker": "docker-compose run --rm --name alg-wiki-dev alg-wiki",
     "dev:docker:build": "docker-compose build",
     "dev:docker:terminal": "docker exec -it alg-wiki-dev /bin/bash",
+    "dev:localstack": "cross-env SERVICES=dynamodb localstack start --host",
     "util:gen-project-refs": "bolt ts-node ./scripts/gen-project-refs.ts",
     "start": "ts-node --project ./tsconfig.server.json ./src/index.ts",
     "test": "jest",
     "clean": "rimraf ./public",
     "proxy": "bolt ts-node ./scripts/proxy.ts",
-    "dev": "run-p -r next:dev",
+    "dev": "run-p -r next:dev dev:localstack",
     "next:dev": "next dev -p 11037",
     "storybook": "start-storybook -p 9001",
     "ts-node": "ts-node -P ./tsconfig/build.node.json"
@@ -69,7 +76,7 @@
     "babel-plugin-styled-components": "^1.10.0",
     "chalk": "^2.4.2",
     "concurrently": "^4.1.0",
-    "cross-env": "^5.2.0",
+    "cross-env": "^5.2.1",
     "jest": "^23.1.0",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "next": "^9.0.5",
@@ -81,6 +88,7 @@
     "rimraf": "^2.6.2",
     "ts-loader": "^5.3.2",
     "ts-node-dev": "^1.0.0-pre.26",
+    "tslib": "^1.10.0",
     "tslint": "^5.10.0"
   },
   "dependencies": {
@@ -88,6 +96,7 @@
     "@emotion/styled": "^10.0.15",
     "@material-ui/core": "^4.3.1",
     "@material-ui/icons": "^4.2.1",
+    "@material-ui/styles": "^4.5.0",
     "@pulumi/aws": "^0.18.20",
     "@pulumi/awsx": "^0.18.6",
     "@pulumi/cloud-aws": "^0.18.0",

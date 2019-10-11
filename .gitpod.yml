@@ -1,8 +1,8 @@
 image:
   file: Dockerfile
 tasks:
-  - init: yarn
-    command: yarn build
+  - init: pnpm i
+    command: pnpm run dev
 ports:
   - port: 11037
     onOpen: open-preview
