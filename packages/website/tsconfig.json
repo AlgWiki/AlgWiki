@@ -4,12 +4,12 @@
   "exclude": ["**/__*__/**/*"],
   "compilerOptions": {
     "noEmit": false,
+    "module": "ESNext",
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist",
     "types": [],
-    "paths": {},
-    "lib": ["DOM"]
+    "paths": {}
   },
   "references": []
 }
