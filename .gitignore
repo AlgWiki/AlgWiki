@@ -1,0 +1,51 @@
+# === Generated Ignore Patterns (do not modify) ===
+# You may add your own rules below the end of this generated section.
+
+# Commonly ignored files
+node_modules/
+.*cache
+.jest
+*.tsbuildinfo
+*.log
+.coverage/
+.DS_Store
+CVS
+.svn
+.hg
+.lock-wscript
+.wafpickle-N
+.*.swp
+._*
+.npmrc
+.yarnrc
+config.gypi
+/package-lock.json
+
+# Rules for Yarn zero-installs
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# jstm generated files
+dist/
+/.npmignore
+/.nvmrc
+/.yvmrc
+/.eslintrc.js
+/.prettierrc.js
+/.eslintignore
+/.prettierignore
+/.lintstagedrc.js
+/.husky/pre-commit
+/.husky/.gitignore
+/tsconfig.build.json
+/tsconfig.base.json
+/jest.config.js
+# === (end generated patterns) ===
+
+# Place custom ignore patterns below here and they will not be removed
+._old

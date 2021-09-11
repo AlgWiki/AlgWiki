@@ -1,0 +1,5 @@
+{
+  "isMonorepo": true,
+  "nodeMinVersion": 14,
+  "mainBranch": "main"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@alg-wiki/website",
+  "version": "0.0.1",
+  "description": "alg.wiki website.",
+  "keywords": [],
+  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alg-wiki/monorepo.git",
+    "directory": "packages/website"
+  },
+  "bugs": {
+    "url": "https://github.com/alg-wiki/monorepo/issues"
+  },
+  "author": "jakzo",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "@types/node": "14.14.37"
+  }
+}
