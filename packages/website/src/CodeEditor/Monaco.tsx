@@ -10,13 +10,13 @@ export const setupMonacoEnvironment = (): void => {
     typeof globalThis & {
       MonacoEnvironment: monaco.Environment;
     }).MonacoEnvironment = {
-    getWorkerUrl: function (_moduleId, label) {
+    getWorkerUrl(_moduleId, label) {
       switch (label) {
         case "typescript":
         case "javascript":
-          return "./dist/monaco-workers/ts.worker.js";
+          return "./monaco-workers/ts.worker.js";
         default:
-          return "./dist/monaco-workers/editor.worker.js";
+          return "./monaco-workers/editor.worker.js";
       }
     },
   };
