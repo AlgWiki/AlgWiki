@@ -24,7 +24,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "dev": "parcel ./__dev__/index.html ./monaco-workers/editor.worker.js ./monaco-workers/ts.worker.js",
+    "dev": "webpack serve",
     "build": "yarn node ./build.js"
   },
   "dependencies": {
@@ -36,14 +36,24 @@
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "monaco-editor": "^0.27.0",
+    "prettier": "^2.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "14.14.37",
+    "@types/prettier": "^2",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
-    "parcel": "^2.0.0-rc.0"
+    "@types/webpack-dev-server": "^4",
+    "css-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "monaco-editor-webpack-plugin": "^4.1.2",
+    "style-loader": "^3.2.1",
+    "ts-loader": "^9.2.5",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.2.0"
   }
 }
