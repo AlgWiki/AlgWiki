@@ -39,13 +39,16 @@
     "prettier": "^2.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "tslib": "^2.3.0"
+    "sha.js": "^2.4.11",
+    "tslib": "^2.3.0",
+    "util": "^0.12.4"
   },
   "devDependencies": {
     "@types/node": "14.14.37",
     "@types/prettier": "^2",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "@types/sha.js": "^2",
     "@types/webpack-dev-server": "^4",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",

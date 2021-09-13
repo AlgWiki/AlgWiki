@@ -7,6 +7,7 @@ import { Compartment, EditorState, StateField } from "@codemirror/state";
 import { EditorView, keymap } from "@codemirror/view";
 import * as monaco from "monaco-editor";
 
+import { ChallengeFunction, TestCaseType } from "../types";
 import { countChars } from "../util";
 import { CodeMirror } from "./CodeMirror";
 import { Monaco } from "./Monaco";
@@ -14,62 +15,60 @@ import { isCodeMirrorRequired } from "./utils";
 
 export const CodeEditor: React.FC<{
   desiredEditor?: "monaco" | "codemirror";
+  function: ChallengeFunction<TestCaseType[], TestCaseType>;
   initialCode: string;
+  onRun?: () => void;
   onChange: (charCount: number) => void;
   getCodeRef: React.MutableRefObject<((code: string) => void) | undefined>;
 }> = (props) => {
   const onChangeRef = React.useRef(props.onChange);
   onChangeRef.current = props.onChange;
+  const onRunRef = React.useRef(props.onRun);
+  onRunRef.current = props.onRun;
 
-  if (
-    props.desiredEditor === "codemirror" ||
-    isCodeMirrorRequired("javascript")
-  )
-    return (
-      <CodeMirror
-        {...props}
-        init={(el) => {
-          const charCounter = StateField.define<number>({
-            create(state) {
-              const charCount = countChars(state.doc.sliceString(0));
-              onChangeRef.current(charCount);
-              return charCount;
-            },
-            update(charCount, tr) {
-              tr.changes.iterChanges((fromA, toA, _fromB, _toB, inserted) => {
-                for (const str of inserted) charCount += countChars(str);
-                charCount -= countChars(tr.startState.sliceDoc(fromA, toA));
-              });
-              onChangeRef.current(charCount);
-              return charCount;
-            },
+  const codeMirrorInit = React.useMemo(
+    () => (el: HTMLElement) => {
+      const charCounter = StateField.define<number>({
+        create(state) {
+          const charCount = countChars(state.doc.sliceString(0));
+          onChangeRef.current(charCount);
+          return charCount;
+        },
+        update(charCount, tr) {
+          tr.changes.iterChanges((fromA, toA, _fromB, _toB, inserted) => {
+            for (const str of inserted) charCount += countChars(str);
+            charCount -= countChars(tr.startState.sliceDoc(fromA, toA));
           });
-          const lang = new Compartment();
-          const editorState = EditorState.create({
-            extensions: [
-              basicSetup,
-              keymap.of([indentWithTab]),
-              charCounter,
-              lang.of(javascript()),
-            ],
-            doc: props.initialCode,
-          });
-          return new EditorView({ state: editorState, parent: el });
-        }}
-      />
-    );
+          onChangeRef.current(charCount);
+          return charCount;
+        },
+      });
+      const lang = new Compartment();
+      const editorState = EditorState.create({
+        extensions: [
+          basicSetup,
+          keymap.of([indentWithTab]),
+          charCounter,
+          lang.of(javascript()),
+        ],
+        doc: props.initialCode,
+      });
+      props.getCodeRef.current = () => editorState.doc.sliceString(0);
+      return new EditorView({ state: editorState, parent: el });
+    },
+    []
+  );
 
-  return (
-    <Monaco
-      {...props}
-      init={(el) => {
-        const editor = monaco.editor.create(el, {
-          value: props.initialCode,
-          language: "javascript",
-          minimap: { enabled: false },
-          wordWrap: "on",
-        });
+  const monacoInit = React.useMemo(
+    () => (el: HTMLElement) => {
+      const editor = monaco.editor.create(el, {
+        value: props.initialCode,
+        language: "javascript",
+        minimap: { enabled: false },
+        wordWrap: "on",
+      });
 
+      if (props.onRun)
         editor.addAction({
           id: "run-code",
           label: "Run Code",
@@ -80,35 +79,37 @@ export const CodeEditor: React.FC<{
           contextMenuGroupId: "navigation",
           contextMenuOrder: 1,
           run() {
-            console.log("RUN");
+            onRunRef.current?.();
           },
         });
 
-        editor.addAction({
-          id: "save-code",
-          label: "Save Code",
-          keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
-          run() {
-            console.log("SAVE");
-          },
-        });
-
-        let charCount = countChars(props.initialCode);
+      let charCount = countChars(props.initialCode);
+      onChangeRef.current(charCount);
+      editor.onDidChangeModelContent(() => {
+        const model = editor.getModel()!;
+        // TODO: Figure out how to get the deleted text so we only count chars in changes
+        charCount = countChars(model.getValue());
+        // charCount = evt.changes.reduce(
+        //   (charCount, change) =>
+        //     charCount -
+        //     countChars(model.getValueInRange(change.range)) +
+        //     countChars(change.text),
+        //   charCount
+        // );
         onChangeRef.current(charCount);
-        editor.onDidChangeModelContent((evt) => {
-          const model = editor.getModel()!;
-          charCount = evt.changes.reduce(
-            (charCount, change) =>
-              charCount -
-              countChars(model.getValueInRange(change.range)) +
-              countChars(change.text),
-            charCount
-          );
-          onChangeRef.current(charCount);
-        });
+      });
 
-        return editor;
-      }}
-    />
+      props.getCodeRef.current = () => editor.getValue();
+
+      return editor;
+    },
+    [props.onRun === undefined]
+  );
+
+  return props.desiredEditor === "codemirror" ||
+    isCodeMirrorRequired("javascript") ? (
+    <CodeMirror init={codeMirrorInit} />
+  ) : (
+    <Monaco height={300} init={monacoInit} />
   );
 };
