@@ -251,7 +251,7 @@ function judgeIsCorrect<T extends TestCaseType>(
         )
           return false;
         // TODO: Update TS
-        return BigInt(result) === ((expected as unknown) as BigInt);
+        return BigInt(result) === (expected as unknown as BigInt);
       }
       case "float": {
         const resultNum =

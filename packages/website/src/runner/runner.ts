@@ -13,8 +13,10 @@ export const runCode = <
   code,
 }: RunnerContext<Input, Output>): TestCaseRuns => {
   let output: [OutputStream, string][];
-  const createLogMethod = (stream: OutputStream) => (...data: unknown[]) =>
-    output.push([stream, `${format(...data)}\n`]);
+  const createLogMethod =
+    (stream: OutputStream) =>
+    (...data: unknown[]) =>
+      output.push([stream, `${format(...data)}\n`]);
   const realConsole = console;
   const mockConsole = {
     log: createLogMethod(OutputStream.STDOUT),
@@ -33,7 +35,7 @@ export const runCode = <
     tests: Object.fromEntries(
       testCases.map((testCase) => {
         output = [];
-        self.console = (mockConsole as unknown) as typeof console;
+        self.console = mockConsole as unknown as typeof console;
         let result: unknown;
         try {
           func(testCase.input, (value) => (result = value));
