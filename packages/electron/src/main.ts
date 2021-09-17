@@ -37,6 +37,14 @@ const createMainWindow = async (): Promise<BrowserWindow> => {
     show: false,
     width: 1280,
     height: 720,
+    webPreferences: {
+      nodeIntegration: false,
+      nodeIntegrationInWorker: false,
+      nodeIntegrationInSubFrames: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
+      disableBlinkFeatures: "Auxclick",
+    },
   });
 
   win.on("ready-to-show", () => {
