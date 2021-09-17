@@ -1,0 +1,89 @@
+{
+  "name": "@alg-wiki/electron",
+  "productName": "Alg Wiki",
+  "version": "0.0.1",
+  "description": "alg.wiki electron.",
+  "keywords": [],
+  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alg-wiki/monorepo.git",
+    "directory": "packages/electron"
+  },
+  "bugs": {
+    "url": "https://github.com/alg-wiki/monorepo/issues"
+  },
+  "author": "acheronfail <acheronfail@gmail.com>",
+  "license": "MIT",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build:pack": "yarn build:website && yarn build:typescript && electron-builder --dir --config.asar=false",
+    "build:dist": "yarn build:website && yarn build:typescript && electron-builder --linux --macos --windows",
+    "build:typescript": "tsc --build ./tsconfig.json",
+    "build:website": "yarn workspace @alg-wiki/website build",
+    "watch:electron": "nodemon --watch 'dist/**/*.js' --exec \"electron . && touch ./dist/main.js\"",
+    "watch:typescript": "tsc --build ./tsconfig.json --watch --preserveWatchOutput",
+    "dev": "concurrently --names 'tsc,web,app' --prefix-colors 'cyan,yellow,magenta' \"yarn watch:typescript\" \"yarn workspace @alg-wiki/website dev\" \"yarn watch:electron\""
+  },
+  "build": {
+    "appId": "wiki.alg.Client",
+    "directories": {
+      "output": "dist/app"
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "darkModeSupport": true,
+      "identity": null
+    },
+    "dmg": {
+      "iconSize": 160,
+      "contents": [
+        {
+          "x": 180,
+          "y": 170
+        },
+        {
+          "x": 480,
+          "y": 170,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "executableName": "algwiki",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Education;Science"
+    }
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@alg-wiki/website": "workspace:packages/website",
+    "electron-context-menu": "^3.1.1",
+    "electron-debug": "^3.2.0",
+    "electron-store": "^8.0.1",
+    "electron-unhandled": "^3.0.2",
+    "electron-updater": "^4.3.9",
+    "electron-util": "^0.17.2",
+    "nodemon": "^2.0.12"
+  },
+  "devDependencies": {
+    "@types/concurrently": "^6",
+    "@types/nodemon": "^1.19.1",
+    "chalk": "^4.1.2",
+    "concurrently": "^6.2.1",
+    "electron": "14.0.1",
+    "electron-builder": "^22.11.7",
+    "typescript": "^4.4.3"
+  }
+}
