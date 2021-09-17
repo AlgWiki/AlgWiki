@@ -17,14 +17,14 @@ yarn workspace @alg-wiki/electron dev
 
 This works by:
 
-* Running the `@alg-wiki/website` package in development mode (this installs an auto-reload hook, so the renderer automatically reloads on changes there)
-* Running `tsc` in watch mode to transpile all TS in this package
-* Running a `nodemon` script which will run and restart the electron main process whenever `tsc` outputs new changes
+- Running the `@alg-wiki/website` package in development mode (this installs an auto-reload hook, so the renderer automatically reloads on changes there)
+- Running `tsc` in watch mode to transpile all TS in this package
+- Running a `nodemon` script which will run and restart the electron main process whenever `tsc` outputs new changes
 
 #### How the app runs in production
 
-* The `electron-builder` package handles most of the distribution
-* The `@alg-wiki/website` package is built and compiled into the app
+- The `electron-builder` package handles most of the distribution
+- The `@alg-wiki/website` package is built and compiled into the app
 
 #### The `electron` dependency is pinned to a specific version
 
