@@ -12,6 +12,9 @@ export const common: webpack.Configuration = {
     filename: "index.js",
     path: path.join(PACKAGE_DIR, "dist"),
   },
+  cache: {
+    type: "filesystem",
+  },
   plugins: [
     new MonacoWebpackPlugin(),
     // Required because we're using the browserify util module which relies on this
