@@ -18,6 +18,7 @@ __metadata:
   dependencies:
     "@alg-wiki/website": "workspace:packages/website"
     "@types/concurrently": ^6
+    "@types/node": ^16.9.2
     "@types/nodemon": ^1.19.1
     chalk: ^4.1.2
     concurrently: ^6.2.1
@@ -30,6 +31,7 @@ __metadata:
     electron-updater: ^4.3.9
     electron-util: ^0.17.2
     nodemon: ^2.0.12
+    ts-node: ^10.2.1
     typescript: ^4.4.3
   languageName: unknown
   linkType: soft
@@ -2055,6 +2057,13 @@ __metadata:
   version: 14.17.16
   resolution: "@types/node@npm:14.17.16"
   checksum: 257e85d0c89310115312b8954f90588ec35065cace86dfe7989d223028c2d47af7c154074482f82988c1f9c1e6e80fef428f569f9767816987c71f6bc661fcb0
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^16.9.2":
+  version: 16.9.2
+  resolution: "@types/node@npm:16.9.2"
+  checksum: 204aa883bc93a267f43804af8872e538935369ab905d5ca702d2c17a213339f8df974bb95d21e2e714e8f83f669b185d8526f7c4b5d16adbdb5d96d4f2e75fa9
   languageName: node
   linkType: hard
 
@@ -12366,7 +12375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:10.2.1":
+"ts-node@npm:10.2.1, ts-node@npm:^10.2.1":
   version: 10.2.1
   resolution: "ts-node@npm:10.2.1"
   dependencies:

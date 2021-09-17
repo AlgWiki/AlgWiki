@@ -16,8 +16,8 @@
   },
   "author": "acheronfail <acheronfail@gmail.com>",
   "license": "MIT",
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
+  "main": "dist/ts/main.js",
+  "types": "dist/ts/main.d.ts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
@@ -27,7 +27,8 @@
     "build:dist": "yarn build:website && yarn build:typescript && electron-builder --linux --macos --windows",
     "build:typescript": "tsc --build ./tsconfig.json",
     "build:website": "yarn workspace @alg-wiki/website build",
-    "watch:electron": "nodemon --watch 'dist/**/*.js' --exec \"electron . && touch ./dist/main.js\"",
+    "start:electron": "ts-node -T scripts/dev-electron.ts",
+    "watch:electron": "nodemon --watch 'dist/ts/**/*.js' --exec \"yarn start:electron\"",
     "watch:typescript": "tsc --build ./tsconfig.json --watch --preserveWatchOutput",
     "dev": "concurrently --names 'tsc,web,app' --prefix-colors 'cyan,yellow,magenta' \"yarn watch:typescript\" \"yarn workspace @alg-wiki/website dev\" \"yarn watch:electron\""
   },
@@ -80,11 +81,13 @@
   },
   "devDependencies": {
     "@types/concurrently": "^6",
+    "@types/node": "^16.9.2",
     "@types/nodemon": "^1.19.1",
     "chalk": "^4.1.2",
     "concurrently": "^6.2.1",
     "electron": "14.0.1",
     "electron-builder": "^22.11.7",
+    "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   }
 }
