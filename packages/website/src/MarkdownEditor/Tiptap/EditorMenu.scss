@@ -1,0 +1,13 @@
+.EditorMenu {
+  button {
+    border: 1px solid grey;
+    border-radius: 4px;
+    margin: 1px;
+    padding: 2px;
+
+    &.is-active {
+      background-color: darkslategrey;
+      color: lightgrey;
+    }
+  }
+}
