@@ -77,7 +77,30 @@ export interface TestCaseRuns {
     };
   };
 }
+
 export enum OutputStream {
   STDOUT,
   STDERR,
+}
+
+export enum Language {
+  Python3 = "python3",
+}
+
+export interface ResultError {
+  message: string;
+  stack?: string;
+}
+
+export interface EncodedResultError {
+  [errorBoundary: string]: ResultError;
+}
+
+export interface UserResult {
+  value?: TestCaseType;
+  error?: ResultError;
+}
+
+export interface ValidatedUserResult extends UserResult {
+  passed: boolean;
 }

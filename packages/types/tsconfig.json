@@ -4,18 +4,12 @@
   "exclude": ["**/__*__/**/*"],
   "compilerOptions": {
     "noEmit": false,
-    "module": "ESNext",
+    "module": "commonjs",
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist",
     "types": [],
-    "paths": {
-      "@alg-wiki/types": ["../types/src"]
-    }
+    "paths": {}
   },
-  "references": [
-    {
-      "path": "../types"
-    }
-  ]
+  "references": []
 }

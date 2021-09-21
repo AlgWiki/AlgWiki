@@ -3,12 +3,12 @@
   "include": ["./src/**/*", "./src/**/*.json"],
   "exclude": ["**/__*__/**/*"],
   "compilerOptions": {
+    "allowJs": false,
     "noEmit": false,
-    "module": "ESNext",
+    "module": "commonjs",
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist",
-    "types": [],
     "paths": {
       "@alg-wiki/types": ["../types/src"]
     }

@@ -1,0 +1,20 @@
+#{USER_CODE}
+
+# delete __run in case user attempted to overwrite it
+try:
+  del __run
+except:
+  pass
+
+def __run():
+  import json
+  boundary = "#{BOUNDARY}"
+  for i, tc in enumerate(json.load(open('mount/input.json', 'rb'))):
+    result = {}
+    try:
+      result = #{CHALLENGE_NAME}(tc)
+    except Exception as e:
+      result =  { f'{boundary}error': { 'message': e.args[0] } }
+    print(f'{boundary}start{json.dumps(result)}{boundary}end')
+
+__run()

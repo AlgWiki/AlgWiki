@@ -1,4 +1,5 @@
-import { TestCaseRuns, TestCaseType } from "../types";
+import { TestCaseRuns, TestCaseType } from "@alg-wiki/types";
+
 import { RunnerContext } from "./types";
 
 export const RUNNER_STOP_EVENT = "alg_wiki_stopped";
