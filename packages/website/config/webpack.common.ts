@@ -2,7 +2,6 @@ import path from "path";
 
 import MonacoWebpackPlugin from "monaco-editor-webpack-plugin";
 import webpack from "webpack";
-import "webpack-dev-server";
 
 const PACKAGE_DIR = path.join(__dirname, "..");
 
