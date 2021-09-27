@@ -1,0 +1,4 @@
+.pulumi-passphrase
+Pulumi.dev.yaml
+.pulumi/*/dev/
+.pulumi/stacks/dev.*
