@@ -16,4 +16,8 @@ export class Boundary {
     this.start = `${this.marker}start`;
     this.end = `${this.marker}end`;
   }
+
+  public toString(): string {
+    return this.marker;
+  }
 }
