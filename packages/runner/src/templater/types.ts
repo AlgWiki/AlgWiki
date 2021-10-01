@@ -20,13 +20,15 @@ export type InferredPrimitive<P> = P extends Primitive.Integer | Primitive.Float
   : never;
 
 // All Types require this for type discrimination
-interface Variant {
-  tag: string;
-  render: (renderer: TypeRenderer) => string;
+export interface Variant {
+  tag: keyof Renderer;
+  type: unknown;
+  value?: unknown;
+  render: (renderer: Renderer) => string;
 }
 
 // A utility interface for easily matching/switching across variants
-export interface TypeRenderer {
+export interface Renderer {
   single: <P extends Primitive>(t: P, v: InferredPrimitive<P>) => string;
   list: <P extends Primitive>(t: P, v: InferredPrimitive<P>[]) => string;
   linkedList: <P extends Primitive>(t: P, v: InferredPrimitive<P>[]) => string;
@@ -36,26 +38,41 @@ export interface TypeRenderer {
   ) => string;
 }
 
+function throwIfNeedsValue<V extends Variant>(
+  v: V,
+  f: Renderer[V["tag"]]
+): string {
+  if (f.length == 2 && !v.value) {
+    throw new Error(
+      `Attempted to render a type-only template with a value: ${v}`
+    );
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return f(v.type, v.value) as string;
+}
+
 // Just a single value
 class Single<P extends Primitive> implements Variant {
   public readonly tag = "single";
-  public constructor(public type: P, public value: InferredPrimitive<P>) {}
-  public render = (r: TypeRenderer): string => r.single(this.type, this.value);
+  public constructor(public type: P, public value?: InferredPrimitive<P>) {}
+  public render = (r: Renderer): string => throwIfNeedsValue(this, r.single);
 }
 
 // A list, all the values are of the same type
 class List<P extends Primitive> implements Variant {
   public readonly tag = "list";
-  public constructor(public type: P, public value: InferredPrimitive<P>[]) {}
-  public render = (r: TypeRenderer): string => r.list(this.type, this.value);
+  public constructor(public type: P, public value?: InferredPrimitive<P>[]) {}
+  public render = (r: Renderer): string => throwIfNeedsValue(this, r.list);
 }
 
 // A linked list, all the values are of the same type
 class LinkedList<P extends Primitive> implements Variant {
   public readonly tag = "linkedList";
-  public constructor(public type: P, public value: InferredPrimitive<P>[]) {}
-  public render = (r: TypeRenderer): string =>
-    r.linkedList(this.type, this.value);
+  public constructor(public type: P, public value?: InferredPrimitive<P>[]) {}
+  public render = (r: Renderer): string =>
+    throwIfNeedsValue(this, r.linkedList);
 }
 
 // A dictionary, all the keys are of the same type, and all the values are of the same type
@@ -64,64 +81,71 @@ class Dictionary<K extends Primitive, V extends Primitive> implements Variant {
   public readonly tag = "dictionary";
   public constructor(
     public type: KeyPair<K, V>,
-    public value: Map<InferredPrimitive<K>, InferredPrimitive<V>>
+    public value?: Map<InferredPrimitive<K>, InferredPrimitive<V>>
   ) {}
-  public render = (r: TypeRenderer): string =>
-    r.dictionary(this.type, this.value);
+  public render = (r: Renderer): string =>
+    throwIfNeedsValue(this, r.dictionary);
 }
 
 // Simple wrapper class to make constructing these easier
-export class Type {
+export class Type<V extends Variant> {
   // public creation api
   public static single<P extends Primitive>(
     inner: P,
-    value: InferredPrimitive<P>
-  ): Type {
+    value?: InferredPrimitive<P>
+  ): Type<Single<P>> {
     return new Type(new Single(inner, value));
   }
 
   public static list<P extends Primitive>(
     inner: P,
-    value: InferredPrimitive<P>[]
-  ): Type {
+    value?: InferredPrimitive<P>[]
+  ): Type<List<P>> {
     return new Type(new List(inner, value));
   }
 
   public static linkedList = <P extends Primitive>(
     inner: P,
-    value: InferredPrimitive<P>[]
-  ): Type => {
+    value?: InferredPrimitive<P>[]
+  ): Type<LinkedList<P>> => {
     return new Type(new LinkedList(inner, value));
   };
 
   public static dictionary = <K extends Primitive, V extends Primitive>(
     inner: KeyPair<K, V>,
-    value: Map<InferredPrimitive<K>, InferredPrimitive<V>>
-  ): Type => {
+    value?: Map<InferredPrimitive<K>, InferredPrimitive<V>>
+  ): Type<Dictionary<K, V>> => {
     return new Type(new Dictionary(inner, value));
   };
 
   // this is private to force construction via static apis
-  private constructor(private readonly inner: Variant) {}
+  private constructor(private readonly inner: V) {}
 
-  public render(renderer: TypeRenderer): string {
+  public render(renderer: Renderer): string {
     return this.inner.render(renderer);
   }
 }
 
 // ---
 
-export interface RunnerTemplateOptions {
+export interface RunnerTemplateOptions<
+  Input extends Variant,
+  Output extends Variant
+> {
   boundary: Boundary;
-  inputs: Type[];
-  outputType: Type;
+  inputs: Type<Input>[];
+  output: Type<Output>;
   challengeName: string;
   userCode: string;
 }
 
 export interface ChallengeRenderer {
   // The base template for the user code
-  defaultTemplate(name: string, input: Type, output: Type): string;
+  createDefaultCode(
+    name: string,
+    input: Type<Variant>,
+    output: Type<Variant>
+  ): string;
   // The outputted template for the runner
-  runnerTemplate(options: RunnerTemplateOptions): string;
+  createRunner(options: RunnerTemplateOptions<Variant, Variant>): string;
 }

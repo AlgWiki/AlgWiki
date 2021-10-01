@@ -6,12 +6,13 @@ import {
   InferredPrimitive,
   KeyPair,
   Primitive,
+  Renderer,
   RunnerTemplateOptions,
   Type,
-  TypeRenderer,
+  Variant,
 } from "./types";
 
-class RustTypeTemplater implements TypeRenderer {
+class RustTypeTemplater implements Renderer {
   single(t: Primitive): string {
     switch (t) {
       case Primitive.Integer:
@@ -38,7 +39,7 @@ class RustTypeTemplater implements TypeRenderer {
   }
 }
 
-export class RustValueTemplater implements TypeRenderer {
+export class RustValueTemplater implements Renderer {
   private readonly typeTemplater: RustTypeTemplater = new RustTypeTemplater();
 
   single<P extends Primitive>(t: P, v: InferredPrimitive<P>): string {
@@ -105,10 +106,10 @@ export class RustLanguageTemplater implements ChallengeRenderer {
     return snakeCase(name);
   }
 
-  public defaultTemplate(
+  public createDefaultCode<Input extends Variant, Output extends Variant>(
     challengeName: string,
-    inputType: Type,
-    outputType: Type
+    inputType: Type<Input>,
+    outputType: Type<Output>
   ): string {
     const challengeIdent = this.identifier(challengeName);
     const inputTypeStr = inputType.render(this.typeTemplater);
@@ -120,12 +121,12 @@ export class RustLanguageTemplater implements ChallengeRenderer {
     `;
   }
 
-  public runnerTemplate({
+  public createRunner<Input extends Variant, Output extends Variant>({
     boundary,
     inputs,
     challengeName,
     userCode,
-  }: RunnerTemplateOptions): string {
+  }: RunnerTemplateOptions<Input, Output>): string {
     const challengeIdent = this.identifier(challengeName);
     const inputIdent = `_${this.identifier(`${boundary}_input`)}`;
 
@@ -159,26 +160,24 @@ export class RustLanguageTemplater implements ChallengeRenderer {
 //  all types work
 //  all values work
 //  valid identifiers
+//  throwIfNeedsValue
 // TODO: invert ChallengeTemplater like I've done for the Type class
 
 // Demo
 const templater = new RustLanguageTemplater();
 const name = "parseStr";
-// FIXME: input should always be a list for multiple inputs
-//  (of the same Variant, not sure if it's possible to enforce at compile time)
 const inputs = [1, 2, 3].map((x) =>
   Type.single(Primitive.String, x.toString())
 );
-// FIXME: output doesn't need a value
-const output = Type.single(Primitive.Integer, 1);
+const output = Type.single(Primitive.Integer);
 void Boundary.create().then((b) =>
   console.log(
-    templater.runnerTemplate({
+    templater.createRunner({
       challengeName: name,
       inputs,
-      outputType: output,
+      output,
       boundary: b,
-      userCode: templater.defaultTemplate(name, inputs[0], output),
+      userCode: templater.createDefaultCode(name, inputs[0], output),
     })
   )
 );
