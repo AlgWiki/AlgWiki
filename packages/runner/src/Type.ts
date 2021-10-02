@@ -1,5 +1,3 @@
-import { Boundary } from "../boundary";
-
 // The types challenges accept
 export enum Primitive {
   // Only supporting signed integers for now
@@ -57,14 +55,16 @@ function throwIfNeedsValue<V extends Variant>(
 class Single<P extends Primitive> implements Variant {
   public readonly tag = "single";
   public constructor(public type: P, public value?: InferredPrimitive<P>) {}
-  public render = (r: Renderer): string => throwIfNeedsValue(this, r.single);
+  public render = (r: Renderer): string =>
+    throwIfNeedsValue(this, r.single.bind(r));
 }
 
 // A list, all the values are of the same type
 class List<P extends Primitive> implements Variant {
   public readonly tag = "list";
   public constructor(public type: P, public value?: InferredPrimitive<P>[]) {}
-  public render = (r: Renderer): string => throwIfNeedsValue(this, r.list);
+  public render = (r: Renderer): string =>
+    throwIfNeedsValue(this, r.list.bind(r));
 }
 
 // A linked list, all the values are of the same type
@@ -72,7 +72,7 @@ class LinkedList<P extends Primitive> implements Variant {
   public readonly tag = "linkedList";
   public constructor(public type: P, public value?: InferredPrimitive<P>[]) {}
   public render = (r: Renderer): string =>
-    throwIfNeedsValue(this, r.linkedList);
+    throwIfNeedsValue(this, r.linkedList.bind(r));
 }
 
 // A dictionary, all the keys are of the same type, and all the values are of the same type
@@ -84,7 +84,7 @@ class Dictionary<K extends Primitive, V extends Primitive> implements Variant {
     public value?: Map<InferredPrimitive<K>, InferredPrimitive<V>>
   ) {}
   public render = (r: Renderer): string =>
-    throwIfNeedsValue(this, r.dictionary);
+    throwIfNeedsValue(this, r.dictionary.bind(r));
 }
 
 // Simple wrapper class to make constructing these easier
@@ -124,28 +124,4 @@ export class Type<V extends Variant> {
   public render(renderer: Renderer): string {
     return this.inner.render(renderer);
   }
-}
-
-// ---
-
-export interface RunnerTemplateOptions<
-  Input extends Variant,
-  Output extends Variant
-> {
-  boundary: Boundary;
-  inputs: Type<Input>[];
-  output: Type<Output>;
-  challengeName: string;
-  userCode: string;
-}
-
-export interface ChallengeRenderer {
-  // The base template for the user code
-  createDefaultCode(
-    name: string,
-    input: Type<Variant>,
-    output: Type<Variant>
-  ): string;
-  // The outputted template for the runner
-  createRunner(options: RunnerTemplateOptions<Variant, Variant>): string;
 }

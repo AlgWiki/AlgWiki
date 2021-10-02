@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RustChallengeRenderer can render challenge 1`] = `
+"
+      Hello, User!
+
+      fn main() {
+        let _b_input: Vec<&str> = vec![
+          r###\\"1\\"###,
+r###\\"2\\"###,
+r###\\"3\\"###
+        ];
+        for tc in _b_input {
+          println!(
+            \\"{boundary_start}{result:?}{boundary_end}\\",
+            boundary_start = \\"B_START\\",
+            boundary_end = \\"B_END\\",
+            result = parse_str(tc)
+          );
+        }
+      }
+    "
+`;
+
+exports[`RustChallengeRenderer can render default input 1`] = `
+"
+      fn parse_str(input: &str) -> i64 {
+        todo!()
+      }
+    "
+`;

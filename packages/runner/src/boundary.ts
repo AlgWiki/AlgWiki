@@ -1,7 +1,14 @@
 import { randomBytes } from "crypto";
 import { promisify } from "util";
 
-export class Boundary {
+export interface IBoundary {
+  readonly marker: string;
+  readonly error: string;
+  readonly start: string;
+  readonly end: string;
+}
+
+export class Boundary implements IBoundary {
   public readonly error: string;
   public readonly start: string;
   public readonly end: string;

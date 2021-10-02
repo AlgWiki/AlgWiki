@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RustTypeRenderer can render all types 1`] = `
+"i64
+Vec<i64>
+LinkedList<i64>
+HashMap<i64, f64>
+HashMap<i64, &str>
+HashMap<i64, bool>
+f64
+Vec<f64>
+LinkedList<f64>
+HashMap<f64, i64>
+HashMap<f64, &str>
+HashMap<f64, bool>
+&str
+Vec<&str>
+LinkedList<&str>
+HashMap<&str, i64>
+HashMap<&str, f64>
+HashMap<&str, bool>
+bool
+Vec<bool>
+LinkedList<bool>
+HashMap<bool, i64>
+HashMap<bool, f64>
+HashMap<bool, &str>"
+`;

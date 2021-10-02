@@ -1,120 +1,120 @@
-import { spawn } from "child_process";
-import { promises as fs } from "fs";
-import { promisify } from "util";
+// TODO: fix this up to use the new renderers, etc
 
-import {
-  Language,
-  TestCase,
-  TestCaseType,
-  UserResult,
-  ValidatedUserResult,
-} from "@alg-wiki/types";
-import rimraf from "rimraf";
+// import { spawn } from "child_process";
+// import { promises as fs } from "fs";
+// import { promisify } from "util";
 
-import { Boundary } from "./boundary";
-import { InputWriter } from "./input-writer";
-import { PathManager } from "./path-manager";
-import { ResultEmitter } from "./result-emitter";
-import { TemplateWriter } from "./template-writer";
+// import {
+//   Language,
+//   TestCase,
+//   TestCaseType,
+//   UserResult,
+//   ValidatedUserResult,
+// } from "@alg-wiki/types";
+// import rimraf from "rimraf";
 
-const rm = promisify(rimraf);
+// import { Boundary } from "./Boundary";
+// import { PathManager } from "./PathManager";
+// import { ResultEmitter } from "./ResultEmitter";
 
-export interface RunnerOptions {
-  lang: Language;
-  challengeName: string;
-  testCases: TestCase<TestCaseType[], TestCaseType>[];
-}
+// const rm = promisify(rimraf);
 
-export interface RunResult {
-  stderr: string;
-  stdout: string;
-  results: ValidatedUserResult[];
-}
+// export interface RunnerOptions {
+//   lang: Language;
+//   challengeName: string;
+//   testCases: TestCase<TestCaseType[], TestCaseType>[];
+// }
 
-export class RunError extends Error {
-  constructor(message: string) {
-    super(message);
-    Error.captureStackTrace(this, this.constructor);
-  }
-}
+// export interface RunResult {
+//   stderr: string;
+//   stdout: string;
+//   results: ValidatedUserResult[];
+// }
 
-export class Runner {
-  private readonly lang: Language;
-  private readonly paths: PathManager;
-  private readonly templateWriter: TemplateWriter;
-  private readonly inputWriter: InputWriter;
-  private readonly testCases: TestCase<TestCaseType[], TestCaseType>[];
+// export class RunError extends Error {
+//   constructor(message: string) {
+//     super(message);
+//     Error.captureStackTrace(this, this.constructor);
+//   }
+// }
 
-  public constructor(options: RunnerOptions) {
-    this.lang = options.lang;
-    this.testCases = options.testCases;
-    this.paths = new PathManager();
-    this.templateWriter = new TemplateWriter(
-      options.lang,
-      options.challengeName
-    );
-    this.inputWriter = new InputWriter(this.testCases.map((tc) => tc.input));
-  }
+// export class Runner {
+//   private readonly lang: Language;
+//   private readonly paths: PathManager;
+//   private readonly templateWriter: TemplateWriter;
+//   private readonly inputWriter: InputWriter;
+//   private readonly testCases: TestCase<TestCaseType[], TestCaseType>[];
 
-  public async execute(userCode: string): Promise<RunResult> {
-    const emitter = await this._execute(userCode);
-    return new Promise((resolve, reject) => {
-      const runResult: RunResult = {
-        stderr: "",
-        stdout: "",
-        results: [],
-      };
+//   public constructor(options: RunnerOptions) {
+//     this.lang = options.lang;
+//     this.testCases = options.testCases;
+//     this.paths = new PathManager();
+//     this.templateWriter = new TemplateWriter(
+//       options.lang,
+//       options.challengeName
+//     );
+//     this.inputWriter = new InputWriter(this.testCases.map((tc) => tc.input));
+//   }
 
-      emitter.on("result", (result: UserResult) => {
-        const i = runResult.results.length;
-        runResult.results.push({
-          ...result,
-          passed: !result.error && this.testCases[i].expected === result.value,
-        });
-      });
-      emitter.on("stdout", (stdout) => (runResult.stdout += `${stdout}`));
-      emitter.on("stderr", (stderr) => (runResult.stderr += `${stderr}`));
-      emitter.on("error", (error: Error) =>
-        reject(new RunError(error.message))
-      );
+//   public async execute(userCode: string): Promise<RunResult> {
+//     const emitter = await this._execute(userCode);
+//     return new Promise((resolve, reject) => {
+//       const runResult: RunResult = {
+//         stderr: "",
+//         stdout: "",
+//         results: [],
+//       };
 
-      emitter.on(
-        "close",
-        // TODO: get handler types working right
-        (code: number | null, signal: NodeJS.Signals | null) => {
-          if (code == 0) {
-            resolve(runResult);
-          } else if (code == null) {
-            reject(new RunError(`Process terminated with signal: ${signal}`));
-          } else {
-            reject(new RunError(`Process exited with code: ${code}`));
-          }
-        }
-      );
-    });
-  }
+//       emitter.on("result", (result: UserResult) => {
+//         const i = runResult.results.length;
+//         runResult.results.push({
+//           ...result,
+//           passed: !result.error && this.testCases[i].expected === result.value,
+//         });
+//       });
+//       emitter.on("stdout", (stdout) => (runResult.stdout += `${stdout}`));
+//       emitter.on("stderr", (stderr) => (runResult.stderr += `${stderr}`));
+//       emitter.on("error", (error: Error) =>
+//         reject(new RunError(error.message))
+//       );
 
-  private async _execute(userCode: string): Promise<ResultEmitter> {
-    // randomise the boundary each run
-    const boundary = await Boundary.create();
+//       emitter.on(
+//         "close",
+//         // TODO: get handler types working right
+//         (code: number | null, signal: NodeJS.Signals | null) => {
+//           if (code == 0) {
+//             resolve(runResult);
+//           } else if (code == null) {
+//             reject(new RunError(`Process terminated with signal: ${signal}`));
+//           } else {
+//             reject(new RunError(`Process exited with code: ${code}`));
+//           }
+//         }
+//       );
+//     });
+//   }
 
-    // ensure that our mount dir is completely clean and exists
-    await rm(this.paths.mountPath);
-    await fs.mkdir(this.paths.mountPath);
+//   private async _execute(userCode: string): Promise<ResultEmitter> {
+//     // randomise the boundary each run
+//     const boundary = await Boundary.create();
 
-    // create the file to execute or compile
-    await this.templateWriter.output(this.paths.userCode, userCode, boundary);
+//     // ensure that our mount dir is completely clean and exists
+//     await rm(this.paths.mountPath);
+//     await fs.mkdir(this.paths.mountPath);
 
-    // create the test input JSON array
-    await this.inputWriter.output(this.paths.testInput);
+//     // create the file to execute or compile
+//     await this.templateWriter.output(this.paths.userCode, userCode, boundary);
 
-    // run the docker image and incrementally parse its output
-    const args = [
-      "run",
-      "--rm",
-      `--volume=${this.paths.mountPath}:/alg-wiki/mount`,
-      `alg-wiki/${this.lang}`,
-    ];
-    return new ResultEmitter(boundary, spawn("docker", args));
-  }
-}
+//     // create the test input JSON array
+//     await this.inputWriter.output(this.paths.testInput);
+
+//     // run the docker image and incrementally parse its output
+//     const args = [
+//       "run",
+//       "--rm",
+//       `--volume=${this.paths.mountPath}:/alg-wiki/mount`,
+//       `alg-wiki/${this.lang}`,
+//     ];
+//     return new ResultEmitter(boundary, spawn("docker", args));
+//   }
+// }

@@ -1,4 +1,4 @@
-import { Primitive, Type } from "./types";
+import { Primitive, Type } from "../Type";
 
 // pass
 Type.single(Primitive.Integer, 1);
