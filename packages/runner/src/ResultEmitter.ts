@@ -8,7 +8,7 @@ import {
   isEncodedResultError,
 } from "@alg-wiki/types";
 
-import { Boundary } from "./boundary";
+import { Boundary } from "./Boundary";
 
 export enum ResultEmitterEvent {
   Result = "result",

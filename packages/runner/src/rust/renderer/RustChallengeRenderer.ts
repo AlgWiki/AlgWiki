@@ -2,7 +2,7 @@ import { snakeCase } from "change-case";
 
 import { IBoundary } from "../../Boundary";
 import { Challenge, ChallengeRenderer } from "../../Challenge";
-import { Variant } from "../../Type";
+import { Dictionary, Type, Variant } from "../../Type";
 import { RustTypeRenderer } from "./RustTypeRenderer";
 import { RustValueRenderer } from "./RustValueRenderer";
 
@@ -33,6 +33,19 @@ export class RustChallengeRenderer<
     `;
   }
 
+  private serialiseDict(output: Type<Output>): string {
+    if (!(output.inner instanceof Dictionary)) {
+      throw new Error(
+        `Attempted to serialise a type that wasn't a Dictionary!`
+      );
+    }
+
+    // map the HashMap into a Vec<(key, value)> so keys aren't casted to strings when JSON encoded
+    const t1 = this.typeTemplater.single(output.inner.type.key);
+    const t2 = this.typeTemplater.single(output.inner.type.value);
+    return `result.into_iter().collect::<Vec<(${t1}, ${t2})>>()`;
+  }
+
   public createRunner(
     challenge: Challenge<Input, Output>,
     boundary: IBoundary,
@@ -47,6 +60,7 @@ export class RustChallengeRenderer<
       .map((input) => input.render(this.valueTemplater))
       .join(",\n");
 
+    const outputTypeStr = challenge.output.render(this.typeTemplater);
     return `
       ${userCode}
 
@@ -55,11 +69,20 @@ export class RustChallengeRenderer<
           ${inputValueStr}
         ];
         for tc in ${inputIdent} {
+          let result = {
+            let result: ${outputTypeStr} = ${challengeIdent}(tc);
+            ${
+              challenge.output.isDictionary()
+                ? this.serialiseDict(challenge.output)
+                : "result"
+            }
+          };
+
           println!(
             "{boundary_start}{result:?}{boundary_end}",
             boundary_start = "${boundary.start}",
             boundary_end = "${boundary.end}",
-            result = ${challengeIdent}(tc)
+            result = serde_json::json!(result).to_string()
           );
         }
       }

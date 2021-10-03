@@ -52,7 +52,7 @@ function throwIfNeedsValue<V extends Variant>(
 }
 
 // Just a single value
-class Single<P extends Primitive> implements Variant {
+export class Single<P extends Primitive> implements Variant {
   public readonly tag = "single";
   public constructor(public type: P, public value?: InferredPrimitive<P>) {}
   public render = (r: Renderer): string =>
@@ -60,7 +60,7 @@ class Single<P extends Primitive> implements Variant {
 }
 
 // A list, all the values are of the same type
-class List<P extends Primitive> implements Variant {
+export class List<P extends Primitive> implements Variant {
   public readonly tag = "list";
   public constructor(public type: P, public value?: InferredPrimitive<P>[]) {}
   public render = (r: Renderer): string =>
@@ -68,7 +68,7 @@ class List<P extends Primitive> implements Variant {
 }
 
 // A linked list, all the values are of the same type
-class LinkedList<P extends Primitive> implements Variant {
+export class LinkedList<P extends Primitive> implements Variant {
   public readonly tag = "linkedList";
   public constructor(public type: P, public value?: InferredPrimitive<P>[]) {}
   public render = (r: Renderer): string =>
@@ -77,7 +77,9 @@ class LinkedList<P extends Primitive> implements Variant {
 
 // A dictionary, all the keys are of the same type, and all the values are of the same type
 export type KeyPair<K, V> = { key: K; value: V };
-class Dictionary<K extends Primitive, V extends Primitive> implements Variant {
+export class Dictionary<K extends Primitive, V extends Primitive>
+  implements Variant
+{
   public readonly tag = "dictionary";
   public constructor(
     public type: KeyPair<K, V>,
@@ -119,9 +121,25 @@ export class Type<V extends Variant> {
   };
 
   // this is private to force construction via static apis
-  private constructor(private readonly inner: V) {}
+  private constructor(public readonly inner: V) {}
 
   public render(renderer: Renderer): string {
     return this.inner.render(renderer);
+  }
+
+  public isSingle(): boolean {
+    return this.inner instanceof Single;
+  }
+
+  public isList(): boolean {
+    return this.inner instanceof List;
+  }
+
+  public isLinkedList(): boolean {
+    return this.inner instanceof LinkedList;
+  }
+
+  public isDictionary(): boolean {
+    return this.inner instanceof Dictionary;
   }
 }
