@@ -1,36 +1,34 @@
 import { promises as fs } from "fs";
-import { join, resolve } from "path";
+import { join } from "path";
 
+import { Boundary } from "../../Boundary";
 import { Challenge } from "../../Challenge";
-import { Templater } from "../../Templater";
+import { LanguageTemplater } from "../../Templater";
 import { Variant } from "../../Type";
 import { RustChallengeRenderer } from "../renderer";
 
-export class RustTemplater<Input extends Variant, Output extends Variant>
-  implements Templater<Input, Output>
+export class RustTemplater<I extends Variant, O extends Variant>
+  implements LanguageTemplater<I, O>
 {
-  #templateCargoToml = resolve(__dirname, "..", "template", "Cargo.toml");
+  public imageName = "rust";
+
   #challengeRenderer = new RustChallengeRenderer();
 
   async output(
-    challenge: Challenge<Input, Output>,
+    challenge: Challenge<I, O>,
     userCode: string,
-    outputDir: string
-  ): Promise<void> {
+    mountPath: string
+  ): Promise<Boundary> {
+    const boundary = await Boundary.create();
     const runnerCode = await challenge.createRunner(
       this.#challengeRenderer,
+      boundary,
       userCode
     );
 
-    const outputCargoToml = join(outputDir, "Cargo.toml");
-    const outputSrc = join(outputDir, "src");
-    const outputMainRs = join(outputSrc, "main.rs");
+    // write files
+    await fs.writeFile(join(mountPath, "main.rs"), runnerCode);
 
-    await fs.mkdir(outputSrc, { recursive: true });
-    await fs.writeFile(outputMainRs, runnerCode);
-    await fs.writeFile(
-      outputCargoToml,
-      await fs.readFile(this.#templateCargoToml)
-    );
+    return boundary;
   }
 }

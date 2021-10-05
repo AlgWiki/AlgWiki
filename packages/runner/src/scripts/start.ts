@@ -1,24 +1,18 @@
-import { Language, TestCase } from "@alg-wiki/types";
+import { Language } from "@alg-wiki/types";
 
-import { Runner } from "../runner";
+import { Challenge } from "../Challenge";
+import { Runner } from "../Runner";
+import { Primitive, Type } from "../Type";
 
-const sampleTestCases: TestCase<number[], number>[] = [
-  {
-    input: [40, 2],
-    expected: 42,
-    hash: "",
-  },
-  {
-    input: [1700, 29],
-    expected: 1729,
-    hash: "",
-  },
-  {
-    input: [Number.MAX_SAFE_INTEGER, -7199254740991],
-    expected: 9000000000000000,
-    hash: "",
-  },
-];
+const challenge = new Challenge(
+  "sum",
+  [
+    Type.list(Primitive.Integer, [40, 2]),
+    Type.list(Primitive.Integer, [1700, 29]),
+    Type.list(Primitive.Integer, [Number.MAX_SAFE_INTEGER, -7199254740991]),
+  ],
+  Type.single(Primitive.Integer)
+);
 
 void (async function () {
   const lang = /--lang(?: |=)(.+)/.exec(process.argv.join(" "))?.[1];
@@ -28,22 +22,16 @@ void (async function () {
   }
 
   const runner = new Runner({
-    lang: Language.Python3,
-    challengeName: "sumTwo",
-    testCases: sampleTestCases,
+    lang: Language.Rust,
+    challenge,
   });
 
   {
     const result = await runner.execute(`
-import sys
-def sum_two(input):
-  print(f"some rogue stdout! {input}")
-  print(f"some rogue stderr! {input}", file=sys.stderr)
-  if 40 in input:
-    return sum(input)
-  if input[0] > 10000:
-    raise Exception('something went wrong')
-  return max(input)`);
+fn sum(input: Vec<i64>) -> i64 {
+  input.iter().sum()
+}
+`);
 
     console.log(JSON.stringify(result, null, 2));
   }

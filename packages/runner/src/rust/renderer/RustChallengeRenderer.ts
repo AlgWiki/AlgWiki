@@ -1,8 +1,9 @@
 import { snakeCase } from "change-case";
+import dedent from "dedent";
 
 import { IBoundary } from "../../Boundary";
 import { Challenge, ChallengeRenderer } from "../../Challenge";
-import { Dictionary, Type, Variant } from "../../Type";
+import { Dictionary, LinkedList, Type, Variant } from "../../Type";
 import { RustTypeRenderer } from "./RustTypeRenderer";
 import { RustValueRenderer } from "./RustValueRenderer";
 
@@ -11,8 +12,8 @@ export class RustChallengeRenderer<
   Output extends Variant
 > implements ChallengeRenderer<Input, Output>
 {
-  private readonly typeTemplater = new RustTypeRenderer();
-  private readonly valueTemplater = new RustValueRenderer();
+  private readonly typeRenderer = new RustTypeRenderer();
+  private readonly valueRenderer = new RustValueRenderer();
 
   private identifier(name: string): string {
     return snakeCase(name);
@@ -24,13 +25,30 @@ export class RustChallengeRenderer<
     output,
   }: Challenge<Input, Output>): string {
     const challengeIdent = this.identifier(name);
-    const inputTypeStr = inputs[0].render(this.typeTemplater);
-    const outputTypeStr = output.render(this.typeTemplater);
-    return `
+    const inputTypeStr = inputs[0].render(this.typeRenderer);
+    const outputTypeStr = output.render(this.typeRenderer);
+    return dedent(`
       fn ${challengeIdent}(input: ${inputTypeStr}) -> ${outputTypeStr} {
         todo!()
       }
-    `;
+    `);
+  }
+
+  private serialiseLinkedList(
+    output: Type<Output>,
+    boundary: IBoundary
+  ): string {
+    if (!(output.inner instanceof LinkedList)) {
+      throw new Error(
+        `Attempted to serialise a type that wasn't a LinkedList!`
+      );
+    }
+
+    return dedent(`serde_json::json!({
+      "${boundary.marker}_linkedList": {
+        "inner": result,
+      }
+    })`);
   }
 
   private serialiseDict(output: Type<Output>): string {
@@ -41,9 +59,9 @@ export class RustChallengeRenderer<
     }
 
     // map the HashMap into a Vec<(key, value)> so keys aren't casted to strings when JSON encoded
-    const t1 = this.typeTemplater.single(output.inner.type.key);
-    const t2 = this.typeTemplater.single(output.inner.type.value);
-    return `result.into_iter().collect::<Vec<(${t1}, ${t2})>>()`;
+    const t1 = this.typeRenderer.single(output.inner.type.key);
+    const t2 = this.typeRenderer.single(output.inner.type.value);
+    return `serde_json::json!(result.into_iter().collect::<Vec<(${t1}, ${t2})>>())`;
   }
 
   public createRunner(
@@ -55,13 +73,13 @@ export class RustChallengeRenderer<
     const inputIdent = `_${this.identifier(`${boundary.marker}_input`)}`;
 
     // NOTE: inputs will always be the same type
-    const inputTypeStr = challenge.inputs[0].render(this.typeTemplater);
+    const inputTypeStr = challenge.inputs[0].render(this.typeRenderer);
     const inputValueStr = challenge.inputs
-      .map((input) => input.render(this.valueTemplater))
+      .map((input) => input.render(this.valueRenderer))
       .join(",\n");
 
-    const outputTypeStr = challenge.output.render(this.typeTemplater);
-    return `
+    const outputTypeStr = challenge.output.render(this.typeRenderer);
+    return dedent(`
       ${userCode}
 
       fn main() {
@@ -69,12 +87,14 @@ export class RustChallengeRenderer<
           ${inputValueStr}
         ];
         for tc in ${inputIdent} {
-          let result = {
+          let json = {
             let result: ${outputTypeStr} = ${challengeIdent}(tc);
             ${
               challenge.output.isDictionary()
                 ? this.serialiseDict(challenge.output)
-                : "result"
+                : challenge.output.isLinkedList()
+                ? this.serialiseLinkedList(challenge.output, boundary)
+                : "serde_json::json!(result)"
             }
           };
 
@@ -82,10 +102,10 @@ export class RustChallengeRenderer<
             "{boundary_start}{result:?}{boundary_end}",
             boundary_start = "${boundary.start}",
             boundary_end = "${boundary.end}",
-            result = serde_json::json!(result).to_string()
+            result = json.to_string()
           );
         }
       }
-    `;
+    `);
   }
 }

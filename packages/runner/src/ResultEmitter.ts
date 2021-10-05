@@ -2,11 +2,7 @@ import { ChildProcessWithoutNullStreams } from "child_process";
 import EventEmitter from "events";
 import { Readable } from "stream";
 
-import {
-  TestCaseType,
-  UserResult,
-  isEncodedResultError,
-} from "@alg-wiki/types";
+import { UserResult, isEncodedResultError } from "@alg-wiki/types";
 
 import { Boundary } from "./Boundary";
 
@@ -15,9 +11,9 @@ export enum ResultEmitterEvent {
   Stdout = "stdout",
   Stderr = "stderr",
   Close = "close",
+  Error = "error",
 }
 
-// TODO: type-safety when adding listeners (get callbacks to have the right types/args/etc)
 export class ResultEmitter extends EventEmitter {
   private _stdout = "";
 
@@ -36,25 +32,29 @@ export class ResultEmitter extends EventEmitter {
     this.emitResults(this.child.stdout);
 
     // re-emit stderr as it's emitted
-    this.child.stderr.on("data", (data: string) =>
-      this.emit(ResultEmitterEvent.Stderr, data)
-    );
+    this.child.stderr.on("data", (data: Buffer | string) => {
+      console.debug(`stderr: ${data.toString().trim()}`);
+      this.emit(ResultEmitterEvent.Stderr, data);
+    });
 
     // Emit errors
     this.child.on("error", (err) => {
+      console.debug(`error: ${err}`);
       this.emit("error", err);
       this.destroy();
     });
 
     // On close
     this.child.on("close", (code, signal) => {
-      // Emit any remaining stdout
+      console.debug(`close: ${JSON.stringify({ code, signal })}`);
       if (this._stdout.length) {
-        // TODO: this may contain a boundary start marker, and/or part of a boundary end marker
+        // last check for any leftover results
+        this.extractResults();
+        // emit the rest as stdout
         this.emit(ResultEmitterEvent.Stdout, this._stdout);
       }
 
-      // Emit the close event
+      // emit the close event
       this.emit(ResultEmitterEvent.Close, code, signal);
       this.destroy();
     });
@@ -62,50 +62,61 @@ export class ResultEmitter extends EventEmitter {
 
   // Listens to stdout, stripping and emitting results as it finds them, as well as emitting chunks of stdout
   private emitResults(stdout: Readable): void {
-    stdout.on("data", (data: string) => {
+    stdout.on("data", (data: Buffer | string) => {
+      console.debug(`stdout: ${data.toString().trim()}`);
       this._stdout += data;
-      // emit all results we've got thus far
-      let beg: number, end: number;
-      while (
-        ~(beg = this._stdout.indexOf(this.boundary.start)) &&
-        ~(end = this._stdout.indexOf(this.boundary.end))
-      ) {
-        // emit prefix (definitely know this is user stdout, no boundaries in it)
-        this.emit(ResultEmitterEvent.Stdout, this._stdout.slice(0, beg));
-        // emit result (definitely know that this is a result, has both boundaries)
-        this.emit(
-          ResultEmitterEvent.Result,
-          this.parseResult(
-            this._stdout.slice(beg + this.boundary.start.length, end)
-          )
-        );
-        // keep the rest in _stdout - don't know for sure if it's completely stdout or a result
-        // this is because it could end with only half of a boundary marker, etc
-        //
-        // NOTE: the `+ 1` handles the newline which is included in the print calls (we want the
-        // calls to include a trailing newline since that helps buffer the output too)
-        this._stdout = this._stdout.slice(end + this.boundary.end.length + 1);
-      }
+      this.extractResults();
     });
+  }
+
+  private extractResults(): void {
+    // emit all results we've got thus far
+    let beg: number, end: number;
+    while (
+      ~(beg = this._stdout.indexOf(this.boundary.start)) &&
+      ~(end = this._stdout.indexOf(this.boundary.end))
+    ) {
+      // emit prefix (definitely know this is user stdout, no boundaries in it)
+      this.emit(ResultEmitterEvent.Stdout, this._stdout.slice(0, beg));
+      // emit result (definitely know that this is a result, has both boundaries)
+      this.emit(
+        ResultEmitterEvent.Result,
+        this.parseResult(
+          this._stdout.slice(beg + this.boundary.start.length, end)
+        )
+      );
+      // keep the rest in _stdout - don't know for sure if it's completely stdout or a result
+      // this is because it could end with only half of a boundary marker, etc
+      //
+      // NOTE: the `+ 1` handles the newline which is included in the print calls (we want the
+      // calls to include a trailing newline since that helps buffer the output too)
+      this._stdout = this._stdout.slice(end + this.boundary.end.length + 1);
+    }
   }
 
   // Parses results
   private parseResult(rawString: string): UserResult {
-    // TODO: error handling
-    const parsed: unknown = JSON.parse(rawString);
+    let json: unknown;
+    try {
+      json = JSON.parse(rawString);
+    } catch (err) {
+      if (err instanceof Error) {
+        return { unknown: { raw: rawString, error: err } };
+      } else {
+        return { unknown: { raw: rawString } };
+      }
+    }
 
     // check if this call resulted in an error
-    if (isEncodedResultError(parsed, this.boundary.error)) {
+    if (isEncodedResultError(json, this.boundary.error)) {
       // TODO: doesn't strip unknown values
       return {
-        error: parsed[this.boundary.error],
+        error: json[this.boundary.error],
       };
     }
 
-    // TODO: handle non-TestCaseType values
-    return {
-      value: parsed as TestCaseType,
-    };
+    // is parsed as JSON, so now it's up to the judge to determine if the result was successful or not
+    return { json };
   }
 
   // Removes all listeners and prevents this emitter from being used again.

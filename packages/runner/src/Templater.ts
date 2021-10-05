@@ -1,10 +1,12 @@
+import { Boundary } from "./Boundary";
 import { Challenge } from "./Challenge";
 import { Variant } from "./Type";
 
-export interface Templater<Input extends Variant, Output extends Variant> {
+export interface LanguageTemplater<I extends Variant, O extends Variant> {
+  imageName: string;
   output(
-    challenge: Challenge<Input, Output>,
+    challenge: Challenge<I, O>,
     userCode: string,
-    outputDir: string
-  ): Promise<void>;
+    mountPath: string
+  ): Promise<Boundary>;
 }

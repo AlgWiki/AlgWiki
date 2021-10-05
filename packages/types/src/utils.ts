@@ -17,5 +17,5 @@ export function isEncodedResultError(
 }
 
 export const LanguageCasing: Record<Language, (name: string) => string> = {
-  [Language.Python3]: snakeCase,
+  [Language.Rust]: snakeCase,
 };

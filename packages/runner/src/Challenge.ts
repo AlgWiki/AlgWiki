@@ -14,9 +14,9 @@ export class Challenge<Input extends Variant, Output extends Variant> {
 
   public async createRunner(
     renderer: ChallengeRenderer<Input, Output>,
+    boundary: Boundary,
     userCode: string
   ): Promise<string> {
-    const boundary = await Boundary.create();
     return renderer.createRunner(this, boundary, userCode);
   }
 }

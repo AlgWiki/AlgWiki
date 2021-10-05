@@ -32,10 +32,12 @@
   "dependencies": {
     "@alg-wiki/types": "workspace:packages/types",
     "change-case": "^4.1.2",
+    "dedent": "^0.7.0",
     "dockerode": "^3.3.1",
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
+    "@types/dedent": "^0",
     "@types/dockerode": "^3",
     "@types/node": "^16.9.2",
     "@types/rimraf": "^3.0.2",

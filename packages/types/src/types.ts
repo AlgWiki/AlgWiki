@@ -84,7 +84,12 @@ export enum OutputStream {
 }
 
 export enum Language {
-  Python3 = "python3",
+  Rust = "rust",
+}
+
+export interface ResultUnknown {
+  raw: string;
+  error?: ResultError;
 }
 
 export interface ResultError {
@@ -96,11 +101,7 @@ export interface EncodedResultError {
   [errorBoundary: string]: ResultError;
 }
 
-export interface UserResult {
-  value?: TestCaseType;
-  error?: ResultError;
-}
-
-export interface ValidatedUserResult extends UserResult {
-  passed: boolean;
-}
+export type UserResult =
+  | { json: unknown }
+  | { error: ResultError }
+  | { unknown: ResultUnknown };
