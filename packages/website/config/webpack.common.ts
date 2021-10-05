@@ -10,6 +10,7 @@ export const common: webpack.Configuration = {
   output: {
     filename: "index.js",
     path: path.join(PACKAGE_DIR, "dist"),
+    publicPath: "/assets/",
   },
   cache: {
     type: "filesystem",

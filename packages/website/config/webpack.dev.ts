@@ -8,12 +8,15 @@ export default merge(common, {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    static: "../dist",
+    static: { publicPath: "/assets/", directory: "../dist" },
+    historyApiFallback: { index: "/assets/entry.html" },
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: "Alg.Wiki (DEV)",
       template: "../entry.html",
+      publicPath: "/assets/",
+      filename: "entry.html",
     }),
   ],
 });

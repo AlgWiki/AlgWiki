@@ -1,13 +1,24 @@
-import * as t from "runtypes";
+import { addSubmission, createDbClient } from "@alg-wiki/db";
 
-import { ClientError, createRoute } from "../util";
+import { ClientError, Route } from "../util/route";
 
-export const submitSolution = createRoute({
+export default new Route({
   key: "submit-solution",
-  input: t.Record({ lang: t.String, code: t.String }),
-  callback: async ({ lang, code }) => {
-    if (lang !== "javascript") throw new ClientError("Unsupported language");
-    console.log("solution submitted", { code });
-    return { msg: "submitted" };
+  async callback(input: { lang: "javascript"; code: string }) {
+    if (input.lang !== "javascript")
+      throw new ClientError("Unsupported language");
+    const db = createDbClient();
+    await addSubmission(db, {
+      challengeId: "chl-xyz123",
+      authorId: "user-abc456",
+      timestamp: new Date(),
+      lang: input.lang,
+      code: input.code,
+      score: input.code.length,
+      executionTime: 123,
+      memoryUsage: 456,
+    });
+    console.log("solution submitted", { code: input.code });
+    return { result: "submitted" };
   },
 });

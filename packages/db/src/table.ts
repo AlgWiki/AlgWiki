@@ -19,7 +19,7 @@ export const table = defineTable({
       hashKey: "pk1",
       rangeKey: "sk0",
       projectionType: "INCLUDE",
-      nonKeyAttributes: [],
+      nonKeyAttributes: ["name"],
     },
     gsi2: {
       hashKey: "pk2",

@@ -1,0 +1,8 @@
+[build]
+  command = "yarn workspace @alg-wiki/website build"
+  publish = "packages/website/dist/"
+
+[[redirects]]
+  from = "/*"
+  to = "/assets/entry.html"
+  status = 200

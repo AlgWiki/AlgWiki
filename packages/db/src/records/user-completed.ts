@@ -1,23 +1,24 @@
 import { Table } from "../table";
 import { DbRecord, defineRecordType } from "../util";
-import { Id as UserId } from "./user";
+import { UserId } from "./user";
 
-export type Id = `${UserId}/done`;
+export type UserCompletedId = `${UserId}/done`;
 
-export interface Type {
+export interface UserCompleted {
   userId: UserId;
   completedChallengeIds: Set<string>;
 }
 
-export type Record = DbRecord<Table, null, { done: string[] }>;
+export type UserCompletedRecord = DbRecord<Table, null, { done: string[] }>;
 
-export const { isId, toRecord, fromRecord } = defineRecordType<
-  Id,
-  Type,
-  Record
+export const UserCompleted = defineRecordType<
+  UserCompletedId,
+  UserCompleted,
+  UserCompletedRecord
 >({
   name: "completed",
-  isId: (id): id is Id => id.startsWith("user-") && id.endsWith("/done"),
+  isId: (id): id is UserCompletedId =>
+    id.startsWith("user-") && id.endsWith("/done"),
   toRecord: (userCompleted) => ({
     pk0: `${userCompleted.userId}/done`,
     sk0: 0,

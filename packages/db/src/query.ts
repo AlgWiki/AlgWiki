@@ -2,11 +2,15 @@
 import { DynamoDB } from "aws-sdk";
 
 import {
-  Challenge,
-  Submission,
-  User,
-  UserCompleted,
-  UserLogin,
+  ChallengeId,
+  ChallengeRecord,
+  SubmissionId,
+  SubmissionRecord,
+  UserCompletedRecord,
+  UserId,
+  UserLoginId,
+  UserLoginRecord,
+  UserRecord,
 } from "./records";
 import { table } from "./table";
 import { Language, getRecord, query } from "./util";
@@ -14,10 +18,10 @@ import { Language, getRecord, query } from "./util";
 export const listPublicChallenges = async (
   db: DynamoDB.DocumentClient,
   limit: number,
-  startKey?: Challenge.Id
+  startKey?: ChallengeId
 ) => {
   const challenges = [];
-  for await (const challenge of query<Challenge.Record>()({
+  for await (const challenge of query<ChallengeRecord>()({
     db,
     table,
     index: "gsi2",
@@ -34,9 +38,9 @@ export const listPublicChallenges = async (
 
 export const listCompletedChallengeIds = async (
   db: DynamoDB.DocumentClient,
-  userId: User.Id
+  userId: UserId
 ) => {
-  const completed = await getRecord<UserCompleted.Record>()({
+  const completed = await getRecord<UserCompletedRecord>()({
     db,
     table,
     key: { pk0: `${userId}/done`, sk0: 0 },
@@ -46,9 +50,9 @@ export const listCompletedChallengeIds = async (
 
 export const getChallengeById = async (
   db: DynamoDB.DocumentClient,
-  challengeId: Challenge.Id
+  challengeId: ChallengeId
 ) => {
-  for await (const challenge of query<Challenge.Record>()({
+  for await (const challenge of query<ChallengeRecord>()({
     db,
     table,
     key: { pk0: challengeId },
@@ -60,12 +64,12 @@ export const getChallengeById = async (
 
 export const listChallengeSubsByScore = async (
   db: DynamoDB.DocumentClient,
-  challengeId: Challenge.Id,
+  challengeId: ChallengeId,
   limit: number,
-  startKey?: Submission.Id
+  startKey?: SubmissionId
 ) => {
   const submissions = [];
-  for await (const submission of query<Submission.Record>()({
+  for await (const submission of query<SubmissionRecord>()({
     db,
     table,
     index: "gsi2",
@@ -82,14 +86,14 @@ export const listChallengeSubsByScore = async (
 
 export const listChallengeSubsForLangByScore = async (
   db: DynamoDB.DocumentClient,
-  challengeId: Challenge.Id,
+  challengeId: ChallengeId,
   lang: Language,
   limit: number,
-  startKey?: Submission.Id
+  startKey?: SubmissionId
 ) => {
   const challengeLangKey = `${challengeId}/${lang}`;
   const submissions = [];
-  for await (const submission of query<Submission.Record>()({
+  for await (const submission of query<SubmissionRecord>()({
     db,
     table,
     index: "gsi3",
@@ -106,9 +110,9 @@ export const listChallengeSubsForLangByScore = async (
 
 export const getSubmissionById = async (
   db: DynamoDB.DocumentClient,
-  submissionId: Submission.Id
+  submissionId: SubmissionId
 ) => {
-  for await (const submission of query<Submission.Record>()({
+  for await (const submission of query<SubmissionRecord>()({
     db,
     table,
     key: { pk0: submissionId },
@@ -120,13 +124,13 @@ export const getSubmissionById = async (
 
 export const listCreatedChallengesByCreationTime = async (
   db: DynamoDB.DocumentClient,
-  userId: User.Id,
+  userId: UserId,
   limit: number,
   startKey?: number
 ) => {
   const authorKey = `chl/${userId}`;
   const challenges = [];
-  for await (const challenge of query<Challenge.Record>()({
+  for await (const challenge of query<ChallengeRecord>()({
     db,
     table,
     index: "gsi1",
@@ -150,7 +154,7 @@ export const listUsersByScore = async (
   startKey?: number
 ) => {
   const users = [];
-  for await (const user of query<User.Record>()({
+  for await (const user of query<UserRecord>()({
     db,
     table,
     index: "gsi1",
@@ -170,9 +174,9 @@ export const listUsersByScore = async (
 
 export const getUserById = async (
   db: DynamoDB.DocumentClient,
-  userId: User.Id
+  userId: UserId
 ) => {
-  for await (const user of query<User.Record>()({
+  for await (const user of query<UserRecord>()({
     db,
     table,
     key: { pk0: userId },
@@ -184,13 +188,13 @@ export const getUserById = async (
 
 export const listSubmissionsForUserByTime = async (
   db: DynamoDB.DocumentClient,
-  userId: User.Id,
+  userId: UserId,
   limit: number,
   startKey?: number
 ) => {
   const authorKey = `sub/${userId}`;
   const submissions = [];
-  for await (const submission of query<Submission.Record>()({
+  for await (const submission of query<SubmissionRecord>()({
     db,
     table,
     index: "gsi1",
@@ -211,9 +215,9 @@ export const listSubmissionsForUserByTime = async (
 export const getUserIdByLogin = async (
   db: DynamoDB.DocumentClient,
   provider: string,
-  loginId: UserLogin.Id
+  loginId: UserLoginId
 ) => {
-  const login = await getRecord<UserLogin.Record>()({
+  const login = await getRecord<UserLoginRecord>()({
     db,
     table,
     key: { pk0: `login/${provider}/${loginId}`, sk0: 0 },

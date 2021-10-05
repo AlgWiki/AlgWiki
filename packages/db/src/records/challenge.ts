@@ -1,11 +1,11 @@
 import { Table } from "../table";
 import { DbRecord, defineRecordType } from "../util";
-import { Id as UserId } from "./user";
+import { UserId } from "./user";
 
-export type Id = `chl-${string}`;
+export type ChallengeId = `chl-${string}`;
 
-export interface Type {
-  id: Id;
+export interface Challenge {
+  id: ChallengeId;
   authorId: UserId;
   createDate: Date;
   endDate: Date;
@@ -15,7 +15,7 @@ export interface Type {
   testCases: unknown[];
 }
 
-export type Record = DbRecord<
+export type ChallengeRecord = DbRecord<
   Table,
   null,
   {
@@ -29,13 +29,13 @@ export type Record = DbRecord<
   }
 >;
 
-export const { isId, toRecord, fromRecord } = defineRecordType<
-  Id,
-  Type,
-  Record
+export const Challenge = defineRecordType<
+  ChallengeId,
+  Challenge,
+  ChallengeRecord
 >({
   name: "challenge",
-  isId: (id): id is Id => id.startsWith("chl-"),
+  isId: (id): id is ChallengeId => id.startsWith("chl-"),
   toRecord: (challenge) => ({
     pk0: challenge.id,
     pk1: `chl/${challenge.authorId}`,
