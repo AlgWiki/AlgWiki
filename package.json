@@ -22,6 +22,9 @@
   "engines": {
     "node": ">=14"
   },
+  "resolutions": {
+    "typescript": "4.4.3"
+  },
   "scripts": {
     "=== Generated Scripts (do not modify) ===": "",
     "lint:eslint": "project && eslint --cache --ext js,jsx,ts,tsx ./",

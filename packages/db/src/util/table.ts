@@ -28,7 +28,7 @@ export const defineTable = <
     string,
     TableIndex<StringOnly<keyof Attrs>> & {
       projectionType: "ALL" | "INCLUDE" | "KEYS_ONLY";
-      nonKeyAttributes?: IncludedAttr[];
+      nonKeyAttributes?: IncludedAttr[] & [string];
     }
   > = {}
 >(opts: {
@@ -87,5 +87,10 @@ export type TableIndex<Attr extends string> = {
   hashKey: Attr;
   rangeKey: Attr;
 };
+
+export type TableKeys<Table extends AnyDbTable> = Pick<
+  Table["attrs"],
+  Table["index"]["hashKey" | "rangeKey"]
+>;
 
 type StringOnly<T> = T extends string ? T : never;

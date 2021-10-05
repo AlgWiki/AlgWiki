@@ -27,8 +27,10 @@
     "hoistingLimits": "dependencies"
   },
   "scripts": {
-    "pulumi": "./scripts/pulumi.sh",
-    "hello": "ts-node-transpile-only -P ./tsconfig.json ./src/routes/hello.ts"
+    "init-pulumi-local": "ts-node --project ../../tsconfig.json --transpile-only --compiler-options '{ \"module\": \"CommonJS\" }' ./scripts/init-pulumi-local.ts",
+    "pulumi": "PULUMI_CONFIG_PASSPHRASE=$(cat .pulumi-passphrase) pulumi",
+    "pulumi-up": "tsc --build && PULUMI_CONFIG_PASSPHRASE=$(cat .pulumi-passphrase) pulumi up",
+    "localstack": "yarn init-pulumi-local && docker-compose up"
   },
   "dependencies": {
     "@alg-wiki/db": "workspace:packages/db",
@@ -36,13 +38,17 @@
     "@pulumi/awsx": "^0.30.0",
     "@pulumi/pulumi": "^3.0.0",
     "aws-lambda": "^1.0.6",
+    "fast-glob": "^3.2.7",
     "runtypes": "^6.4.1",
-    "tslib": "^2.3.1"
+    "ts-loader": "^9.2.6",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3",
+    "webpack": "^5.56.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.83",
     "@types/node": "14.14.37",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.3"
+    "fs-extra": "^10.0.0",
+    "ts-node": "^10.2.1"
   }
 }

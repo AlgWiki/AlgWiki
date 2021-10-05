@@ -1,27 +1,27 @@
 import { Table } from "../table";
 import { DbRecord, defineRecordType } from "../util";
-import { Id as UserId } from "./user";
+import { UserId } from "./user";
 
 export type LoginProvider = "github";
 
-export type Id = `login/${LoginProvider}/${string}`;
+export type UserLoginId = `login/${LoginProvider}/${string}`;
 const loginIdPattern = /^login\/([^/]+)\/(.+)$/;
 
-export interface Type {
+export interface UserLogin {
   provider: LoginProvider;
   id: string;
   userId: UserId;
 }
 
-export type Record = DbRecord<Table, null, { user: UserId }>;
+export type UserLoginRecord = DbRecord<Table, null, { user: UserId }>;
 
-export const { isId, toRecord, fromRecord } = defineRecordType<
-  Id,
-  Type,
-  Record
+export const UserLogin = defineRecordType<
+  UserLoginId,
+  UserLogin,
+  UserLoginRecord
 >({
   name: "login",
-  isId: (id): id is Id => id.startsWith("login/"),
+  isId: (id): id is UserLoginId => id.startsWith("login/"),
   toRecord: (userLogin) => ({
     pk0: userLogin.id,
     sk0: 0,

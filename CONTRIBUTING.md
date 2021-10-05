@@ -2,6 +2,11 @@ Hi! 👋 Contributions are welcome -- feel free to open a PR for small fixes or 
 
 ## Dev Instructions
 
+Prerequisites:
+
+- Node.js
+- Yarn
+
 Before starting, install dependencies with:
 
 ```sh
@@ -11,6 +16,9 @@ yarn
 Common commands are:
 
 ```sh
+yarn workspace @alg-wiki/website dev
+yarn workspace @alg-wiki/infrastructure localstack
+yarn workspace @alg-wiki/infrastructure pulumi up
 yarn test:watch
 yarn lint:fix
 ```

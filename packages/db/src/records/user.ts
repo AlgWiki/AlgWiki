@@ -1,17 +1,17 @@
 import { Table } from "../table";
 import { DbRecord, defineRecordType } from "../util";
 
-export type Id = `user-${string}`;
+export type UserId = `user-${string}`;
 
-export interface Type {
-  id: Id;
+export interface User {
+  id: UserId;
   name: string;
   avatarUrl?: string;
   globalScore: number;
   joinDate: Date;
 }
 
-export type Record = DbRecord<
+export type UserRecord = DbRecord<
   Table,
   null,
   {
@@ -23,13 +23,9 @@ export type Record = DbRecord<
   }
 >;
 
-export const { isId, toRecord, fromRecord } = defineRecordType<
-  Id,
-  Type,
-  Record
->({
+export const User = defineRecordType<UserId, User, UserRecord>({
   name: "user",
-  isId: (id): id is Id => id.startsWith("user-"),
+  isId: (id): id is UserId => id.startsWith("user-"),
   toRecord: (user) => ({
     pk0: user.id,
     sk0: user.globalScore,
@@ -48,5 +44,5 @@ export const { isId, toRecord, fromRecord } = defineRecordType<
   }),
 });
 
-export const getName = (user: Partial<Pick<Record, "name">>): string =>
+export const getName = (user: Partial<Pick<UserRecord, "name">>): string =>
   user.name ?? "Unknown User";

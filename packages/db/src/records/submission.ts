@@ -1,12 +1,12 @@
 import { Table } from "../table";
 import { DbRecord, Language, defineRecordType } from "../util";
-import { Id as ChallengeId } from "./challenge";
-import { Id as UserId } from "./user";
+import { ChallengeId } from "./challenge";
+import { UserId } from "./user";
 
-export type Id = `sub-${string}`;
+export type SubmissionId = `sub-${string}`;
 
-export interface Type {
-  id: Id;
+export interface Submission {
+  id: SubmissionId;
   challengeId: ChallengeId;
   authorId: UserId;
   timestamp: Date;
@@ -17,7 +17,7 @@ export interface Type {
   memoryUsage: number;
 }
 
-export type Record = DbRecord<
+export type SubmissionRecord = DbRecord<
   Table,
   null,
   {
@@ -31,13 +31,13 @@ export type Record = DbRecord<
   }
 >;
 
-export const { isId, toRecord, fromRecord } = defineRecordType<
-  Id,
-  Type,
-  Record
+export const Submission = defineRecordType<
+  SubmissionId,
+  Submission,
+  SubmissionRecord
 >({
   name: "submission",
-  isId: (id): id is Id => id.startsWith("sub-"),
+  isId: (id): id is SubmissionId => id.startsWith("sub-"),
   toRecord: (submission) => ({
     pk0: submission.id,
     pk1: `sub/${submission.authorId}`,
