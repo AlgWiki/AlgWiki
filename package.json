@@ -2,7 +2,7 @@
   "name": "@alg-wiki/monorepo",
   "private": true,
   "version": "0.0.1",
-  "description": "Computer science algorithm database",
+  "description": "Website for programming algorithms and puzzles.",
   "keywords": [],
   "homepage": "https://github.com/alg-wiki/monorepo#readme",
   "repository": {

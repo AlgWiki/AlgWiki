@@ -7,5 +7,3 @@ Pulumi.dev.yaml
 Pulumi.local.yaml
 .pulumi/*/local/
 .pulumi/stacks/local.*
-
-/dist-*/

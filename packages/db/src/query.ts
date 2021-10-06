@@ -4,13 +4,14 @@ import { DynamoDB } from "aws-sdk";
 import {
   ChallengeId,
   ChallengeRecord,
+  LoginProvider,
   SubmissionId,
   SubmissionRecord,
   UserCompletedRecord,
   UserId,
-  UserLoginId,
   UserLoginRecord,
   UserRecord,
+  buildUserLoginId,
 } from "./records";
 import { table } from "./table";
 import { Language, getRecord, query } from "./util";
@@ -214,13 +215,13 @@ export const listSubmissionsForUserByTime = async (
 
 export const getUserIdByLogin = async (
   db: DynamoDB.DocumentClient,
-  provider: string,
-  loginId: UserLoginId
+  provider: LoginProvider,
+  loginId: string
 ) => {
   const login = await getRecord<UserLoginRecord>()({
     db,
     table,
-    key: { pk0: `login/${provider}/${loginId}`, sk0: 0 },
+    key: { pk0: buildUserLoginId(provider, loginId), sk0: 0 },
   });
   return login?.user;
 };

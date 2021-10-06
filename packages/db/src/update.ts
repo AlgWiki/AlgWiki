@@ -2,7 +2,13 @@ import crypto from "crypto";
 
 import { DynamoDB } from "aws-sdk";
 
-import { Submission, SubmissionRecord } from "./records";
+import {
+  Submission,
+  SubmissionRecord,
+  User,
+  UserLogin,
+  UserRecord,
+} from "./records";
 import { Table, table } from "./table";
 import { AnyDbTable, RuntimeTable, TableKeys } from "./util";
 
@@ -35,9 +41,23 @@ const createRecordAdd =
   <RecordType extends TableKeys<Table>, Value>(
     toRecord: (value: Value) => RecordType
   ) =>
-  async (db: DynamoDB.DocumentClient, value: Value): Promise<void> => {
-    await putRecord<RecordType>()({ db, table, item: toRecord(value) });
+  async (db: DynamoDB.DocumentClient, value: Value): Promise<RecordType> => {
+    const record = toRecord(value);
+    // TODO: Validate data before adding (fields like name are returned as-is from
+    //       GitHub API and could cause problems if GitHub decides to not return the name)
+    await putRecord<RecordType>()({ db, table, item: record });
+    return record;
   };
+
+export const addUserLogin = createRecordAdd(UserLogin.toRecord);
+
+export const addUser = createRecordAdd(
+  (value: Omit<Parameters<typeof User.toRecord>[0], "id">): UserRecord =>
+    User.toRecord({
+      id: `user-${randId()}`,
+      ...value,
+    })
+);
 
 export const addSubmission = createRecordAdd(
   (

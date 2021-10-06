@@ -6,6 +6,10 @@ export type LoginProvider = "github";
 
 export type UserLoginId = `login/${LoginProvider}/${string}`;
 const loginIdPattern = /^login\/([^/]+)\/(.+)$/;
+export const buildUserLoginId = (
+  provider: LoginProvider,
+  id: string
+): UserLoginId => `login/${provider}/${id}`;
 
 export interface UserLogin {
   provider: LoginProvider;
@@ -13,7 +17,11 @@ export interface UserLogin {
   userId: UserId;
 }
 
-export type UserLoginRecord = DbRecord<Table, null, { user: UserId }>;
+export type UserLoginRecord = DbRecord<
+  Table,
+  null,
+  { pk0: UserLoginId; sk0: 0; user: UserId }
+>;
 
 export const UserLogin = defineRecordType<
   UserLoginId,
@@ -23,7 +31,7 @@ export const UserLogin = defineRecordType<
   name: "login",
   isId: (id): id is UserLoginId => id.startsWith("login/"),
   toRecord: (userLogin) => ({
-    pk0: userLogin.id,
+    pk0: buildUserLoginId(userLogin.provider, userLogin.id),
     sk0: 0,
     user: userLogin.userId,
   }),

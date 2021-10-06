@@ -15,6 +15,8 @@ export type UserRecord = DbRecord<
   Table,
   null,
   {
+    pk0: UserId;
+    sk0: number;
     pk1: string;
     name: string;
     avatar?: string;

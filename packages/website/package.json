@@ -28,6 +28,7 @@
     "build": "cd ./config && webpack --config ./webpack.prod.ts"
   },
   "dependencies": {
+    "@alg-wiki/common": "workspace:packages/common",
     "@codemirror/basic-setup": "^0.19.0",
     "@codemirror/commands": "^0.19.3",
     "@codemirror/lang-javascript": "^0.19.1",

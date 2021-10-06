@@ -19,6 +19,8 @@ export type ChallengeRecord = DbRecord<
   Table,
   null,
   {
+    pk0: ChallengeId;
+    sk0: number;
     pk1: `chl/${UserId}`;
     pk2: "chl";
     sk1: number;

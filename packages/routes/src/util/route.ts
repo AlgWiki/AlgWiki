@@ -11,7 +11,19 @@ export type Json =
 
 export type Opaque<T, Key extends string> = T & { __type: Key };
 
+export type MaybePromise<T> = T | Promise<T>;
+
 export class ClientError extends Error {}
+export class ServerError extends Error {}
+
+type RouteCallback<Input extends Json, Output extends Json> = MaybePromise<
+  (
+    this: Route<Input, Output>,
+    input: Input,
+    event: awsx.apigateway.Request,
+    context: aws.lambda.Context
+  ) => Promise<Output>
+>;
 
 export interface RouteOpts<Input extends Json, Output extends Json> {
   /** Used to generate some options:
@@ -20,11 +32,7 @@ export interface RouteOpts<Input extends Json, Output extends Json> {
   key: string;
   route?: Omit<awsx.apigateway.Route, "eventHandler">;
   lambda?: Omit<aws.lambda.FunctionArgs, "code">;
-  callback: (
-    input: Input,
-    event: awsx.apigateway.Request,
-    context: aws.lambda.Context
-  ) => Promise<Output>;
+  callback: () => RouteCallback<Input, Output>;
 }
 
 /** Creates a backend route with sensible defaults:
@@ -32,6 +40,7 @@ export interface RouteOpts<Input extends Json, Output extends Json> {
  * - 5 second timeout
  * - Node 14 */
 export class Route<Input extends Json, Output extends Json> {
+  callback?: RouteCallback<Input, Output>;
   constructor(public opts: RouteOpts<Input, Output>) {}
 
   async handler(
@@ -42,10 +51,12 @@ export class Route<Input extends Json, Output extends Json> {
       if (!evt.body) throw new Error("No body provided");
       const input = JSON.parse(evt.body) as Input;
       try {
+        if (!this.callback) this.callback = this.opts.callback();
+        const callback = await this.callback;
         return {
           statusCode: 200,
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(await this.opts.callback(input, evt, ctx)),
+          body: JSON.stringify(await callback.call(this, input, evt, ctx)),
         };
       } catch (err) {
         if (err instanceof ClientError) throw err;
@@ -53,7 +64,12 @@ export class Route<Input extends Json, Output extends Json> {
         return {
           statusCode: 500,
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ error: "Internal server error" }),
+          body: JSON.stringify({
+            error:
+              err instanceof ServerError
+                ? err.message
+                : "Internal server error",
+          }),
         };
       }
     } catch (err) {

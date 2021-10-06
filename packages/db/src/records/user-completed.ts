@@ -9,7 +9,11 @@ export interface UserCompleted {
   completedChallengeIds: Set<string>;
 }
 
-export type UserCompletedRecord = DbRecord<Table, null, { done: string[] }>;
+export type UserCompletedRecord = DbRecord<
+  Table,
+  null,
+  { pk0: UserCompletedId; sk0: 0; done: string[] }
+>;
 
 export const UserCompleted = defineRecordType<
   UserCompletedId,
