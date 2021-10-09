@@ -8,11 +8,12 @@ import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 const getGithubOauthUrl = (): string =>
   `https://github.com/login/oauth/authorize?${new URLSearchParams({
     client_id: GITHUB_OAUTH_CLIENT_ID,
-    redirect_uri: `${window.location.origin}${GITHUB_LOGIN_PATH}`,
+    redirect_uri: GITHUB_LOGIN_PATH,
   })}`;
 
 export const useLogin = (): void => {
-  const match = useRouteMatch(GITHUB_LOGIN_PATH);
+  const githubLoginPath = new URL(GITHUB_LOGIN_PATH).pathname;
+  const match = useRouteMatch(githubLoginPath);
   const location = useLocation();
   const history = useHistory();
   React.useEffect(() => {
@@ -20,7 +21,7 @@ export const useLogin = (): void => {
     const code = new URLSearchParams(location.search).get("code");
     if (!code) return;
     console.log({ code });
-    history.replace(GITHUB_LOGIN_PATH);
+    history.replace(githubLoginPath);
   }, [match]);
 };
 

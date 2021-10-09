@@ -9,7 +9,18 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "types": ["node"],
-    "paths": {}
+    "paths": {
+      "@alg-wiki/common": ["../common/src"],
+      "@alg-wiki/db": ["../db/src"]
+    }
   },
-  "references": []
+  "references": [
+    {
+      "path": "../common"
+    },
+
+    {
+      "path": "../db"
+    }
+  ]
 }

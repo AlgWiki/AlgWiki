@@ -1,5 +1,5 @@
-import * as aws from "@pulumi/aws";
-import * as awsx from "@pulumi/awsx";
+import type * as aws from "@pulumi/aws";
+import type * as awsx from "@pulumi/awsx";
 
 export type Json =
   | null

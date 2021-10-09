@@ -23,6 +23,9 @@
   "engines": {
     "node": ">=14"
   },
+  "scripts": {
+    "dev": "ts-node-dev --project ../../tsconfig.json --transpile-only --compiler-options '{ \"module\": \"CommonJS\" }' ./__dev__/dev-server.ts"
+  },
   "dependencies": {
     "@alg-wiki/common": "workspace:packages/common",
     "@alg-wiki/db": "workspace:packages/db",
@@ -34,6 +37,12 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@types/node": "14.14.37"
+    "@types/koa": "^2",
+    "@types/node": "14.14.37",
+    "chalk": "^4.1.2",
+    "koa": "^2.13.3",
+    "ts-node": "^10.2.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.3"
   }
 }

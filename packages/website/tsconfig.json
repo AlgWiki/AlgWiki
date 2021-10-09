@@ -9,7 +9,13 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "types": [],
-    "paths": {}
+    "paths": {
+      "@alg-wiki/common": ["../common/src"]
+    }
   },
-  "references": []
+  "references": [
+    {
+      "path": "../common"
+    }
+  ]
 }

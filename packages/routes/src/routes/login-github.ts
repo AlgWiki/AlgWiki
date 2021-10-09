@@ -28,7 +28,9 @@ export default new Route({
         code: input.code,
         redirect_uri: GITHUB_LOGIN_PATH,
       });
-      const accessToken = accessTokenRes.data.access_token;
+      const accessToken = new URLSearchParams(accessTokenRes.data).get(
+        "access_token"
+      );
       if (!accessToken) {
         console.error("Error getting GitHub access token", accessTokenRes.data);
         throw new ServerError("Error accessing GitHub API");
@@ -72,7 +74,10 @@ query {
         "github",
         `${githubUser.databaseId}`
       );
-      if (userId) return { result: "logged in", userId };
+      if (userId) {
+        console.log("User logged in", { id: userId });
+        return { result: "logged in", userId };
+      }
 
       const user = User.fromRecord(
         await addUser(db, {
@@ -89,6 +94,7 @@ query {
         id: `${githubUser.databaseId}`,
         userId: user.id,
       });
+      console.log("User signed up", { id: user.id });
       return { result: "signed up", userId: user.id };
     };
   },

@@ -139,12 +139,7 @@ export const getRecord = <RecordType>() =>
     const result = await opts.db
       .get({
         TableName: opts.table.name,
-        Key: Object.fromEntries(
-          Object.entries(opts.key).map(([name, value]) => [
-            name,
-            { [opts.table.attributes[name]]: value },
-          ])
-        ),
+        Key: opts.key,
       })
       .promise();
     return result.Item as RecordType | undefined;

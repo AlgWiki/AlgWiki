@@ -10,6 +10,8 @@ export default merge(common, {
     new HtmlWebpackPlugin({
       title: "Alg.Wiki",
       template: "../entry.html",
+      publicPath: "/assets/",
+      filename: "entry.html",
     }),
   ],
 });

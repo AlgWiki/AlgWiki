@@ -86,10 +86,10 @@ const compileRoutes = (): Promise<void> =>
         (data): webpack.Configuration => ({
           target: "node",
           mode: "production",
-          entry: `data:text/javascript;base64,${Buffer.from(
+          entry: `data:text/typescript;base64,${Buffer.from(
             `
+            import 'source-map-support/register.js';
             import route from "./${path.relative(ROOT_DIR, data.path)}";
-            route.loadState();
             exports.handler = (evt, ctx) => route.handler(evt, ctx);`
           ).toString("base64")}`,
           resolve: {
@@ -107,11 +107,6 @@ const compileRoutes = (): Promise<void> =>
                     projectReferences: true,
                     onlyCompileBundledFiles: true,
                     getCustomTransformers: () => ({}),
-                    compilerOptions: {
-                      module: "ESNext",
-                      composite: false,
-                      declaration: false,
-                    },
                   },
                 },
               },
@@ -119,11 +114,7 @@ const compileRoutes = (): Promise<void> =>
           },
           output: {
             filename: "index.js",
-            path: path.join(
-              DIST_DIR,
-              path.relative(ROOT_DIR, data.path),
-              data.route.opts.key
-            ),
+            path: path.join(DIST_DIR, data.route.opts.key),
           },
           devtool: "source-map",
         })
@@ -158,9 +149,7 @@ const getLambdaAssetArchive = async (
   for (const d of uncompiledRouteList) {
     uncompiledRoutes.delete(d);
     d.assetArchive = new pulumi.asset.AssetArchive({
-      ".": new pulumi.asset.FileArchive(
-        path.join(DIST_DIR, path.relative(ROOT_DIR, d.path), d.route.opts.key)
-      ),
+      ".": new pulumi.asset.FileArchive(path.join(DIST_DIR, d.route.opts.key)),
     });
   }
   return data.assetArchive!;
