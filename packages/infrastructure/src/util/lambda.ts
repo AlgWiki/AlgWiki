@@ -1,12 +1,12 @@
 import path from "path";
 
+import { Json, Route } from "@alg-wiki/routes";
 import * as aws from "@pulumi/aws";
 import * as awsx from "@pulumi/awsx";
 import * as pulumi from "@pulumi/pulumi";
 import webpack from "webpack";
 
 import { dynamodb } from "../db";
-import { Json, Route } from "./route";
 
 const ROOT_DIR = process.cwd();
 const DIST_DIR = path.join(ROOT_DIR, "dist-pulumi");
@@ -29,13 +29,13 @@ const getDefaultLambdaRole = (): aws.iam.Role => {
     },
     inlinePolicies: [
       {
-        name: "DbWrite",
+        name: "LambdaRoute",
         policy: dynamodb.arn.apply((arn) =>
           JSON.stringify({
             Version: "2012-10-17",
             Statement: [
               {
-                Sid: "ReadWriteTable",
+                Sid: "DbWrite",
                 Effect: "Allow",
                 Action: [
                   "dynamodb:PutItem",
@@ -48,6 +48,12 @@ const getDefaultLambdaRole = (): aws.iam.Role => {
                   "dynamodb:ConditionCheckItem",
                 ],
                 Resource: [arn, `${arn}/index/*`],
+              },
+              {
+                Sid: "ReadSecrets",
+                Effect: "Allow",
+                Action: "ssm:GetParameter",
+                Resource: "arn:aws:ssm:*:*:parameter/*",
               },
             ],
           })
@@ -81,10 +87,10 @@ const compileRoutes = (): Promise<void> =>
           target: "node",
           mode: "production",
           entry: `data:text/javascript;base64,${Buffer.from(
-            `import route from "./${path.relative(
-              ROOT_DIR,
-              data.path
-            )}"; exports.handler = (evt, ctx) => route.handler(evt, ctx);`
+            `
+            import route from "./${path.relative(ROOT_DIR, data.path)}";
+            route.loadState();
+            exports.handler = (evt, ctx) => route.handler(evt, ctx);`
           ).toString("base64")}`,
           resolve: {
             extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -200,7 +206,7 @@ export const getPulumiRoute = (
   lambda: aws.lambda.Function
 ): awsx.apigateway.Route => {
   return {
-    path: `/${route.opts.key}`,
+    path: `/v1/${route.opts.key}`,
     method: "POST",
     ...route.opts.route,
     eventHandler: lambda,

@@ -21,6 +21,8 @@ export type SubmissionRecord = DbRecord<
   Table,
   null,
   {
+    pk0: SubmissionId;
+    sk0: number;
     pk1: `sub/${UserId}`;
     pk2: ChallengeId;
     pk3: `${ChallengeId}/${Language}`;

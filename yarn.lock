@@ -12,6 +12,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alg-wiki/common@workspace:packages/common":
+  version: 0.0.0-use.local
+  resolution: "@alg-wiki/common@workspace:packages/common"
+  dependencies:
+    "@types/node": 14.14.37
+    tslib: ^2.3.1
+  languageName: unknown
+  linkType: soft
+
 "@alg-wiki/db@workspace:packages/db":
   version: 0.0.0-use.local
   resolution: "@alg-wiki/db@workspace:packages/db"
@@ -51,9 +60,10 @@ __metadata:
   resolution: "@alg-wiki/infrastructure@workspace:packages/infrastructure"
   dependencies:
     "@alg-wiki/db": "workspace:packages/db"
+    "@alg-wiki/routes": "workspace:packages/routes"
     "@pulumi/aws": ^4.0.0
     "@pulumi/awsx": ^0.30.0
-    "@pulumi/pulumi": ^3.0.0
+    "@pulumi/pulumi": ^3.13.2
     "@types/aws-lambda": ^8.10.83
     "@types/node": 14.14.37
     aws-lambda: ^1.0.6
@@ -107,10 +117,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@alg-wiki/routes@workspace:packages/routes":
+  version: 0.0.0-use.local
+  resolution: "@alg-wiki/routes@workspace:packages/routes"
+  dependencies:
+    "@alg-wiki/common": "workspace:packages/common"
+    "@alg-wiki/db": "workspace:packages/db"
+    "@pulumi/aws": ^4.0.0
+    "@pulumi/awsx": ^0.30.0
+    "@pulumi/pulumi": ^3.13.2
+    "@types/node": 14.14.37
+    aws-sdk: ^2.995.0
+    axios: ^0.22.0
+    tslib: ^2.3.1
+  languageName: unknown
+  linkType: soft
+
 "@alg-wiki/website@workspace:packages/website":
   version: 0.0.0-use.local
   resolution: "@alg-wiki/website@workspace:packages/website"
   dependencies:
+    "@alg-wiki/common": "workspace:packages/common"
     "@codemirror/basic-setup": ^0.19.0
     "@codemirror/commands": ^0.19.3
     "@codemirror/lang-javascript": ^0.19.1
@@ -1882,6 +1909,29 @@ __metadata:
     typescript: ~3.7.3
     upath: ^1.1.0
   checksum: fe53df36ab04e26cfccce260d9ad45c640886013be26ea98525fb884a527ecc816438d39201cb114bab59c480a87c73a4c1daf56500a02973bb15eb636bd9052
+  languageName: node
+  linkType: hard
+
+"@pulumi/pulumi@npm:^3.13.2":
+  version: 3.13.2
+  resolution: "@pulumi/pulumi@npm:3.13.2"
+  dependencies:
+    "@grpc/grpc-js": ^1.2.7
+    "@logdna/tail-file": ^2.0.6
+    "@pulumi/query": ^0.3.0
+    google-protobuf: ^3.5.0
+    js-yaml: ^3.14.0
+    minimist: ^1.2.0
+    normalize-package-data: ^2.4.0
+    protobufjs: ^6.8.6
+    read-package-tree: ^5.3.1
+    require-from-string: ^2.0.1
+    semver: ^6.1.0
+    source-map-support: ^0.4.16
+    ts-node: ^7.0.1
+    typescript: ~3.7.3
+    upath: ^1.1.0
+  checksum: 336ee1552e63a85ebd141a06e45c68bf57cc867c99c0c78046b6243e1469106f9364909a78054479e0528e818f6e8780f531cfdbdc6f112ebb366acbcc8b215e
   languageName: node
   linkType: hard
 
@@ -3925,6 +3975,15 @@ __metadata:
     uuid: 3.3.2
     xml2js: 0.4.19
   checksum: fe8f1bb762358edbecf50056c79373e555817e3132432bace35bf4c594c99313020a87f8fb31a0abd8935c9973310cf50938c8ff7131eb4d009d481501b975db
+  languageName: node
+  linkType: hard
+
+"axios@npm:^0.22.0":
+  version: 0.22.0
+  resolution: "axios@npm:0.22.0"
+  dependencies:
+    follow-redirects: ^1.14.4
+  checksum: 83dc4d02e180f69aa9f0d1d0d50b84ec3603517230d58b4c3720ebd440c7e64ea86c5e892dc6e19061608e8e1103504a709d8baa4051c4b7652101b523d04b63
   languageName: node
   linkType: hard
 
@@ -6910,6 +6969,16 @@ __metadata:
     debug:
       optional: true
   checksum: b4d89339afd119b5e6fd92f0e81ae7d3621a5421af7d4a7d94539765c1d5546cf61d2f3219d40596e53c7c253307fbaf5dc772254aa9170fdfe1f9d7731732a9
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.14.4":
+  version: 1.14.4
+  resolution: "follow-redirects@npm:1.14.4"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: d4ce74cf5c6f363168b97e706b914eb9ffb6bf4d4c6d8f8330b93088d9b90e566611ddbcf0e42c8ed5fd17598dfeda1d19230d3e9d6d6c6b4d1c10ec3a0b99be
   languageName: node
   linkType: hard
 

@@ -4,7 +4,7 @@ import { ClientError, Route } from "../util/route";
 
 export default new Route({
   key: "submit-solution",
-  async callback(input: { lang: "javascript"; code: string }) {
+  callback: () => async (input: { lang: "javascript"; code: string }) => {
     if (input.lang !== "javascript")
       throw new ClientError("Unsupported language");
     const db = createDbClient();

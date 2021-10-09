@@ -49,3 +49,6 @@ dist/
 
 # Place custom ignore patterns below here and they will not be removed
 ._old
+*.secret/
+*.secret.*
+dist-*/

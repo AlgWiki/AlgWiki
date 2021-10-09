@@ -24,12 +24,8 @@ export type Language = "javascript";
 export type DbRecord<
   Table extends AnyDbTable,
   Idx extends keyof Table["globalSecondaryIndexes"] | null,
-  Data
-> = {
-  [K in
-    | Table["index"]["hashKey"]
-    | Table["index"]["rangeKey"]]: Table["attrs"][K];
-} & (Idx extends keyof Table["globalSecondaryIndexes"]
+  Data extends Pick<Table["attrs"], Table["index"]["hashKey" | "rangeKey"]>
+> = (Idx extends keyof Table["globalSecondaryIndexes"]
   ? string extends Table["globalSecondaryIndexes"][Idx]["attributes"]
     ? {}
     : {
