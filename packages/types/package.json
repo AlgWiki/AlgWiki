@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "name": "@alg-wiki/types",
+  "productName": "Alg Wiki",
+  "version": "0.0.1",
+  "description": "alg.wiki types.",
+  "keywords": [],
+  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alg-wiki/monorepo.git",
+    "directory": "packages/types"
+  },
+  "bugs": {
+    "url": "https://github.com/alg-wiki/monorepo/issues"
+  },
+  "author": "acheronfail <acheronfail@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {},
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "change-case": "^4.1.2"
+  }
+}

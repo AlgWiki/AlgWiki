@@ -77,7 +77,29 @@ export interface TestCaseRuns {
     };
   };
 }
+
 export enum OutputStream {
   STDOUT,
   STDERR,
 }
+
+export enum Language {
+  Rust = "rust",
+}
+
+export interface ResultUnknown {
+  raw: string;
+  error?: ResultError;
+}
+
+export interface ResultError {
+  message: string;
+  stack?: string;
+}
+
+export interface EncodedResultError {
+  [errorBoundary: string]: ResultError;
+}
+
+// TODO: create a JudgeInput type
+export type UserResult = { json: unknown } | { error: ResultError };

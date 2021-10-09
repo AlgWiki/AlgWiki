@@ -1,0 +1,47 @@
+{
+  "private": true,
+  "name": "@alg-wiki/runner",
+  "productName": "Alg Wiki",
+  "version": "0.0.1",
+  "description": "alg.wiki runner.",
+  "keywords": [],
+  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alg-wiki/monorepo.git",
+    "directory": "packages/runner"
+  },
+  "bugs": {
+    "url": "https://github.com/alg-wiki/monorepo/issues"
+  },
+  "author": "acheronfail <acheronfail@gmail.com>",
+  "license": "MIT",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "ts-node -P tsconfig.json src/scripts/build.ts",
+    "start": "ts-node -P tsconfig.json src/scripts/start.ts"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@alg-wiki/types": "workspace:packages/types",
+    "change-case": "^4.1.2",
+    "dedent": "^0.7.0",
+    "dockerode": "^3.3.1",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/dedent": "^0",
+    "@types/dockerode": "^3",
+    "@types/node": "^16.9.2",
+    "@types/rimraf": "^3.0.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}

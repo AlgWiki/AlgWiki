@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { ChallengeFunction, TestCaseType } from "@alg-wiki/types";
 import { basicSetup } from "@codemirror/basic-setup";
 import { indentWithTab } from "@codemirror/commands";
 import { javascript } from "@codemirror/lang-javascript";
@@ -7,7 +8,6 @@ import { Compartment, EditorState, StateField } from "@codemirror/state";
 import { EditorView, keymap } from "@codemirror/view";
 import * as monaco from "monaco-editor";
 
-import { ChallengeFunction, TestCaseType } from "../types";
 import { countChars } from "../util";
 import { CodeMirror } from "./CodeMirror";
 import { Monaco } from "./Monaco";
