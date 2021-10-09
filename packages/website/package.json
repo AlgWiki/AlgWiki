@@ -24,8 +24,8 @@
     "node": ">=14"
   },
   "scripts": {
-    "dev": "cd ./config && webpack serve --config ./webpack.dev.ts",
-    "build": "cd ./config && webpack --config ./webpack.prod.ts"
+    "dev": "tsc --build && cd ./config && webpack serve --config ./webpack.dev.ts",
+    "build": "tsc --build && cd ./config && webpack --config ./webpack.prod.ts"
   },
   "dependencies": {
     "@alg-wiki/common": "workspace:packages/common",
