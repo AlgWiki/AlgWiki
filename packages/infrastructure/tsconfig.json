@@ -10,12 +10,17 @@
     "outDir": "./dist",
     "types": ["node"],
     "paths": {
-      "@alg-wiki/db": ["../db/src"]
+      "@alg-wiki/db": ["../db/src"],
+      "@alg-wiki/routes": ["../routes/src"]
     }
   },
   "references": [
     {
       "path": "../db"
+    },
+
+    {
+      "path": "../routes"
     }
   ]
 }
