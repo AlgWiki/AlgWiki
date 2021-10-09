@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RustValueRenderer can render all values 1`] = `
+"42
+vec![42]
+{
+  use std::collections::LinkedList;
+  let mut inner: LinkedList<i64> = LinkedList::new();
+  inner.push_back(42);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<i64, f64> = HashMap::new();
+  inner.insert(42, 1.337);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<i64, &str> = HashMap::new();
+  inner.insert(42, r###\\"1986\\"###);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<i64, bool> = HashMap::new();
+  inner.insert(42, true);
+  inner
+}
+1.337
+vec![1.337]
+{
+  use std::collections::LinkedList;
+  let mut inner: LinkedList<f64> = LinkedList::new();
+  inner.push_back(1.337);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<f64, i64> = HashMap::new();
+  inner.insert(1.337, 42);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<f64, &str> = HashMap::new();
+  inner.insert(1.337, r###\\"1986\\"###);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<f64, bool> = HashMap::new();
+  inner.insert(1.337, true);
+  inner
+}
+r###\\"1986\\"###
+vec![r###\\"1986\\"###]
+{
+  use std::collections::LinkedList;
+  let mut inner: LinkedList<&str> = LinkedList::new();
+  inner.push_back(r###\\"1986\\"###);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<&str, i64> = HashMap::new();
+  inner.insert(r###\\"1986\\"###, 42);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<&str, f64> = HashMap::new();
+  inner.insert(r###\\"1986\\"###, 1.337);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<&str, bool> = HashMap::new();
+  inner.insert(r###\\"1986\\"###, true);
+  inner
+}
+true
+vec![true]
+{
+  use std::collections::LinkedList;
+  let mut inner: LinkedList<bool> = LinkedList::new();
+  inner.push_back(true);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<bool, i64> = HashMap::new();
+  inner.insert(true, 42);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<bool, f64> = HashMap::new();
+  inner.insert(true, 1.337);
+  inner
+}
+{
+  use std::collections::HashMap;
+  let mut inner: HashMap<bool, &str> = HashMap::new();
+  inner.insert(true, r###\\"1986\\"###);
+  inner
+}"
+`;

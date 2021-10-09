@@ -1,5 +1,11 @@
 import * as React from "react";
 
+import {
+  Challenge as ChallengeType,
+  TestCase,
+  TestCaseRuns,
+  TestCaseType,
+} from "@alg-wiki/types";
 import { Button } from "@material-ui/core";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import shajs from "sha.js";
@@ -8,12 +14,6 @@ import { CodeEditor } from "./CodeEditor";
 import { MarkdownEditor } from "./MarkdownEditor";
 import { TestCases } from "./TestCases/TestCases";
 import { RUNNER_STOP_EVENT, runCodeInWorker } from "./runner/create-worker";
-import {
-  Challenge as ChallengeType,
-  TestCase,
-  TestCaseRuns,
-  TestCaseType,
-} from "./types";
 
 const STARTING_CODE = `const fizzbuzz = (limit = 99) => {
     console.log('Starting with limit:', limit);

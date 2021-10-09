@@ -1,4 +1,5 @@
-import { TestCaseType } from "../types";
+import { TestCaseType } from "@alg-wiki/types";
+
 import { runCode } from "./runner";
 import { RunnerContext } from "./types";
 

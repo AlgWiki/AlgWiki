@@ -1,4 +1,4 @@
-import { ChallengeFunction, TestCase, TestCaseType } from "../types";
+import { ChallengeFunction, TestCase, TestCaseType } from "@alg-wiki/types";
 
 export interface RunnerContext<
   Input extends TestCaseType[],

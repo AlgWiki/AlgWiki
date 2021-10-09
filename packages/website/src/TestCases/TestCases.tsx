@@ -1,5 +1,13 @@
 import * as React from "react";
 
+import {
+  ArgType,
+  ChallengeFunction,
+  OutputStream,
+  TestCase,
+  TestCaseRuns,
+  TestCaseType,
+} from "@alg-wiki/types";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import WarningIcon from "@material-ui/icons/Warning";
@@ -8,14 +16,6 @@ import parserBabel from "prettier/parser-babel";
 import * as prettier from "prettier/standalone";
 
 import { Monaco } from "../CodeEditor/Monaco";
-import {
-  ArgType,
-  ChallengeFunction,
-  OutputStream,
-  TestCase,
-  TestCaseRuns,
-  TestCaseType,
-} from "../types";
 
 const prettify = (code: string): string => {
   try {
