@@ -1,0 +1,10 @@
+{{#if types.hasLinkedList}}
+use std::collections::LinkedList;
+
+{{else if types.hasDictionary}}
+use std::collections::HashMap;
+
+{{/if}}
+fn {{{challengeIdent}}}(input: {{{types.input.type}}}) -> {{{types.output.type}}} {
+    todo!()
+}

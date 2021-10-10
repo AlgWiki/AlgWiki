@@ -1,0 +1,10 @@
+{{#types.hasLinkedList}}
+# Definition for LinkedList.
+# class ListNode:
+#   def __init__(self, val=0, next=None):
+#     self.val = val
+#     self.next = next
+
+{{/types.hasLinkedList}}
+def {{challengeIdent}}(testcase):
+  pass

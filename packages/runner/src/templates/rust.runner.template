@@ -1,0 +1,37 @@
+#![allow(unused_variables)]
+
+{{{userCode}}}
+
+fn main() {
+    {{#if types.input.isDictionary}}
+    let {{{inputIdent}}}: Vec<{{{types.input.type}}}> = serde_json::from_str::<Vec<Vec<({{{types.input.dictTypes.key}}}, {{{types.input.dictTypes.value}}})>>>(r#"{{{escRustRaw inputJson}}}"#)
+        .expect("failed to parse input json")
+        .into_iter()
+        .map(|v| v.into_iter().collect::<{{{types.input.type}}}>())
+        .collect();
+    {{else}}
+    let {{{inputIdent}}}: Vec<{{{types.input.type}}}> = serde_json::from_str(r#"{{{escRustRaw inputJson}}}"#)
+      .expect("failed to parse input json");
+    {{/if}}
+
+    for tc in {{{inputIdent}}} {
+        let json = {
+            let result: {{{types.output.type}}} = {{{challengeIdent}}}(tc);
+            {{#if types.output.isDictionary}}
+            serde_json::json!({ r#"{{{escRustRaw boundary.dictionary}}}"#: { "inner": result.into_iter().collect::<Vec<_>>() } })
+            {{else if types.output.isLinkedList}}
+            serde_json::json!({ r#"{{{escRustRaw boundary.linkedList}}}"#: { "inner": result } })
+            {{else}}
+            serde_json::json!(result)
+            {{/if}}
+
+        };
+
+        println!(
+            "{boundary_start}{result}{boundary_end}",
+            boundary_start = r#"{{{escRustRaw boundary.start}}}"#,
+            boundary_end = r#"{{{escRustRaw boundary.end}}}"#,
+            result = json
+        );
+    }
+}

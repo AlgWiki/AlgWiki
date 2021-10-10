@@ -1,5 +1,8 @@
 FROM python:3-alpine
 RUN adduser --disabled-password --gecos '' runner
-USER runner
+RUN apk add --update nmap-ncat
 WORKDIR /alg-wiki
-ENTRYPOINT ["python3", "mount/user"]
+ADD entrypoint.sh /alg-wiki/entrypoint.sh
+RUN chown runner:runner /alg-wiki
+USER runner
+ENTRYPOINT ["/alg-wiki/entrypoint.sh"]

@@ -19,6 +19,25 @@ export class Challenge<Input extends Variant, Output extends Variant> {
   ): Promise<string> {
     return renderer.createRunner(this, boundary, userCode);
   }
+
+  public inputJsonString(): string {
+    return JSON.stringify(
+      this.inputs.map((inp) => {
+        if (!inp.inner.value) {
+          throw new Error(
+            "tried to serialise Type to JSON, but had no inner value!"
+          );
+        }
+
+        if (inp.isDictionary()) {
+          const inner = inp.inner.value as Map<unknown, unknown>;
+          return [...inner.entries()].map(([k, v]) => [k, v]);
+        }
+
+        return inp.inner.value;
+      })
+    );
+  }
 }
 
 export interface ChallengeRenderer<
