@@ -1,6 +1,6 @@
 jobs:
   test:
-    if: github.event.pusher.login != 'AlgWiki-bot'
+    if: github.event.pusher.name != 'AlgWiki-bot'
 
   release:
     if: ${{ github.ref == 'refs/heads/main' }}
