@@ -24,12 +24,11 @@
     "node": ">=14"
   },
   "installConfig": {
-    "hoistingLimits": "dependencies"
+    "hoistingLimits": "workspaces"
   },
   "scripts": {
     "init-pulumi-local": "ts-node --project ../../tsconfig.json --transpile-only --compiler-options '{ \"module\": \"CommonJS\" }' ./scripts/init-pulumi-local.ts",
     "pulumi": "PULUMI_CONFIG_PASSPHRASE=$(cat .pulumi-passphrase) pulumi",
-    "pulumi-up": "tsc --build && PULUMI_CONFIG_PASSPHRASE=$(cat .pulumi-passphrase) pulumi up",
     "localstack": "yarn init-pulumi-local && docker-compose up"
   },
   "dependencies": {

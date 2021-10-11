@@ -8,15 +8,24 @@ import {
 } from "@alg-wiki/db";
 import axios, { AxiosResponse } from "axios";
 
-import { Route, ServerError } from "../util/route";
+import { SESSION_JWT_COOKIE, createSessionJwt } from "../util/auth";
+import { Route, RouteCookies, ServerError } from "../util/route";
 import { requireSecret } from "../util/secrets";
 
 export default new Route({
   key: "login-github",
   callback: async () => {
-    const githubOauthClientSecret = await requireSecret(
-      "GithubOauthClientSecret"
-    );
+    const [githubOauthClientSecret, sessionJwtPrivateKey] = await Promise.all([
+      requireSecret("GithubOauthClientSecret"),
+      requireSecret("SessionJwtPrivateKey"),
+    ]);
+
+    const getLoginCookie = (userId: string): RouteCookies => ({
+      [SESSION_JWT_COOKIE]: {
+        value: createSessionJwt(sessionJwtPrivateKey, userId),
+        path: "/",
+      },
+    });
 
     return async (input: { /** GitHub OAuth code. */ code: string }) => {
       const accessTokenRes = await axios.post<
@@ -76,7 +85,11 @@ query {
       );
       if (userId) {
         console.log("User logged in", { id: userId });
-        return { result: "logged in", userId };
+        return {
+          _http: { cookies: getLoginCookie(userId) },
+          result: "logged in",
+          userId,
+        };
       }
 
       const user = User.fromRecord(
@@ -95,7 +108,11 @@ query {
         userId: user.id,
       });
       console.log("User signed up", { id: user.id });
-      return { result: "signed up", userId: user.id };
+      return {
+        _http: { cookies: getLoginCookie(user.id) },
+        result: "signed up",
+        userId: user.id,
+      };
     };
   },
 });

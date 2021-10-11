@@ -28,10 +28,9 @@ const main = async (): Promise<void> => {
       if (!route || ctx.method !== "POST") {
         ctx.status = 404;
       } else {
-        const result = await route.handler(
-          { body: await readBody(ctx.req) } as any,
-          {} as any
-        );
+        const result = await route.handler({
+          body: await readBody(ctx.req),
+        } as any);
         ctx.status = result.statusCode;
         ctx.body = result.body;
         if (result.headers)

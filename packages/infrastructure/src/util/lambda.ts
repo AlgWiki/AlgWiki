@@ -178,7 +178,6 @@ export const createLambdas = (
         runtime: aws.lambda.Runtime.NodeJS14dX,
         handler: "index.handler",
         role: getDefaultLambdaRole().arn,
-        ...route.opts.lambda,
         code: pulumi
           .output(undefined)
           .apply(async () => getLambdaAssetArchive(data)),
@@ -197,7 +196,6 @@ export const getPulumiRoute = (
   return {
     path: `/v1/${route.opts.key}`,
     method: "POST",
-    ...route.opts.route,
     eventHandler: lambda,
   };
 };
