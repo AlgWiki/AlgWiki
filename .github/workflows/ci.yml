@@ -109,6 +109,8 @@ jobs:
       - name: Push Pulumi stack state
         run: |
           set -e
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add ./packages/infrastructure/.pulumi
           git commit --no-verify -m "release(ci): update prod infrastructure state"
           git push --no-verify
