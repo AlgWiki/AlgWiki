@@ -1,4 +1,7 @@
 jobs:
+  test:
+    if: github.event.pusher.login != 'AlgWiki-bot'
+
   release:
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:

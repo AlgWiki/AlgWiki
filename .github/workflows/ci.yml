@@ -48,6 +48,7 @@ jobs:
             const versionsPath = path.join(process.env.GITHUB_WORKSPACE, '.yarn', 'versions');
             const versionFiles = fs.existsSync(versionsPath) ? fs.readdirSync(versionsPath) : [];
             return versionFiles.length > 0;
+    if: github.event.pusher.login != 'AlgWiki-bot'
 
   release:
     name: Release
