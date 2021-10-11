@@ -4,7 +4,7 @@
         "stack": "prod",
         "latest": {
             "manifest": {
-                "time": "2021-10-11T06:58:34.564553344Z",
+                "time": "2021-10-11T10:52:06.396458203Z",
                 "magic": "a22075a99dc2b67c7b7f26661e359fc7871152095f85df0c01fcff4f0fab467a",
                 "version": "v3.14.0"
             },
@@ -279,6 +279,65 @@
                     }
                 },
                 {
+                    "urn": "urn:pulumi:prod::alg-wiki::aws:apigateway/domainName:DomainName::api-internal-domain",
+                    "custom": true,
+                    "id": "internal.api.alg.wiki",
+                    "type": "aws:apigateway/domainName:DomainName",
+                    "inputs": {
+                        "__defaults": [],
+                        "domainName": "internal.api.alg.wiki",
+                        "endpointConfiguration": {
+                            "__defaults": [],
+                            "types": "REGIONAL"
+                        },
+                        "regionalCertificateArn": "arn:aws:acm:us-east-1:497605084935:certificate/ab5cc50a-d4dd-4beb-8718-a868fa5755ec",
+                        "securityPolicy": "TLS_1_2",
+                        "tags": {
+                            "__defaults": [],
+                            "stack": "prod"
+                        }
+                    },
+                    "outputs": {
+                        "arn": "arn:aws:apigateway:us-east-1::/domainnames/internal.api.alg.wiki",
+                        "certificateArn": "",
+                        "certificateName": "",
+                        "certificateUploadDate": "2021-10-09T20:26:48Z",
+                        "cloudfrontDomainName": "",
+                        "cloudfrontZoneId": "Z2FDTNDATAQYW2",
+                        "domainName": "internal.api.alg.wiki",
+                        "endpointConfiguration": {
+                            "types": "REGIONAL"
+                        },
+                        "id": "internal.api.alg.wiki",
+                        "mutualTlsAuthentication": null,
+                        "regionalCertificateArn": "arn:aws:acm:us-east-1:497605084935:certificate/ab5cc50a-d4dd-4beb-8718-a868fa5755ec",
+                        "regionalCertificateName": "",
+                        "regionalDomainName": "d-zv5dqc5789.execute-api.us-east-1.amazonaws.com",
+                        "regionalZoneId": "Z1UJRXOUMOOFQ8",
+                        "securityPolicy": "TLS_1_2",
+                        "tags": {
+                            "stack": "prod"
+                        },
+                        "tagsAll": {
+                            "stack": "prod"
+                        }
+                    },
+                    "parent": "urn:pulumi:prod::alg-wiki::pulumi:pulumi:Stack::alg-wiki-prod",
+                    "dependencies": [
+                        "urn:pulumi:prod::alg-wiki::aws:acm/certificate:Certificate::api-internal-cert"
+                    ],
+                    "provider": "urn:pulumi:prod::alg-wiki::pulumi:providers:aws::default_4_24_0::3a27ebbf-b9ce-4e6f-bc4e-17addb50384b",
+                    "propertyDependencies": {
+                        "domainName": null,
+                        "endpointConfiguration": null,
+                        "regionalCertificateArn": [
+                            "urn:pulumi:prod::alg-wiki::aws:acm/certificate:Certificate::api-internal-cert"
+                        ],
+                        "securityPolicy": null,
+                        "tags": null
+                    }
+                },
+                {
                     "urn": "urn:pulumi:prod::alg-wiki::aws:iam/role:Role::defaultLambdaRole",
                     "custom": true,
                     "id": "defaultLambdaRole-43828ba",
@@ -345,65 +404,6 @@
                         "inlinePolicies": [
                             "urn:pulumi:prod::alg-wiki::aws:dynamodb/table:Table::main"
                         ],
-                        "tags": null
-                    }
-                },
-                {
-                    "urn": "urn:pulumi:prod::alg-wiki::aws:apigateway/domainName:DomainName::api-internal-domain",
-                    "custom": true,
-                    "id": "internal.api.alg.wiki",
-                    "type": "aws:apigateway/domainName:DomainName",
-                    "inputs": {
-                        "__defaults": [],
-                        "domainName": "internal.api.alg.wiki",
-                        "endpointConfiguration": {
-                            "__defaults": [],
-                            "types": "REGIONAL"
-                        },
-                        "regionalCertificateArn": "arn:aws:acm:us-east-1:497605084935:certificate/ab5cc50a-d4dd-4beb-8718-a868fa5755ec",
-                        "securityPolicy": "TLS_1_2",
-                        "tags": {
-                            "__defaults": [],
-                            "stack": "prod"
-                        }
-                    },
-                    "outputs": {
-                        "arn": "arn:aws:apigateway:us-east-1::/domainnames/internal.api.alg.wiki",
-                        "certificateArn": "",
-                        "certificateName": "",
-                        "certificateUploadDate": "2021-10-09T20:26:48Z",
-                        "cloudfrontDomainName": "",
-                        "cloudfrontZoneId": "Z2FDTNDATAQYW2",
-                        "domainName": "internal.api.alg.wiki",
-                        "endpointConfiguration": {
-                            "types": "REGIONAL"
-                        },
-                        "id": "internal.api.alg.wiki",
-                        "mutualTlsAuthentication": null,
-                        "regionalCertificateArn": "arn:aws:acm:us-east-1:497605084935:certificate/ab5cc50a-d4dd-4beb-8718-a868fa5755ec",
-                        "regionalCertificateName": "",
-                        "regionalDomainName": "d-zv5dqc5789.execute-api.us-east-1.amazonaws.com",
-                        "regionalZoneId": "Z1UJRXOUMOOFQ8",
-                        "securityPolicy": "TLS_1_2",
-                        "tags": {
-                            "stack": "prod"
-                        },
-                        "tagsAll": {
-                            "stack": "prod"
-                        }
-                    },
-                    "parent": "urn:pulumi:prod::alg-wiki::pulumi:pulumi:Stack::alg-wiki-prod",
-                    "dependencies": [
-                        "urn:pulumi:prod::alg-wiki::aws:acm/certificate:Certificate::api-internal-cert"
-                    ],
-                    "provider": "urn:pulumi:prod::alg-wiki::pulumi:providers:aws::default_4_24_0::3a27ebbf-b9ce-4e6f-bc4e-17addb50384b",
-                    "propertyDependencies": {
-                        "domainName": null,
-                        "endpointConfiguration": null,
-                        "regionalCertificateArn": [
-                            "urn:pulumi:prod::alg-wiki::aws:acm/certificate:Certificate::api-internal-cert"
-                        ],
-                        "securityPolicy": null,
                         "tags": null
                     }
                 },
@@ -792,8 +792,8 @@
                     },
                     "parent": "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API::api",
                     "dependencies": [
-                        "urn:pulumi:prod::alg-wiki::aws:lambda/function:Function::submit-solution-handler",
-                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:apigateway/deployment:Deployment::api"
+                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:apigateway/deployment:Deployment::api",
+                        "urn:pulumi:prod::alg-wiki::aws:lambda/function:Function::submit-solution-handler"
                     ],
                     "provider": "urn:pulumi:prod::alg-wiki::pulumi:providers:aws::default_4_24_0::3a27ebbf-b9ce-4e6f-bc4e-17addb50384b",
                     "propertyDependencies": {
@@ -833,8 +833,8 @@
                     },
                     "parent": "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API::api",
                     "dependencies": [
-                        "urn:pulumi:prod::alg-wiki::aws:lambda/function:Function::login-github-handler",
-                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:apigateway/deployment:Deployment::api"
+                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:apigateway/deployment:Deployment::api",
+                        "urn:pulumi:prod::alg-wiki::aws:lambda/function:Function::login-github-handler"
                     ],
                     "provider": "urn:pulumi:prod::alg-wiki::pulumi:providers:aws::default_4_24_0::3a27ebbf-b9ce-4e6f-bc4e-17addb50384b",
                     "propertyDependencies": {
@@ -888,10 +888,10 @@
                     },
                     "parent": "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API::api",
                     "dependencies": [
-                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:lambda/permission:Permission::api-bc2fc72c",
-                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:lambda/permission:Permission::api-f6d5732b",
                         "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:apigateway/deployment:Deployment::api",
-                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:apigateway/restApi:RestApi::api"
+                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:apigateway/restApi:RestApi::api",
+                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:lambda/permission:Permission::api-bc2fc72c",
+                        "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:lambda/permission:Permission::api-f6d5732b"
                     ],
                     "provider": "urn:pulumi:prod::alg-wiki::pulumi:providers:aws::default_4_24_0::3a27ebbf-b9ce-4e6f-bc4e-17addb50384b",
                     "propertyDependencies": {
