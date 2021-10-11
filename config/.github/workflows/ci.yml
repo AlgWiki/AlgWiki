@@ -1,6 +1,6 @@
 jobs:
   test:
-    if: github.event.pusher.name != 'AlgWiki-bot'
+    if: github.event.pusher.name != 'AlgWiki-bot' && !contains(github.event.head_commit.message, "[skip ci]")
 
   release:
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -61,6 +61,6 @@ jobs:
         run: |
           set -e
           git add ./packages/infrastructure/.pulumi
-          if git commit --no-verify -m "release(ci): update prod infrastructure state"; then
+          if git commit --no-verify -m "release(ci): update prod infrastructure state [skip ci]"; then
             git push --no-verify
           fi
