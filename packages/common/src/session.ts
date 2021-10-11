@@ -1,0 +1,5 @@
+export const sessionJwtPublicKey = `-----BEGIN PUBLIC KEY-----
+MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEC3ixFFRN8a8krPGoFz716FpjIpRm7BoD
+5A/59MiU911oh1miQLLmmj5PK9r9mdxaHuc7HRx5q7rLX36jzBYJZQ==
+-----END PUBLIC KEY-----
+`;

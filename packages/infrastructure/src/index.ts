@@ -1,7 +1,8 @@
-import type { Output } from "@pulumi/pulumi";
+// This import must be first (before any resources are created)
+import "./auto-tag";
 
-import { api } from "./api";
+import { apiInternal } from "./api-internal";
 import { dynamodb } from "./db";
 
-export const apiUrl = api.url;
-export const dbId = dynamodb.id as Output<string>;
+export const apiInternalUrl = apiInternal.url;
+export const dbId = dynamodb.id;
