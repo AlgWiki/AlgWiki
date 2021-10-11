@@ -4,7 +4,7 @@
         "stack": "prod",
         "latest": {
             "manifest": {
-                "time": "2021-10-11T06:33:04.591355651Z",
+                "time": "2021-10-11T06:58:34.564553344Z",
                 "magic": "a22075a99dc2b67c7b7f26661e359fc7871152095f85df0c01fcff4f0fab467a",
                 "version": "v3.14.0"
             },
@@ -938,43 +938,6 @@
                             "urn:pulumi:prod::alg-wiki::aws:apigateway:x:API$aws:apigateway/stage:Stage::api"
                         ]
                     }
-                },
-                {
-                    "urn": "urn:pulumi:prod::alg-wiki::pulumi:providers:aws::default_4_21_2",
-                    "custom": true,
-                    "id": "1229c57f-5448-4e0d-b3f8-75b3ca91b3d9",
-                    "type": "pulumi:providers:aws",
-                    "inputs": {
-                        "profile": "alg_wiki_pulumi",
-                        "region": "us-east-1",
-                        "version": "4.21.2"
-                    },
-                    "outputs": {
-                        "profile": "alg_wiki_pulumi",
-                        "region": "us-east-1",
-                        "version": "4.21.2"
-                    }
-                }
-            ],
-            "pending_operations": [
-                {
-                    "resource": {
-                        "urn": "urn:pulumi:prod::alg-wiki::pulumi:providers:aws::default_4_21_2",
-                        "custom": true,
-                        "id": "1229c57f-5448-4e0d-b3f8-75b3ca91b3d9",
-                        "type": "pulumi:providers:aws",
-                        "inputs": {
-                            "profile": "alg_wiki_pulumi",
-                            "region": "us-east-1",
-                            "version": "4.21.2"
-                        },
-                        "outputs": {
-                            "profile": "alg_wiki_pulumi",
-                            "region": "us-east-1",
-                            "version": "4.21.2"
-                        }
-                    },
-                    "type": "deleting"
                 }
             ]
         }
