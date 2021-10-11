@@ -1,18 +1,20 @@
 import { spawn, spawnSync } from "child_process";
 import { promises as fs } from "fs";
 import { tmpdir } from "os";
-import { resolve } from "path";
+import { join, resolve } from "path";
 import { promisify } from "util";
 
 import { Language, UserResult } from "@alg-wiki/types";
 import rimraf from "rimraf";
 
+import { Boundary } from "./Boundary";
 import { Challenge } from "./Challenge";
 import { RunError } from "./Errors";
 import { NcatTrigger } from "./NcatTrigger";
 import { ResultEmitter } from "./ResultEmitter";
-import { TEMPLATER_MAP } from "./TemplaterMap";
 import { Variant } from "./Type";
+import { TemplateKind, render } from "./templates/template";
+import { LanguageFileName } from "./templates/utils";
 
 const rm = promisify(rimraf);
 
@@ -90,11 +92,18 @@ export class Runner<I extends Variant, O extends Variant> {
     await fs.mkdir(this.mountPath);
 
     // create the file to execute or compile
-    const templater = TEMPLATER_MAP[this.lang]();
-    const boundary = await templater.output(
-      this.challenge,
+    const boundary = await Boundary.create();
+    const runnerCode = await render({
+      boundary,
+      challenge: this.challenge,
+      kind: TemplateKind.Runner,
+      lang: this.lang,
       userCode,
-      this.mountPath
+    });
+    console.debug(runnerCode);
+    await fs.writeFile(
+      join(this.mountPath, LanguageFileName[this.lang]),
+      runnerCode
     );
 
     // run the docker image and incrementally parse its output
@@ -104,7 +113,7 @@ export class Runner<I extends Variant, O extends Variant> {
       `--name=${boundary.marker}`,
       "--publish=1234:1234",
       `--volume=${this.mountPath}:/alg-wiki/mount`,
-      `alg-wiki/${templater.imageName}`,
+      `alg-wiki/${this.lang}`,
     ];
 
     // dodgy cleanup on any errors

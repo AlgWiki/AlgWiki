@@ -85,6 +85,7 @@ export enum OutputStream {
 
 export enum Language {
   Rust = "rust",
+  Python3 = "python3",
 }
 
 export interface ResultUnknown {

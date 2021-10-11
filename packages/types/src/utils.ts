@@ -1,6 +1,4 @@
-import { snakeCase } from "change-case";
-
-import { EncodedResultError, Language } from "./types";
+import { EncodedResultError } from "./types";
 
 export function isObject(x: unknown): x is Record<string, unknown> {
   // If `x` is already an object, it's returned. Otherwise it's wrapped.
@@ -15,7 +13,3 @@ export function isEncodedResultError(
 ): x is EncodedResultError {
   return isObject(x) && boundaryKey in x;
 }
-
-export const LanguageCasing: Record<Language, (name: string) => string> = {
-  [Language.Rust]: snakeCase,
-};

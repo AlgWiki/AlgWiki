@@ -10,5 +10,9 @@
   "[javascript]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
   "[javascriptreact]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
   "[typescript]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
-  "[typescriptreact]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" }
+  "[typescriptreact]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
+  "files.associations": {
+    "rust.*template": "rust",
+    "python3.*template": "python"
+  }
 }
