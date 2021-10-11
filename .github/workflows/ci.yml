@@ -63,18 +63,22 @@ jobs:
         with:
           # Fetch Git history so that Changesets can generate changelogs with correct commits
           fetch-depth: 0
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.node_version }}
+      - name: Setup git
+        run: |
+          set -e
+          git config --global user.name "AlgWiki-bot"
+          git config --global user.email "github-bot@alg.wiki"
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Bump versions according to changeset
         if: ${{ needs.test.outputs.release_required == 'true' }}
         run: |
           set -e
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           yarn version apply
           git push --no-verify
       - name: Publish to npm
@@ -109,8 +113,7 @@ jobs:
       - name: Push Pulumi stack state
         run: |
           set -e
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add ./packages/infrastructure/.pulumi
-          git commit --no-verify -m "release(ci): update prod infrastructure state"
-          git push --no-verify
+          if git commit --no-verify -m "release(ci): update prod infrastructure state"; then
+            git push --no-verify
+          fi
