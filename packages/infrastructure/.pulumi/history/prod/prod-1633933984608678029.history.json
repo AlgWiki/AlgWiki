@@ -1,0 +1,35 @@
+{
+    "kind": "update",
+    "startTime": 1633933864,
+    "message": "Merge pull request #20 from AlgWiki/jakzo",
+    "environment": {
+        "ci.build.id": "1327739710",
+        "ci.build.number": "64",
+        "ci.build.type": "push",
+        "ci.build.url": "https://github.com/AlgWiki/alg-wiki/actions/runs/1327739710",
+        "ci.pr.headSHA": "57114312b61c7da1b988153981475d3fbeaaa870",
+        "ci.system": "GitHub Actions",
+        "exec.agent": "pulumi/actions@v3",
+        "exec.kind": "auto.local",
+        "git.author": "jakzo",
+        "git.author.email": "jack@jf.id.au",
+        "git.committer": "GitHub",
+        "git.committer.email": "noreply@github.com",
+        "git.dirty": "false",
+        "git.head": "57114312b61c7da1b988153981475d3fbeaaa870",
+        "git.headName": "refs/heads/main",
+        "vcs.kind": "github.com",
+        "vcs.owner": "AlgWiki",
+        "vcs.repo": "alg-wiki"
+    },
+    "config": {
+        "aws:region": "us-east-1"
+    },
+    "version": 0,
+    "result": "succeeded",
+    "endTime": 1633933984,
+    "resourceChanges": {
+        "same": 13,
+        "update": 2
+    }
+}
