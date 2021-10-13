@@ -9,7 +9,7 @@
     "rootDir": "./src",
     "outDir": "./dist/ts",
     "paths": {
-      "@alg-wiki/website": ["../website/src"]
+      "@algwiki/website": ["../website/src"]
     }
   },
   "references": [

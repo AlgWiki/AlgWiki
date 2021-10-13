@@ -1,6 +1,6 @@
-import { ALPHANUM } from "@alg-wiki/common";
-import { randStr } from "@alg-wiki/common-node";
-import type { UserId } from "@alg-wiki/db";
+import { ALPHANUM } from "@algwiki/common";
+import { randStr } from "@algwiki/common-node";
+import type { UserId } from "@algwiki/db";
 import type { APIGatewayProxyEvent } from "aws-lambda";
 import * as cookie from "cookie";
 import * as jwt from "jsonwebtoken";

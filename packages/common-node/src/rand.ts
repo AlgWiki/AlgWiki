@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-import { LOWER } from "@alg-wiki/common";
+import { LOWER } from "@algwiki/common";
 
 export const randStr = (len: number, alphabet = LOWER): string =>
   [...crypto.randomBytes(len)]

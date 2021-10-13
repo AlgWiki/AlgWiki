@@ -8,7 +8,7 @@ export default merge(common, {
   devtool: "source-map",
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Alg.Wiki",
+      title: "AlgWiki",
       template: "../entry.html",
       publicPath: "/assets/",
       filename: "entry.html",

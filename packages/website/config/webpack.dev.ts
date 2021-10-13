@@ -13,7 +13,7 @@ export default merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Alg.Wiki (DEV)",
+      title: "AlgWiki (DEV)",
       template: "../entry.html",
       publicPath: "/assets/",
       filename: "entry.html",

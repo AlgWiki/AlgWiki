@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ChallengeFunction, TestCaseType } from "@alg-wiki/types";
+import { ChallengeFunction, TestCaseType } from "@algwiki/types";
 import { basicSetup } from "@codemirror/basic-setup";
 import { indentWithTab } from "@codemirror/commands";
 import { javascript } from "@codemirror/lang-javascript";

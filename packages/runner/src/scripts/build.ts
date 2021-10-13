@@ -6,7 +6,7 @@ const imagesDirectory = resolve(__dirname, "..", "..", "docker");
 
 void (async function () {
   for (const lang of await fs.readdir(imagesDirectory)) {
-    execSync(`docker build . --tag "alg-wiki/${lang}"`, {
+    execSync(`docker build . --tag "algwiki/${lang}"`, {
       cwd: join(imagesDirectory, lang),
       stdio: "inherit",
     });

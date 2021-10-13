@@ -1,5 +1,5 @@
 [build]
-  command = "yarn workspace @alg-wiki/website build --output-path ../dist-netlify/assets/"
+  command = "yarn workspace @algwiki/website build --output-path ../dist-netlify/assets/"
   publish = "packages/website/dist-netlify/"
 
 [[redirects]]

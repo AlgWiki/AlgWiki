@@ -1,4 +1,4 @@
-import { CORS_ALLOWED_DOMAINS } from "@alg-wiki/common";
+import { CORS_ALLOWED_DOMAINS } from "@algwiki/common";
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import * as cookie from "cookie";
 

@@ -1,16 +1,16 @@
 {
-  "name": "@alg-wiki/monorepo",
+  "name": "@algwiki/monorepo",
   "private": true,
   "version": "0.0.1",
   "description": "Website for programming algorithms and puzzles.",
   "keywords": [],
-  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alg-wiki/monorepo.git"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git"
   },
   "bugs": {
-    "url": "https://github.com/alg-wiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
   },
   "author": "jakzo",
   "license": "MIT",

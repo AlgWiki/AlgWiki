@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import { join } from "path";
 
-import { Language } from "@alg-wiki/types";
+import { Language } from "@algwiki/types";
 import Handlerbars from "handlebars";
 
 import { IBoundary } from "../Boundary";

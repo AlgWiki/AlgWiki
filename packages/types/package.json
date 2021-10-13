@@ -1,18 +1,18 @@
 {
   "private": true,
-  "name": "@alg-wiki/types",
-  "productName": "Alg Wiki",
+  "name": "@algwiki/types",
+  "productName": "AlgWiki",
   "version": "0.0.1",
-  "description": "alg.wiki types.",
+  "description": "AlgWiki common types.",
   "keywords": [],
-  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alg-wiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
     "directory": "packages/types"
   },
   "bugs": {
-    "url": "https://github.com/alg-wiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
   },
   "author": "acheronfail <acheronfail@gmail.com>",
   "license": "MIT",

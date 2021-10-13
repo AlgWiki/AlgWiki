@@ -10,8 +10,8 @@
     "outDir": "./dist",
     "types": [],
     "paths": {
-      "@alg-wiki/common": ["../common/src"],
-      "@alg-wiki/types": ["../types/src"]
+      "@algwiki/common": ["../common/src"],
+      "@algwiki/types": ["../types/src"]
     }
   },
   "references": [

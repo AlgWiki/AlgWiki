@@ -4,7 +4,7 @@ import { tmpdir } from "os";
 import { join, resolve } from "path";
 import { promisify } from "util";
 
-import { Language, UserResult } from "@alg-wiki/types";
+import { Language, UserResult } from "@algwiki/types";
 import rimraf from "rimraf";
 
 import { Boundary } from "./Boundary";
@@ -112,8 +112,8 @@ export class Runner<I extends Variant, O extends Variant> {
       "--rm",
       `--name=${boundary.marker}`,
       "--publish=1234:1234",
-      `--volume=${this.mountPath}:/alg-wiki/mount`,
-      `alg-wiki/${this.lang}`,
+      `--volume=${this.mountPath}:/algwiki/mount`,
+      `algwiki/${this.lang}`,
     ];
 
     // dodgy cleanup on any errors

@@ -9,8 +9,8 @@
 Setting up infra locally:
 
 ```sh
-yarn workspace @alg-wiki/infrastructure localstack
-yarn workspace @alg-wiki/infrastructure pulumi up
+yarn workspace @algwiki/infrastructure localstack
+yarn workspace @algwiki/infrastructure pulumi up
 ```
 
 Viewing logs for a resource:
@@ -23,9 +23,9 @@ aws --endpoint-url=http://localhost:4566 logs tail /aws/lambda/submit-solution-h
 Setting up infra on AWS for dev:
 
 ```sh
-# yarn workspace @alg-wiki/infrastructure pulumi stack init dev
-yarn workspace @alg-wiki/infrastructure pulumi stack select dev
-yarn workspace @alg-wiki/infrastructure pulumi up
+# yarn workspace @algwiki/infrastructure pulumi stack init dev
+yarn workspace @algwiki/infrastructure pulumi stack select dev
+yarn workspace @algwiki/infrastructure pulumi up
 ```
 
 ### Administrator access through AWS console

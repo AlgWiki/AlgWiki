@@ -1,17 +1,17 @@
 {
-  "name": "@alg-wiki/infrastructure",
+  "name": "@algwiki/infrastructure",
   "version": "0.0.1",
-  "description": "alg.wiki backend infrastructure.",
+  "description": "AlgWiki backend infrastructure.",
   "private": true,
   "keywords": [],
-  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alg-wiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
     "directory": "packages/infrastructure"
   },
   "bugs": {
-    "url": "https://github.com/alg-wiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
   },
   "author": "jakzo",
   "license": "MIT",
@@ -29,8 +29,8 @@
     "localstack": "yarn init-pulumi-local && docker-compose up"
   },
   "dependencies": {
-    "@alg-wiki/db": "workspace:packages/db",
-    "@alg-wiki/routes": "workspace:packages/routes",
+    "@algwiki/db": "workspace:packages/db",
+    "@algwiki/routes": "workspace:packages/routes",
     "@pulumi/aws": "^4.0.0",
     "@pulumi/awsx": "^0.30.0",
     "@pulumi/pulumi": "^3.13.2",
@@ -43,8 +43,8 @@
     "webpack": "^5.56.0"
   },
   "devDependencies": {
-    "@alg-wiki/common": "workspace:packages/common",
-    "@alg-wiki/common-node": "workspace:packages/common-node",
+    "@algwiki/common": "workspace:packages/common",
+    "@algwiki/common-node": "workspace:packages/common-node",
     "@types/aws-lambda": "^8.10.83",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "14.14.37",

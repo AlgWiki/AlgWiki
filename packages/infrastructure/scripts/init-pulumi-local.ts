@@ -1,8 +1,8 @@
 import { SpawnSyncReturns, spawnSync } from "child_process";
 import path from "path";
 
-import { ALPHA } from "@alg-wiki/common";
-import { randStr } from "@alg-wiki/common-node";
+import { ALPHA } from "@algwiki/common";
+import { randStr } from "@algwiki/common-node";
 import fg from "fast-glob";
 import * as fse from "fs-extra";
 

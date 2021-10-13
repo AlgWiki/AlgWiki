@@ -10,7 +10,7 @@
     "outDir": "./dist",
     "types": ["node"],
     "paths": {
-      "@alg-wiki/common": ["../common/src"]
+      "@algwiki/common": ["../common/src"]
     }
   },
   "references": [

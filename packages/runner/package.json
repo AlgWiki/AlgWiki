@@ -1,18 +1,18 @@
 {
   "private": true,
-  "name": "@alg-wiki/runner",
-  "productName": "Alg Wiki",
+  "name": "@algwiki/runner",
+  "productName": "AlgWiki",
   "version": "0.0.1",
-  "description": "alg.wiki runner.",
+  "description": "AlgWiki test case runner.",
   "keywords": [],
-  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alg-wiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
     "directory": "packages/runner"
   },
   "bugs": {
-    "url": "https://github.com/alg-wiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
   },
   "author": "acheronfail <acheronfail@gmail.com>",
   "license": "MIT",
@@ -30,7 +30,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@alg-wiki/types": "workspace:packages/types",
+    "@algwiki/types": "workspace:packages/types",
     "change-case": "^4.1.2",
     "dedent": "^0.7.0",
     "dockerode": "^3.3.1",
