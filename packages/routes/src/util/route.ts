@@ -1,17 +1,8 @@
+import { CORS_ALLOWED_DOMAINS } from "@alg-wiki/common";
 import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import * as cookie from "cookie";
 
-export type Json =
-  | null
-  | boolean
-  | number
-  | string
-  | Json[]
-  | { [key: string]: Json };
-
-export type Opaque<T, Key extends string> = T & { __type: Key };
-
-export type MaybePromise<T> = T | Promise<T>;
+import { Json, MaybePromise } from "./types";
 
 export class ClientError extends Error {
   constructor(message: string, public status = 400) {
@@ -62,7 +53,16 @@ export class Route<Input extends Json, Output> {
 
   async handler(evt: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
     try {
-      if (!evt.body) throw new Error("No body provided");
+      if (!evt.headers.origin) {
+        console.warn("Missing Origin header", {
+          userAgent: evt.headers["user-agent"],
+        });
+        throw new ClientError("Missing Origin header");
+      }
+      if (!CORS_ALLOWED_DOMAINS.includes(evt.headers.origin))
+        throw new ClientError("Origin not allowed to access API");
+
+      if (!evt.body) throw new ClientError("No body provided");
       const input = JSON.parse(evt.body) as Input;
       try {
         if (!this.callback) this.callback = this.opts.callback();

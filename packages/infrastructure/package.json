@@ -23,9 +23,6 @@
   "engines": {
     "node": ">=14"
   },
-  "installConfig": {
-    "hoistingLimits": "workspaces"
-  },
   "scripts": {
     "init-pulumi-local": "ts-node --project ../../tsconfig.json --transpile-only --compiler-options '{ \"module\": \"CommonJS\" }' ./scripts/init-pulumi-local.ts",
     "pulumi": "PULUMI_CONFIG_PASSPHRASE=$(cat .pulumi-passphrase) pulumi",
@@ -46,7 +43,10 @@
     "webpack": "^5.56.0"
   },
   "devDependencies": {
+    "@alg-wiki/common": "workspace:packages/common",
+    "@alg-wiki/common-node": "workspace:packages/common-node",
     "@types/aws-lambda": "^8.10.83",
+    "@types/fs-extra": "^9.0.13",
     "@types/node": "14.14.37",
     "@types/source-map-support": "^0",
     "fs-extra": "^10.0.0",

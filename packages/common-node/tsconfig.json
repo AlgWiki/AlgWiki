@@ -10,22 +10,12 @@
     "outDir": "./dist",
     "types": ["node"],
     "paths": {
-      "@alg-wiki/common": ["../common/src"],
-      "@alg-wiki/db": ["../db/src"],
-      "@alg-wiki/common-node": ["../common-node/src"]
+      "@alg-wiki/common": ["../common/src"]
     }
   },
   "references": [
     {
       "path": "../common"
-    },
-
-    {
-      "path": "../common-node"
-    },
-
-    {
-      "path": "../db"
     }
   ]
 }

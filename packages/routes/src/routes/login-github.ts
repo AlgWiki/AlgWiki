@@ -8,7 +8,7 @@ import {
 } from "@alg-wiki/db";
 import axios, { AxiosResponse } from "axios";
 
-import { SESSION_JWT_COOKIE, createSessionJwt } from "../util/auth";
+import { SESSION_JWT_COOKIE, generateSessionJwt } from "../util/auth";
 import { Route, RouteCookies, ServerError } from "../util/route";
 import { requireSecret } from "../util/secrets";
 
@@ -20,9 +20,10 @@ export default new Route({
       requireSecret("SessionJwtPrivateKey"),
     ]);
 
-    const getLoginCookie = (userId: string): RouteCookies => ({
+    const getLoginCookies = (userId: string): RouteCookies => ({
       [SESSION_JWT_COOKIE]: {
-        value: createSessionJwt(sessionJwtPrivateKey, userId),
+        value: generateSessionJwt(sessionJwtPrivateKey, userId),
+        httpOnly: true,
         path: "/",
       },
     });
@@ -86,7 +87,7 @@ query {
       if (userId) {
         console.log("User logged in", { id: userId });
         return {
-          _http: { cookies: getLoginCookie(userId) },
+          _http: { cookies: getLoginCookies(userId) },
           result: "logged in",
           userId,
         };
@@ -109,7 +110,7 @@ query {
       });
       console.log("User signed up", { id: user.id });
       return {
-        _http: { cookies: getLoginCookie(user.id) },
+        _http: { cookies: getLoginCookies(user.id) },
         result: "signed up",
         userId: user.id,
       };
