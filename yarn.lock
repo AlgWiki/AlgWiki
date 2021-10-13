@@ -12,6 +12,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alg-wiki/blog@workspace:packages/blog":
+  version: 0.0.0-use.local
+  resolution: "@alg-wiki/blog@workspace:packages/blog"
+  languageName: unknown
+  linkType: soft
+
+"@alg-wiki/common-node@workspace:packages/common-node":
+  version: 0.0.0-use.local
+  resolution: "@alg-wiki/common-node@workspace:packages/common-node"
+  dependencies:
+    "@alg-wiki/common": "workspace:packages/common"
+    "@types/node": 14.14.37
+    tslib: ^2.3.1
+  languageName: unknown
+  linkType: soft
+
 "@alg-wiki/common@workspace:packages/common":
   version: 0.0.0-use.local
   resolution: "@alg-wiki/common@workspace:packages/common"
@@ -59,12 +75,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@alg-wiki/infrastructure@workspace:packages/infrastructure"
   dependencies:
+    "@alg-wiki/common": "workspace:packages/common"
+    "@alg-wiki/common-node": "workspace:packages/common-node"
     "@alg-wiki/db": "workspace:packages/db"
     "@alg-wiki/routes": "workspace:packages/routes"
     "@pulumi/aws": ^4.0.0
     "@pulumi/awsx": ^0.30.0
     "@pulumi/pulumi": ^3.13.2
     "@types/aws-lambda": ^8.10.83
+    "@types/fs-extra": ^9.0.13
     "@types/node": 14.14.37
     "@types/source-map-support": ^0
     aws-lambda: ^1.0.6
@@ -124,6 +143,7 @@ __metadata:
   resolution: "@alg-wiki/routes@workspace:packages/routes"
   dependencies:
     "@alg-wiki/common": "workspace:packages/common"
+    "@alg-wiki/common-node": "workspace:packages/common-node"
     "@alg-wiki/db": "workspace:packages/db"
     "@types/aws-lambda": ^8.10.83
     "@types/cookie": ^0
@@ -2509,7 +2529,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/fs-extra@npm:^9.0.11":
+"@types/fs-extra@npm:^9.0.11, @types/fs-extra@npm:^9.0.13":
   version: 9.0.13
   resolution: "@types/fs-extra@npm:9.0.13"
   dependencies:

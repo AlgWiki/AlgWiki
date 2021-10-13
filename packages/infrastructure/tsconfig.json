@@ -11,7 +11,9 @@
     "types": ["node"],
     "paths": {
       "@alg-wiki/db": ["../db/src"],
-      "@alg-wiki/routes": ["../routes/src"]
+      "@alg-wiki/routes": ["../routes/src"],
+      "@alg-wiki/common": ["../common/src"],
+      "@alg-wiki/common-node": ["../common-node/src"]
     }
   },
   "references": [
@@ -21,6 +23,14 @@
 
     {
       "path": "../routes"
+    },
+
+    {
+      "path": "../common"
+    },
+
+    {
+      "path": "../common-node"
     }
   ]
 }

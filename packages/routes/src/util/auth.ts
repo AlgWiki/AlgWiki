@@ -1,3 +1,5 @@
+import { ALPHANUM } from "@alg-wiki/common";
+import { randStr } from "@alg-wiki/common-node";
 import type { UserId } from "@alg-wiki/db";
 import type { APIGatewayProxyEvent } from "aws-lambda";
 import * as cookie from "cookie";
@@ -9,11 +11,11 @@ const NOT_LOGGED_IN_ERROR = new ClientError("Not logged in", 401);
 
 export const SESSION_JWT_COOKIE = "session";
 
-export const createSessionJwt = (
+export const generateSessionJwt = (
   privateKeyPem: string,
   userId: string
 ): string =>
-  jwt.sign({ id: userId }, privateKeyPem, {
+  jwt.sign({ id: userId, csrf: randStr(8, ALPHANUM) }, privateKeyPem, {
     algorithm: "ES256",
     expiresIn: "90d",
   });
