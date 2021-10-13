@@ -10,7 +10,7 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "paths": {
-      "@alg-wiki/types": ["../types/src"]
+      "@algwiki/types": ["../types/src"]
     }
   },
   "references": [

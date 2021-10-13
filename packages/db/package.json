@@ -1,17 +1,17 @@
 {
-  "name": "@alg-wiki/db",
+  "name": "@algwiki/db",
   "version": "0.0.1",
-  "description": "alg.wiki database.",
+  "description": "AlgWiki database definition and utilities.",
   "private": true,
   "keywords": [],
-  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alg-wiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
     "directory": "packages/db"
   },
   "bugs": {
-    "url": "https://github.com/alg-wiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
   },
   "author": "jakzo",
   "license": "MIT",

@@ -1,4 +1,4 @@
-import { Language } from "@alg-wiki/types";
+import { Language } from "@algwiki/types";
 import { snakeCase } from "change-case";
 
 import { RustTypeRenderer } from "./rust";

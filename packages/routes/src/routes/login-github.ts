@@ -1,11 +1,11 @@
-import { GITHUB_LOGIN_PATH, GITHUB_OAUTH_CLIENT_ID } from "@alg-wiki/common";
+import { GITHUB_LOGIN_PATH, GITHUB_OAUTH_CLIENT_ID } from "@algwiki/common";
 import {
   User,
   addUser,
   addUserLogin,
   createDbClient,
   getUserIdByLogin,
-} from "@alg-wiki/db";
+} from "@algwiki/db";
 import axios, { AxiosResponse } from "axios";
 
 import { SESSION_JWT_COOKIE, generateSessionJwt } from "../util/auth";

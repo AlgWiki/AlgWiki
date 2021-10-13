@@ -65,7 +65,7 @@ const createMainWindow = async (): Promise<BrowserWindow> => {
         __dirname,
         "..",
         "node_modules",
-        "@alg-wiki",
+        "@algwiki",
         "website",
         "dist",
         "index.html"

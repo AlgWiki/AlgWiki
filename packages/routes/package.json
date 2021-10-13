@@ -1,17 +1,17 @@
 {
-  "name": "@alg-wiki/routes",
+  "name": "@algwiki/routes",
   "version": "0.0.1",
-  "description": "alg.wiki backend API routes.",
+  "description": "AlgWiki backend API routes.",
   "private": true,
   "keywords": [],
-  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alg-wiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
     "directory": "packages/routes"
   },
   "bugs": {
-    "url": "https://github.com/alg-wiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
   },
   "author": "jakzo",
   "license": "MIT",
@@ -27,9 +27,9 @@
     "dev": "ts-node-dev --project ../../tsconfig.json --transpile-only --compiler-options '{ \"module\": \"CommonJS\" }' ./__dev__/dev-server.ts"
   },
   "dependencies": {
-    "@alg-wiki/common": "workspace:packages/common",
-    "@alg-wiki/common-node": "workspace:packages/common-node",
-    "@alg-wiki/db": "workspace:packages/db",
+    "@algwiki/common": "workspace:packages/common",
+    "@algwiki/common-node": "workspace:packages/common-node",
+    "@algwiki/db": "workspace:packages/db",
     "aws-lambda": "^1.0.6",
     "aws-sdk": "^2.995.0",
     "axios": "^0.22.0",

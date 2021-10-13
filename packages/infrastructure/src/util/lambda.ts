@@ -1,6 +1,6 @@
 import path from "path";
 
-import { Json, Route } from "@alg-wiki/routes";
+import { Json, Route } from "@algwiki/routes";
 import * as aws from "@pulumi/aws";
 import * as awsx from "@pulumi/awsx";
 import * as pulumi from "@pulumi/pulumi";

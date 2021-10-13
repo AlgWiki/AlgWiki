@@ -1,17 +1,17 @@
 {
-  "name": "@alg-wiki/common-node",
+  "name": "@algwiki/common-node",
   "version": "0.0.1",
   "description": "Common utilities which only run in node.",
   "private": true,
   "keywords": [],
-  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alg-wiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
     "directory": "packages/common-node"
   },
   "bugs": {
-    "url": "https://github.com/alg-wiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
   },
   "author": "jakzo",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@alg-wiki/common": "workspace:packages/common",
+    "@algwiki/common": "workspace:packages/common",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

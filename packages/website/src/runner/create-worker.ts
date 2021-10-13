@@ -1,8 +1,8 @@
-import { TestCaseRuns, TestCaseType } from "@alg-wiki/types";
+import { TestCaseRuns, TestCaseType } from "@algwiki/types";
 
 import { RunnerContext } from "./types";
 
-export const RUNNER_STOP_EVENT = "alg_wiki_stopped";
+export const RUNNER_STOP_EVENT = "algwiki_stopped";
 export const RUNNER_TIMEOUT = 4000;
 
 export const runCodeInWorker = <

@@ -16,9 +16,9 @@ yarn
 Common commands are:
 
 ```sh
-yarn workspace @alg-wiki/website dev
-yarn workspace @alg-wiki/infrastructure localstack
-yarn workspace @alg-wiki/infrastructure pulumi up
+yarn workspace @algwiki/website dev
+yarn workspace @algwiki/infrastructure localstack
+yarn workspace @algwiki/infrastructure pulumi up
 yarn test:watch
 yarn lint:fix
 ```

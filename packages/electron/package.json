@@ -1,18 +1,18 @@
 {
   "private": true,
-  "name": "@alg-wiki/electron",
-  "productName": "Alg Wiki",
+  "name": "@algwiki/electron",
+  "productName": "AlgWiki",
   "version": "0.0.1",
-  "description": "alg.wiki electron.",
+  "description": "AlgWiki electron app.",
   "keywords": [],
-  "homepage": "https://github.com/alg-wiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alg-wiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
     "directory": "packages/electron"
   },
   "bugs": {
-    "url": "https://github.com/alg-wiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
   },
   "author": "acheronfail <acheronfail@gmail.com>",
   "license": "MIT",
@@ -26,11 +26,11 @@
     "build:pack": "yarn build:website && yarn build:typescript && electron-builder --dir --config.asar=false",
     "build:dist": "yarn build:website && yarn build:typescript && electron-builder --linux --macos --windows",
     "build:typescript": "tsc --build ./tsconfig.json",
-    "build:website": "yarn workspace @alg-wiki/website build",
+    "build:website": "yarn workspace @algwiki/website build",
     "start:electron": "ts-node -T scripts/dev-electron.ts",
     "watch:electron": "nodemon --watch 'dist/ts/**/*.js' --exec \"yarn start:electron\"",
     "watch:typescript": "tsc --build ./tsconfig.json --watch --preserveWatchOutput",
-    "dev": "concurrently --names 'tsc,web,app' --prefix-colors 'cyan,yellow,magenta' \"yarn watch:typescript\" \"yarn workspace @alg-wiki/website dev\" \"yarn watch:electron\""
+    "dev": "concurrently --names 'tsc,web,app' --prefix-colors 'cyan,yellow,magenta' \"yarn watch:typescript\" \"yarn workspace @algwiki/website dev\" \"yarn watch:electron\""
   },
   "build": {
     "appId": "wiki.alg.Client",
@@ -70,7 +70,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@alg-wiki/website": "workspace:packages/website",
+    "@algwiki/website": "workspace:packages/website",
     "electron-context-menu": "^3.1.1",
     "electron-debug": "^3.2.0",
     "electron-store": "^8.0.1",

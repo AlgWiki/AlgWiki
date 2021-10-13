@@ -1,5 +1,5 @@
-import { sessionJwtPublicKey } from "@alg-wiki/common";
-import { addSubmission, createDbClient } from "@alg-wiki/db";
+import { sessionJwtPublicKey } from "@algwiki/common";
+import { addSubmission, createDbClient } from "@algwiki/db";
 import type { APIGatewayProxyEvent } from "aws-lambda";
 
 import { requireAuth } from "../util/auth";

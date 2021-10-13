@@ -1,6 +1,6 @@
 import { format } from "util";
 
-import { OutputStream, TestCaseRuns, TestCaseType } from "@alg-wiki/types";
+import { OutputStream, TestCaseRuns, TestCaseType } from "@algwiki/types";
 
 import { randAlpha } from "../util";
 import { RunnerContext } from "./types";

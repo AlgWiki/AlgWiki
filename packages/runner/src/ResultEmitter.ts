@@ -2,7 +2,7 @@ import { ChildProcessWithoutNullStreams } from "child_process";
 import EventEmitter from "events";
 import { Readable } from "stream";
 
-import { UserResult, isEncodedResultError } from "@alg-wiki/types";
+import { UserResult, isEncodedResultError } from "@algwiki/types";
 
 import { Boundary } from "./Boundary";
 import { RunError } from "./Errors";

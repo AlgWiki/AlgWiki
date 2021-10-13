@@ -5,7 +5,7 @@ import {
   TestCase,
   TestCaseRuns,
   TestCaseType,
-} from "@alg-wiki/types";
+} from "@algwiki/types";
 import { Button } from "@material-ui/core";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import shajs from "sha.js";

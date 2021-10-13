@@ -7,7 +7,7 @@ import {
   TestCase,
   TestCaseRuns,
   TestCaseType,
-} from "@alg-wiki/types";
+} from "@algwiki/types";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import WarningIcon from "@material-ui/icons/Warning";

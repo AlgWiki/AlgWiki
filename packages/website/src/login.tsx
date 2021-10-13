@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { GITHUB_LOGIN_PATH, GITHUB_OAUTH_CLIENT_ID } from "@alg-wiki/common";
+import { GITHUB_LOGIN_PATH, GITHUB_OAUTH_CLIENT_ID } from "@algwiki/common";
 import { Button } from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
 import { useHistory, useLocation, useRouteMatch } from "react-router-dom";

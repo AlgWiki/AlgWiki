@@ -20,11 +20,11 @@ const showPreferences = (): void => {
 const helpSubmenu: MenuItemConstructorOptions[] = [
   openUrlMenuItem({
     label: "Website",
-    url: "https://github.com/jakzo/alg-wiki",
+    url: "https://github.com/jakzo/algwiki",
   }),
   openUrlMenuItem({
     label: "Source Code",
-    url: "https://github.com/jakzo/alg-wiki",
+    url: "https://github.com/jakzo/algwiki",
   }),
   {
     label: "Report an Issue…",
@@ -39,7 +39,7 @@ ${debugInfo()}`;
 
       openNewGitHubIssue({
         user: "jakzo",
-        repo: "alg-wiki",
+        repo: "algwiki",
         body,
       });
     },
