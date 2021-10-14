@@ -3,14 +3,19 @@
 {{{userCode}}}
 
 fn main() {
+    use std::io::{self, Read};
+
+    let mut buffer = String::new();
+    io::stdin().read_to_string(&mut buffer).expect("runner failed to read input");
+
     {{#if types.input.isDictionary}}
-    let {{{inputIdent}}}: Vec<{{{types.input.type}}}> = serde_json::from_str::<Vec<Vec<({{{types.input.dictTypes.key}}}, {{{types.input.dictTypes.value}}})>>>(r#"{{{escRustRaw inputJson}}}"#)
+    let {{{inputIdent}}}: Vec<{{{types.input.type}}}> = serde_json::from_str::<Vec<Vec<({{{types.input.dictTypes.key}}}, {{{types.input.dictTypes.value}}})>>>(&buffer)
         .expect("failed to parse input json")
         .into_iter()
         .map(|v| v.into_iter().collect::<{{{types.input.type}}}>())
         .collect();
     {{else}}
-    let {{{inputIdent}}}: Vec<{{{types.input.type}}}> = serde_json::from_str(r#"{{{escRustRaw inputJson}}}"#)
+    let {{{inputIdent}}}: Vec<{{{types.input.type}}}> = serde_json::from_str(&buffer)
       .expect("failed to parse input json");
     {{/if}}
 
