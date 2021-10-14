@@ -120,7 +120,7 @@ export class Runner<I extends Variant, O extends Variant> {
       // the bind mount where we store the runner code
       `--volume=${this.mountPath}:/algwiki/mount`,
       // the image to run
-      `alg-wiki/${this.lang}`,
+      `algwiki/${this.lang}`,
     ];
 
     // dodgy cleanup on any errors
