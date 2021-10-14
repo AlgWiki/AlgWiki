@@ -1,0 +1,60 @@
+{{#types.hasLinkedList}}
+class ListNode:
+  def __init__(self, val=0, next=None):
+    self.val = val
+    self.next = next
+{{/types.hasLinkedList}}
+
+{{{userCode}}}
+
+try:
+  del _main
+except:
+  pass
+
+def _main():
+  import json
+  import sys
+
+  {{{inputIdent}}} = json.load(sys.stdin)
+
+  {{#types.hasLinkedList}}
+  def _listnode_from_list(l):
+    if len(l) == 0:
+      return None
+    r = ListNode(l.pop(0))
+    for x in l:
+      r.next = ListNode(x)
+      r = r.next
+    return r
+
+  {{{inputIdent}}} = [_listnode_from_list(x) for x in {{{inputIdent}}}]
+
+  def _listnode_to_list(node):
+    l = []
+    while node != None:
+      l.append(node.val)
+      node = node.next
+    return l
+  {{/types.hasLinkedList}}
+
+  for tc in {{{inputIdent}}}:
+    try:
+      result = {{{challengeIdent}}}(tc)
+      {{#if types.output.isDictionary}}
+      j = json.dumps({
+        r'{{{escPythonRaw boundary.dictionary}}}': { 'inner': [(k, v) for k, v in result.items()] }
+      })
+      {{else if types.output.isLinkedList}}
+      j = json.dumps({
+        r'{{{escPythonRaw boundary.linkedList}}}': { 'inner': _listnode_to_list(result) }
+      })
+      {{else}}
+      j = json.dumps(result)
+      {{/if}}
+
+    except Exception as e:
+      j = json.dumps({ r'{{{escPythonRaw boundary.error}}}': { 'message': str(e) } })
+    print '{}{}{}'.format(r'{{{escPythonRaw boundary.start}}}', j, r'{{{escPythonRaw boundary.end}}}')
+
+_main()

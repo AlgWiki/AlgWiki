@@ -32,6 +32,20 @@ fn reduce2(input: HashMap<i64, i64>) -> HashMap<i64, i64> {
   m
 }`,
   },
+  [Language.Python2]: {
+    single: `\
+def double(input):
+  return input * 2`,
+    list: `\
+def sum2(input):
+  return [sum(input)]`,
+    linkedList: `\
+def sum2(input):
+  return ListNode(0)`,
+    dictionary: `\
+def reduce2(input):
+  return { 42: 1729 }`,
+  },
   [Language.Python3]: {
     single: `\
 def double(input):
