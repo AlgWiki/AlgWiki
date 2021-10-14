@@ -109,11 +109,18 @@ export class Runner<I extends Variant, O extends Variant> {
     // run the docker image and incrementally parse its output
     const args = [
       "run",
+      // remove container after it exits
       "--rm",
+      // keep stdin open so we can write to it
+      "--interactive",
+      // a unique name that we know (so we can remove it)
       `--name=${boundary.marker}`,
+      // the port each runner listens to before starting
       "--publish=1234:1234",
+      // the bind mount where we store the runner code
       `--volume=${this.mountPath}:/algwiki/mount`,
-      `algwiki/${this.lang}`,
+      // the image to run
+      `alg-wiki/${this.lang}`,
     ];
 
     // dodgy cleanup on any errors
@@ -127,6 +134,12 @@ export class Runner<I extends Variant, O extends Variant> {
     });
 
     // pass child to the ResultEmitter to parse its output
-    return new ResultEmitter(boundary, child);
+    const resultEmitter = new ResultEmitter(boundary, child);
+
+    // pass in input JSON via stdin
+    child.stdin.write(this.challenge.inputJsonString());
+    child.stdin.end();
+
+    return resultEmitter;
   }
 }

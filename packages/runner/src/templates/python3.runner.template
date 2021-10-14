@@ -3,25 +3,6 @@ class ListNode:
   def __init__(self, val=0, next=None):
     self.val = val
     self.next = next
-
-  def _to_list(self):
-    l = []
-    c = self
-    while c != None:
-      l.append(c.val)
-      c = c.next
-    return l
-
-  @staticmethod
-  def _from_list(input):
-    if len(input) == 0:
-      return None
-
-    r = ListNode(input.pop(0))
-    for x in input:
-      r.next = ListNode(x)
-      r = r.next
-    return r
 {{/types.hasLinkedList}}
 
 {{{userCode}}}
@@ -33,7 +14,29 @@ except:
 
 def _main():
   import json
-  {{{inputIdent}}} = json.loads(r'{{{escPythonRaw inputJson}}}')
+  import sys
+
+  {{{inputIdent}}} = json.load(sys.stdin)
+
+  {{#types.hasLinkedList}}
+  def _listnode_from_list(l):
+    if len(l) == 0:
+      return None
+    r = ListNode(l.pop(0))
+    for x in l:
+      r.next = ListNode(x)
+      r = r.next
+    return r
+
+  {{{inputIdent}}} = [_listnode_from_list(x) for x in {{{inputIdent}}}]
+
+  def _listnode_to_list(node):
+    l = []
+    while node != None:
+      l.append(node.val)
+      node = node.next
+    return l
+  {{/types.hasLinkedList}}
 
   for tc in {{{inputIdent}}}:
     try:
@@ -44,7 +47,7 @@ def _main():
       })
       {{else if types.output.isLinkedList}}
       j = json.dumps({
-        r'{{{escPythonRaw boundary.linkedList}}}': { 'inner': result._to_list() }
+        r'{{{escPythonRaw boundary.linkedList}}}': { 'inner': _listnode_to_list(result) }
       })
       {{else}}
       j = json.dumps(result)

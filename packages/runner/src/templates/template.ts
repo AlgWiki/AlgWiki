@@ -40,7 +40,6 @@ export async function render(options: RendererOptions): Promise<string> {
     boundary: options.boundary,
     challengeIdent: LanguageIdentifier[options.lang](options.challenge.name),
     inputIdent: LanguageIdentifier[options.lang](options.boundary.input),
-    inputJson: options.challenge.inputJsonString(),
     userCode: options.userCode,
     input: options.challenge.inputs[0],
     output: options.challenge.output,
@@ -54,7 +53,6 @@ interface TemplateVariables {
   input: Type<Variant>;
   output: Type<Variant>;
   userCode: ViewString;
-  inputJson: ViewString;
   inputIdent: ViewString;
   challengeIdent: ViewString;
 }
