@@ -10,6 +10,8 @@ import { Dictionary, Primitive, Type, Variant } from "../Type";
 import { LanguageIdentifier, LanguageTypeRenderer } from "./utils";
 
 Handlerbars.registerHelper({
+  escJs: (text: string) =>
+    new Handlerbars.SafeString(text.replace(/"/g, '\\"')),
   escRustRaw: (text: string) =>
     new Handlerbars.SafeString(text.replace(/"#/g, '\\"\\#')),
   escPythonRaw: (text: string) =>

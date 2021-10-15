@@ -84,6 +84,7 @@ export enum OutputStream {
 }
 
 export enum Language {
+  Node = "node",
   Rust = "rust",
   Python2 = "python2",
   Python3 = "python3",
