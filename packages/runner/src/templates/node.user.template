@@ -1,0 +1,14 @@
+{{#types.hasLinkedList}}
+// Definition for LinkedList.
+// function ListNode(val, next = null) {
+//   if (!(this instanceof ListNode)) {
+//     return new ListNode(val, next);
+//   }
+//   this.val = val;
+//   this.next = next;
+// }
+
+{{/types.hasLinkedList}}
+function {{challengeIdent}}(testcase) {
+  return null;
+}

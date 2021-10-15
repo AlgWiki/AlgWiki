@@ -22,11 +22,12 @@ def _main():
   def _listnode_from_list(l):
     if len(l) == 0:
       return None
-    r = ListNode(l.pop(0))
+    head = ListNode(l.pop(0))
+    curr = head
     for x in l:
-      r.next = ListNode(x)
-      r = r.next
-    return r
+      curr.next = ListNode(x)
+      curr = curr.next
+    return head
 
   {{{inputIdent}}} = [_listnode_from_list(x) for x in {{{inputIdent}}}]
 

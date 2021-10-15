@@ -1,0 +1,73 @@
+{{#types.hasLinkedList}}
+function ListNode(val, next = null) {
+  if (!(this instanceof ListNode)) {
+    return new ListNode(val, next);
+  }
+  this.val = val;
+  this.next = next;
+}
+{{/types.hasLinkedList}}
+
+{{{userCode}}}
+
+;(function () {
+  const { stdin } = process;
+
+  let data = '';
+  stdin.setEncoding('utf-8');
+  stdin.on("data", chunk => data += chunk);
+  stdin.on("end", () => run());
+  stdin.resume();
+
+  function run() {
+    let {{{inputIdent}}};
+    try {
+      {{#if types.output.isLinkedList}}
+      {{{inputIdent}}} = JSON.parse(data).map(list => {
+        if (list.length == 0) return null;
+        const head = ListNode(list.shift());
+        let curr = head;
+        for (const x of list) {
+          curr.next = ListNode(x);
+          curr = curr.next;
+        }
+        return head;
+      });
+      {{else}}
+      {{{inputIdent}}} = JSON.parse(data);
+      {{/if}}
+    } catch (err) {
+      const j = { "{{{escJs boundary.error}}}": { message: err.message, stack: err.stack } };
+      process.stdout.write("{{{escJs boundary.start}}}" + JSON.stringify(j) + "{{{escJs boundary.end}}}");
+      return;
+    }
+
+    for (const tc of {{{inputIdent}}}) {
+      let j;
+      try {
+        const result = {{{challengeIdent}}}(tc);
+        {{#if types.output.isDictionary}}
+        if (result instanceof Map) {
+          j = { "{{{escJs boundary.dictionary}}}": { inner: [...result.entries()] } };
+        } else {
+          j = { "{{{escJs boundary.dictionary}}}": { inner: [...Object.entries(result)] } };
+        }
+        {{else if types.output.isLinkedList}}
+        const inner = [];
+        let curr = result;
+        while (curr != null) {
+          inner.push(curr.val);
+          curr = curr.next;
+        }
+        j = { "{{{escJs boundary.linkedList}}}": { inner: inner } };
+        {{else}}
+        j = result;
+        {{/if}}
+      } catch (err) {
+        j = { "{{{escJs boundary.error}}}": { message: err.message, stack: err.stack } };
+      } finally {
+        process.stdout.write("{{{escJs boundary.start}}}" + JSON.stringify(j) + "{{{escJs boundary.end}}}");
+      }
+    }
+  }
+})();

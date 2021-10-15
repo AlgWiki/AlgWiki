@@ -6,6 +6,12 @@ import { Primitive, Type, Variant } from "../Type";
 import { TypeRenderer } from "../templates/types";
 
 const input: Record<Language, Record<keyof TypeRenderer, string>> = {
+  [Language.Node]: {
+    single: `const double = i => i * 2`,
+    list: `const sum2 = i => i.map(j => j * 2)`,
+    linkedList: `const sum2 = _ => ListNode(42)`,
+    dictionary: `const reduce2 = _ => new Map([[1,2]])`,
+  },
   [Language.Rust]: {
     single: `\
 fn double(input: i64) -> i64 {
