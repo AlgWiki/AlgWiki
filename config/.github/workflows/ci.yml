@@ -45,22 +45,15 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ADMIN }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ADMIN }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Update infrastructure
         uses: pulumi/actions@v3
         with:
           work-dir: ./packages/infrastructure
-          cloud-url: file://.
           command: up
           stack-name: prod
         env:
-          PULUMI_CONFIG_PASSPHRASE: ${{ secrets.PULUMI_PASSPHRASE_PROD }}
-      - name: Push Pulumi stack state
-        run: |
-          set -e
-          git add ./packages/infrastructure/.pulumi
-          if git commit --no-verify -m "release(ci): update prod infrastructure state [skip ci]"; then
-            git push --no-verify
-          fi
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          NETLIFY_ACCESS_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}

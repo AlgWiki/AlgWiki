@@ -1,18 +1,19 @@
 import * as pulumi from "@pulumi/pulumi";
 
-export const registerAutoTags = (autoTags: Record<string, string>): void =>
-  pulumi.runtime.registerStackTransformation((args) => {
+export const autoTagsTransformation =
+  (autoTags: Record<string, string>): pulumi.ResourceTransformation =>
+  (args) => {
     if (taggableResourceTypes.includes(args.type)) {
-      args.props["tags"] = {
-        ...(args.props["tags"] as Record<string, string>),
+      args.props.tags = {
+        ...(args.props.tags as Record<string, string>),
         ...autoTags,
       };
       return { props: args.props, opts: args.opts };
     }
     return undefined;
-  });
+  };
 
-const taggableResourceTypes = [
+const taggableResourceTypes: string[] = [
   "aws:accessanalyzer/analyzer:Analyzer",
   "aws:acm/certificate:Certificate",
   "aws:acmpca/certificateAuthority:CertificateAuthority",

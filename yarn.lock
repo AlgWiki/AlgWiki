@@ -69,12 +69,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@algwiki/infrastructure@workspace:packages/infrastructure"
   dependencies:
-    "@algwiki/common": "workspace:packages/common"
-    "@algwiki/common-node": "workspace:packages/common-node"
     "@algwiki/db": "workspace:packages/db"
     "@algwiki/routes": "workspace:packages/routes"
     "@pulumi/aws": ^4.0.0
     "@pulumi/awsx": ^0.30.0
+    "@pulumi/github": ^4.5.0
     "@pulumi/pulumi": ^3.13.2
     "@types/aws-lambda": ^8.10.83
     "@types/fs-extra": ^9.0.13
@@ -83,11 +82,14 @@ __metadata:
     aws-lambda: ^1.0.6
     fast-glob: ^3.2.7
     fs-extra: ^10.0.0
+    netlify: ^8.0.2
+    openpgp: ^5.0.0
     runtypes: ^6.4.1
     source-map-support: ^0.5.20
     ts-loader: ^9.2.6
     ts-node: ^10.2.1
     tslib: ^2.3.1
+    type-fest: ^2.5.0
     typescript: ^4.4.3
     webpack: ^5.56.0
   languageName: unknown
@@ -1788,6 +1790,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@netlify/open-api@npm:^2.5.2":
+  version: 2.5.2
+  resolution: "@netlify/open-api@npm:2.5.2"
+  checksum: 499a85c742cfc5e8ebbf3067642e1a4c4af212636a0bc5f2d1f5066664f11c0b361860a842f7dd39bf8ca96192d9215ac7fa307cc84ff3803dd04cec782d5119
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1950,6 +1959,15 @@ __metadata:
     "@pulumi/pulumi": ^3.0.0
     semver: ^5.4.0
   checksum: e0c57e10e863d9fe80c34c1204d783d8c324e0cf7fda95c2f7ce16106b359978e3c18b9f14d03dcd76d4aa2e0dc9ba92e003c5383aed820bf51070d3c497a8fd
+  languageName: node
+  linkType: hard
+
+"@pulumi/github@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@pulumi/github@npm:4.5.0"
+  dependencies:
+    "@pulumi/pulumi": ^3.0.0
+  checksum: c73cc575169ffce3a33e56c4a1fc46698aa64775d436482e42b9aaebfa583bf6a42644f64767d29e9f47cfafb94c68997004b92993544b771d84d4f401bdd85d
   languageName: node
   linkType: hard
 
@@ -3992,6 +4010,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"asn1.js@npm:^5.0.0":
+  version: 5.4.1
+  resolution: "asn1.js@npm:5.4.1"
+  dependencies:
+    bn.js: ^4.0.0
+    inherits: ^2.0.1
+    minimalistic-assert: ^1.0.0
+    safer-buffer: ^2.1.0
+  checksum: 3786a101ac6f304bd4e9a7df79549a7561950a13d4bcaec0c7790d44c80d147c1a94ba3d4e663673406064642a40b23fcd6c82a9952468e386c1a1376d747f9a
+  languageName: node
+  linkType: hard
+
 "asn1@npm:^0.2.4":
   version: 0.2.4
   resolution: "asn1@npm:0.2.4"
@@ -4267,6 +4297,13 @@ __metadata:
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 869417503c722e7dc54ca46715f70e15f4d9c602a423a02c825570862d12935be59ed9c7ba34a9b31f186c017c23cac6b54e35446f8353059c101da73eac22ef
+  languageName: node
+  linkType: hard
+
+"bn.js@npm:^4.0.0":
+  version: 4.12.0
+  resolution: "bn.js@npm:4.12.0"
+  checksum: 39afb4f15f4ea537b55eaf1446c896af28ac948fdcf47171961475724d1bb65118cca49fa6e3d67706e4790955ec0e74de584e45c8f1ef89f46c812bee5b5a12
   languageName: node
   linkType: hard
 
@@ -9930,6 +9967,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.camelcase@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "lodash.camelcase@npm:4.3.0"
+  checksum: cb9227612f71b83e42de93eccf1232feeb25e705bdb19ba26c04f91e885bfd3dd5c517c4a97137658190581d3493ea3973072ca010aab7e301046d90740393d1
+  languageName: node
+  linkType: hard
+
 "lodash.clonedeep@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.clonedeep@npm:4.5.0"
@@ -10285,6 +10329,13 @@ __metadata:
   version: 1.1.2
   resolution: "methods@npm:1.1.2"
   checksum: 0917ff4041fa8e2f2fda5425a955fe16ca411591fbd123c0d722fcf02b73971ed6f764d85f0a6f547ce49ee0221ce2c19a5fa692157931cecb422984f1dcd13a
+  languageName: node
+  linkType: hard
+
+"micro-api-client@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "micro-api-client@npm:3.3.0"
+  checksum: db0ad27df4c58bfb10eb4a6ad14d242d8abbae1bca623db3b23568dae6b146338ecbd62563a41a756b7a75ea155c950ddb5d633859ca728072d1852ed29dd1e2
   languageName: node
   linkType: hard
 
@@ -10682,6 +10733,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"netlify@npm:^8.0.2":
+  version: 8.0.3
+  resolution: "netlify@npm:8.0.3"
+  dependencies:
+    "@netlify/open-api": ^2.5.2
+    lodash.camelcase: ^4.3.0
+    micro-api-client: ^3.3.0
+    node-fetch: ^2.6.1
+    omit.js: ^2.0.2
+    p-wait-for: ^3.2.0
+    qs: ^6.9.6
+  checksum: 04772d2b0671509977211c0041cc34f38acfc1c185b071f6cb0993e467490575d72fbfa99cbcc075ff256efb1f2c27ad6933c4a497b3b5ae1ee537551de9d40e
+  languageName: node
+  linkType: hard
+
 "new-github-issue-url@npm:^0.2.1":
   version: 0.2.1
   resolution: "new-github-issue-url@npm:0.2.1"
@@ -10705,6 +10771,15 @@ __metadata:
   dependencies:
     node-gyp: latest
   checksum: 938922b3d7cb34ee137c5ec39df6289a3965e8cab9061c6848863324c21a778a81ae3bc955554c56b6b86962f6ccab2043dd5fa3f33deab633636bd28039333f
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^2.6.1":
+  version: 2.6.5
+  resolution: "node-fetch@npm:2.6.5"
+  dependencies:
+    whatwg-url: ^5.0.0
+  checksum: 4e83db450718e70762882f00d96f647a7f2f3170035225934ddd5450cb1d91ef339ceb180d3687bcb0a6ed78c3fa5636ce8d3e44ec81ab59e0224ebf8965f65f
   languageName: node
   linkType: hard
 
@@ -11043,6 +11118,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"omit.js@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "omit.js@npm:2.0.2"
+  checksum: 5d802b9fd7640250aada82f3b9b7243b554b38911f29b3de0d1066c00f24dd4ee72d3b9c94c582e373fb6511bd21e107917d419a7b2a04287f26c31133b48a15
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:^2.3.0, on-finished@npm:~2.3.0":
   version: 2.3.0
   resolution: "on-finished@npm:2.3.0"
@@ -11092,6 +11174,15 @@ __metadata:
     is-docker: ^2.1.1
     is-wsl: ^2.2.0
   checksum: 10fcb7ad453534cc1103ff90e0ebc36e542d67a4ccacf3b3d78c8e6401cec686e2849479cbc4a3386c7a3210064cbcc52e6ac38b788fc5fff1cf1dcbfef3c83b
+  languageName: node
+  linkType: hard
+
+"openpgp@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "openpgp@npm:5.0.0"
+  dependencies:
+    asn1.js: ^5.0.0
+  checksum: 6b6d2e8345a0fa876665f9cb71a15593b06c25bfbd4af885d8ff9b543cfbf3ab2b833eb25de824e6552c0eafe2b78e9ccb3a7270841baff98fabb6b3ac370999
   languageName: node
   linkType: hard
 
@@ -11299,7 +11390,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-timeout@npm:^3.1.0":
+"p-timeout@npm:^3.0.0, p-timeout@npm:^3.1.0":
   version: 3.2.0
   resolution: "p-timeout@npm:3.2.0"
   dependencies:
@@ -11319,6 +11410,15 @@ __metadata:
   version: 2.2.0
   resolution: "p-try@npm:2.2.0"
   checksum: f8a8e9a7693659383f06aec604ad5ead237c7a261c18048a6e1b5b85a5f8a067e469aa24f5bc009b991ea3b058a87f5065ef4176793a200d4917349881216cae
+  languageName: node
+  linkType: hard
+
+"p-wait-for@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "p-wait-for@npm:3.2.0"
+  dependencies:
+    p-timeout: ^3.0.0
+  checksum: 7f6840e9233d96836a233dee9c5b1c711bfdf76228d0eaea68fa74a79418f5eef6dc1915dadd28d17312a99f6a53daa308b1c18b779bc9c1dabcae3d6b35a086
   languageName: node
   linkType: hard
 
@@ -12035,6 +12135,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:^6.9.6":
+  version: 6.10.1
+  resolution: "qs@npm:6.10.1"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 00e390dbf98eff4d8ff121b61ab2fe32106852290de99ecd0e40fc76651c4101f43fc6cc8313cb69423563876fc532951b11dda55d2917def05f292258263480
+  languageName: node
+  linkType: hard
+
 "querystring@npm:0.2.0":
   version: 0.2.0
   resolution: "querystring@npm:0.2.0"
@@ -12675,7 +12784,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safer-buffer@npm:>= 2.1.2 < 3, safer-buffer@npm:>= 2.1.2 < 3.0.0, safer-buffer@npm:~2.1.0":
+"safer-buffer@npm:>= 2.1.2 < 3, safer-buffer@npm:>= 2.1.2 < 3.0.0, safer-buffer@npm:^2.1.0, safer-buffer@npm:~2.1.0":
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
@@ -13952,6 +14061,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tr46@npm:~0.0.3":
+  version: 0.0.3
+  resolution: "tr46@npm:0.0.3"
+  checksum: 726321c5eaf41b5002e17ffbd1fb7245999a073e8979085dacd47c4b4e8068ff5777142fc6726d6ca1fd2ff16921b48788b87225cbc57c72636f6efa8efbffe3
+  languageName: node
+  linkType: hard
+
 "tree-kill@npm:^1.2.2":
   version: 1.2.2
   resolution: "tree-kill@npm:1.2.2"
@@ -14339,6 +14455,13 @@ __metadata:
   version: 1.4.0
   resolution: "type-fest@npm:1.4.0"
   checksum: b011c3388665b097ae6a109a437a04d6f61d81b7357f74cbcb02246f2f5bd72b888ae33631b99871388122ba0a87f4ff1c94078e7119ff22c70e52c0ff828201
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "type-fest@npm:2.5.0"
+  checksum: 25fc675e276c8acec915c3166a07aea2f2e74b8c6b55a977ffa36477ff686309ba36a818cef48d03c66c8e1b8618d4a15bd00fc53bc4d571238ed4512cabb25e
   languageName: node
   linkType: hard
 
@@ -14859,6 +14982,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"webidl-conversions@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "webidl-conversions@npm:3.0.1"
+  checksum: c92a0a6ab95314bde9c32e1d0a6dfac83b578f8fa5f21e675bc2706ed6981bc26b7eb7e6a1fab158e5ce4adf9caa4a0aee49a52505d4d13c7be545f15021b17c
+  languageName: node
+  linkType: hard
+
 "webidl-conversions@npm:^5.0.0":
   version: 5.0.0
   resolution: "webidl-conversions@npm:5.0.0"
@@ -15047,6 +15177,16 @@ __metadata:
   version: 2.3.0
   resolution: "whatwg-mimetype@npm:2.3.0"
   checksum: 23eb885940bcbcca4ff841c40a78e9cbb893ec42743993a42bf7aed16085b048b44b06f3402018931687153550f9a32d259dfa524e4f03577ab898b6965e5383
+  languageName: node
+  linkType: hard
+
+"whatwg-url@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "whatwg-url@npm:5.0.0"
+  dependencies:
+    tr46: ~0.0.3
+    webidl-conversions: ^3.0.0
+  checksum: b8daed4ad3356cc4899048a15b2c143a9aed0dfae1f611ebd55073310c7b910f522ad75d727346ad64203d7e6c79ef25eafd465f4d12775ca44b90fa82ed9e2c
   languageName: node
   linkType: hard
 
