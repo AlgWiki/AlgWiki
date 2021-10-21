@@ -107,7 +107,7 @@ jobs:
         with:
           work-dir: ./packages/infrastructure
           command: up
-          stack-name: prod
+          stack-name: AlgWiki/prod
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           NETLIFY_ACCESS_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}

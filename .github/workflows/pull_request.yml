@@ -22,4 +22,6 @@ jobs:
         with:
           work-dir: ./packages/infrastructure
           command: preview
-          stack-name: prod
+          stack-name: AlgWiki/prod
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
