@@ -1,24 +1,10 @@
 import { SpawnSyncReturns, spawnSync } from "child_process";
 import path from "path";
 
-import { ALPHA } from "@algwiki/common";
-import { randStr } from "@algwiki/common-node";
 import fg from "fast-glob";
 import * as fse from "fs-extra";
 
-const PULUMI_PASSPHRASE_PATH = path.join(__dirname, "..", ".pulumi-passphrase");
-
-const getPulumiPassphrase = async (): Promise<string> => {
-  try {
-    const contents = await fse.readFile(PULUMI_PASSPHRASE_PATH, "utf8");
-    return contents.trim();
-  } catch (err) {
-    if ((err as { code?: string } | undefined)?.code !== "ENOENT") throw err;
-    const randomPassphrase = randStr(16, ALPHA);
-    await fse.writeFile(PULUMI_PASSPHRASE_PATH, randomPassphrase);
-    return randomPassphrase;
-  }
-};
+import { getPulumiPassphrase } from "../src/util/stack";
 
 const main = async (): Promise<void> => {
   const pulumiPassphrase = await getPulumiPassphrase();

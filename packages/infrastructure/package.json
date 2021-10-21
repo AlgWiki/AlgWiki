@@ -25,17 +25,23 @@
   },
   "scripts": {
     "init-pulumi-local": "ts-node --project ../../tsconfig.json --transpile-only --compiler-options '{ \"module\": \"CommonJS\" }' ./scripts/init-pulumi-local.ts",
-    "pulumi": "PULUMI_CONFIG_PASSPHRASE=$(cat .pulumi-passphrase) pulumi",
-    "localstack": "yarn init-pulumi-local && docker-compose up"
+    "//": "node_modules rm hack below waiting on https://github.com/pulumi/pulumi/issues/2928 or https://github.com/yarnpkg/berry/issues/3380",
+    "pulumi": "rm -rf ./node_modules/@algwiki && PULUMI_CONFIG_PASSPHRASE_FILE=.pulumi-passphrase pulumi",
+    "localstack": "yarn init-pulumi-local && docker-compose up",
+    "decrypt-passwords": "ts-node --project ../../tsconfig.json --transpile-only --compiler-options '{ \"module\": \"CommonJS\" }' ./scripts/decrypt-passwords.ts"
   },
   "dependencies": {
     "@algwiki/db": "workspace:packages/db",
     "@algwiki/routes": "workspace:packages/routes",
     "@pulumi/aws": "^4.0.0",
     "@pulumi/awsx": "^0.30.0",
+    "@pulumi/github": "^4.5.0",
     "@pulumi/pulumi": "^3.13.2",
     "aws-lambda": "^1.0.6",
     "fast-glob": "^3.2.7",
+    "fs-extra": "^10.0.0",
+    "netlify": "^8.0.2",
+    "openpgp": "^5.0.0",
     "runtypes": "^6.4.1",
     "ts-loader": "^9.2.6",
     "tslib": "^2.3.1",
@@ -43,14 +49,12 @@
     "webpack": "^5.56.0"
   },
   "devDependencies": {
-    "@algwiki/common": "workspace:packages/common",
-    "@algwiki/common-node": "workspace:packages/common-node",
     "@types/aws-lambda": "^8.10.83",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "14.14.37",
     "@types/source-map-support": "^0",
-    "fs-extra": "^10.0.0",
     "source-map-support": "^0.5.20",
-    "ts-node": "^10.2.1"
+    "ts-node": "^10.2.1",
+    "type-fest": "^2.5.0"
   }
 }

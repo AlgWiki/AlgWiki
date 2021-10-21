@@ -1,3 +1,14 @@
-encryptionsalt: v1:GCAqr8wxmHY=:v1:AB4PtAYCYXdNH3OB:cTkwj9AFoPWlSXxeqOH6FsxZFWtXYA==
 config:
+  AlgWiki:admins:
+  - githubUsername: jakzo
+  - githubUsername: acheronfail
+  - githubUsername: AlgWiki-bot
+    isBot: true
+  AlgWiki:baseDomain: alg.wiki
+  AlgWiki:netlifyAccessToken:
+    secure: AAABAMG8zeR+x17bODaEun0/t6rqdtkxwwSSvg0mY5dBAJ9G22ZeXQ/81HWPBHWp6dWzH3+KbcVwFPrJ4iHDnwZmv42QDZc/5y1f
+  AlgWiki:netlifyZoneId: alg_wiki
   aws:region: us-east-1
+  github:owner: AlgWiki
+  github:token:
+    secure: AAABAH1pAa0jKTZzRxJudKeOP5ZKsj5fUoV8PlBS2xrpks0QEjgMRN0Vjb4bcB/Fk91hEcdUOPwgxzZrhPph1l4+ddQmy/uP

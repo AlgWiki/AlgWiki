@@ -1,9 +1,5 @@
 .pulumi-passphrase
+.pulumi/
 
-Pulumi.dev.yaml
-.pulumi/*/dev/
-.pulumi/stacks/dev.*
-
-Pulumi.local.yaml
-.pulumi/*/local/
-.pulumi/stacks/local.*
+Pulumi.*.yaml
+!Pulumi.prod.yaml

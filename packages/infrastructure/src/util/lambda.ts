@@ -6,15 +6,13 @@ import * as awsx from "@pulumi/awsx";
 import * as pulumi from "@pulumi/pulumi";
 import webpack from "webpack";
 
-import { dynamodb } from "../db";
-
 const ROOT_DIR = process.cwd();
 const DIST_DIR = path.join(ROOT_DIR, "dist-pulumi");
 
 let cachedDefaultLambdaRole: aws.iam.Role | undefined;
-const getDefaultLambdaRole = (): aws.iam.Role => {
+const getDefaultLambdaRole = (table: aws.dynamodb.Table): aws.iam.Role => {
   if (cachedDefaultLambdaRole) return cachedDefaultLambdaRole;
-  const defaultLambdaRole = new aws.iam.Role("defaultLambdaRole", {
+  const defaultLambdaRole = new aws.iam.Role("default-lambda-role", {
     assumeRolePolicy: {
       Version: "2012-10-17",
       Statement: [
@@ -30,7 +28,7 @@ const getDefaultLambdaRole = (): aws.iam.Role => {
     inlinePolicies: [
       {
         name: "LambdaRoute",
-        policy: dynamodb.arn.apply((arn) =>
+        policy: table.arn.apply((arn) =>
           JSON.stringify({
             Version: "2012-10-17",
             Statement: [
@@ -61,7 +59,7 @@ const getDefaultLambdaRole = (): aws.iam.Role => {
       },
     ],
   });
-  new aws.iam.RolePolicyAttachment("defaultLambdaRoleAttach", {
+  new aws.iam.RolePolicyAttachment("default-lambda-role-attach", {
     role: defaultLambdaRole,
     policyArn: aws.iam.ManagedPolicy.AWSLambdaExecute,
   });
@@ -156,6 +154,7 @@ const getLambdaAssetArchive = async (
 };
 
 export const createLambdas = (
+  table: aws.dynamodb.Table,
   routeModules: { default: Route<Json, Json> }[]
 ): LambdaData[] => {
   const routeModulesSet = new Set(routeModules);
@@ -177,7 +176,7 @@ export const createLambdas = (
         timeout: 5,
         runtime: aws.lambda.Runtime.NodeJS14dX,
         handler: "index.handler",
-        role: getDefaultLambdaRole().arn,
+        role: getDefaultLambdaRole(table).arn,
         code: pulumi
           .output(undefined)
           .apply(async () => getLambdaAssetArchive(data)),

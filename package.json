@@ -3,7 +3,12 @@
   "private": true,
   "version": "0.0.1",
   "description": "Website for programming algorithms and puzzles.",
-  "keywords": [],
+  "keywords": [
+    "algorithms",
+    "competitive-programming",
+    "puzzles",
+    "code-golf"
+  ],
   "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
   "repository": {
     "type": "git",
@@ -44,7 +49,8 @@
     "release": "project && rimraf \"./dist\" \"*.tsbuildinfo\" && run-if-script-exists build:clean:custom && run-if-script-exists build:custom-before && tsc -b ./tsconfig.build.json && run-if-script-exists build:custom && yarn workspaces foreach --verbose --topological --no-private npm publish --tolerate-republish && run-if-script-exists release:custom",
     "prepare": "project && husky install && run-if-script-exists prepare:custom",
     "=== (end generated scripts) ===": "",
-    "": ""
+    "": "",
+    "clean-install": "rm -rf node_modules && rm -rf packages/*/node_modules && yarn install"
   },
   "devDependencies": {
     "@changesets/cli": "2.17.0",
