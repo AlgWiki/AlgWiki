@@ -1,0 +1,44 @@
+{
+  "name": "@oxy2/middleware",
+  "version": "0.0.1",
+  "description": "Middleware for building an O2 backend server.",
+  "keywords": [],
+  "homepage": "https://github.com/AlgWiki/AlgWiki#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlgWiki/AlgWiki.git",
+    "directory": "frameworks/o2/middleware"
+  },
+  "bugs": {
+    "url": "https://github.com/AlgWiki/AlgWiki/issues"
+  },
+  "author": "jakzo",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@oxy2/backend": "workspace:frameworks/o2/backend",
+    "@oxy2/console-logger": "workspace:frameworks/o2/console-logger",
+    "@oxy2/magic": "workspace:frameworks/o2/magic",
+    "@oxy2/utils": "workspace:frameworks/o2/utils",
+    "co-body": "^6.1.0",
+    "koa": "^2.13.1",
+    "on-finished": "^2.3.0",
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/co-body": "^5.1.0",
+    "@types/koa": "^2.13.3",
+    "@types/node": "14.14.37",
+    "@types/on-finished": "^2.3.1",
+    "@types/prettier": "^2",
+    "prettier": "^2.4.1"
+  }
+}

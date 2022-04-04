@@ -1,0 +1,24 @@
+{
+  "extends": "../../../tsconfig.json",
+  "include": ["./src/**/*", "./src/**/*.json"],
+  "exclude": ["**/__*__/**/*"],
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "types": ["node"],
+    "paths": {
+      "@oxy2/backend": ["frameworks/o2/backend/src"],
+      "@oxy2/magic": ["frameworks/o2/magic/src"]
+    }
+  },
+  "references": [
+    {
+      "path": "../backend"
+    },
+
+    {
+      "path": "../magic"
+    }
+  ]
+}

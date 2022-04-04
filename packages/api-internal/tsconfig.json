@@ -1,0 +1,36 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["./src/**/*", "./src/**/*.json"],
+  "exclude": ["**/__*__/**/*"],
+  "compilerOptions": {
+    "noEmit": false,
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "types": ["node"],
+    "paths": {
+      "@algwiki/common": ["../common/src"],
+      "@algwiki/db": ["../db/src"],
+      "@algwiki/common-node": ["../common-node/src"],
+      "@oxy2/backend": ["../../frameworks/o2/backend/src"]
+    }
+  },
+  "references": [
+    {
+      "path": "../common"
+    },
+
+    {
+      "path": "../common-node"
+    },
+
+    {
+      "path": "../db"
+    },
+
+    {
+      "path": "../../frameworks/o2/backend"
+    }
+  ]
+}

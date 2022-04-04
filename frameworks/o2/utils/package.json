@@ -1,0 +1,32 @@
+{
+  "name": "@oxy2/utils",
+  "version": "0.0.1",
+  "description": "Internal utilities for the O2 framework.",
+  "keywords": [],
+  "homepage": "https://github.com/AlgWiki/AlgWiki#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlgWiki/AlgWiki.git",
+    "directory": "frameworks/o2/utils"
+  },
+  "bugs": {
+    "url": "https://github.com/AlgWiki/AlgWiki/issues"
+  },
+  "author": "jakzo",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "@types/node": "14.14.37"
+  },
+  "dependencies": {
+    "tslib": "^2.2.0"
+  }
+}

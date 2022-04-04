@@ -9,19 +9,20 @@
     "puzzles",
     "code-golf"
   ],
-  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git"
+    "url": "https://github.com/AlgWiki/AlgWiki.git"
   },
   "bugs": {
-    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/issues"
   },
   "author": "jakzo",
   "license": "MIT",
   "workspaces": {
     "packages": [
-      "./packages/*"
+      "./packages/*",
+      "./frameworks/*/*"
     ]
   },
   "engines": {

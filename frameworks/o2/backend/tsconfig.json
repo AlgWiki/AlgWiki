@@ -1,0 +1,21 @@
+{
+  "extends": "../../../tsconfig.json",
+  "include": ["./src/**/*", "./src/**/*.json"],
+  "exclude": ["**/__*__/**/*"],
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "types": ["node"],
+    "paths": {
+      "@oxy2/utils": ["frameworks/o2/utils/src"],
+      "@oxy2/magic": ["frameworks/o2/magic/src"],
+      "@oxy2/console-logger": ["frameworks/o2/console-logger/src"]
+    }
+  },
+  "references": [
+    { "path": "../console-logger" },
+    { "path": "../magic" },
+    { "path": "../utils" }
+  ]
+}

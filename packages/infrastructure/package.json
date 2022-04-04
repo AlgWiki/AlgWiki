@@ -4,14 +4,14 @@
   "description": "AlgWiki backend infrastructure.",
   "private": true,
   "keywords": [],
-  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki.git",
     "directory": "packages/infrastructure"
   },
   "bugs": {
-    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/issues"
   },
   "author": "jakzo",
   "license": "MIT",
@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@algwiki/db": "workspace:packages/db",
-    "@algwiki/routes": "workspace:packages/routes",
     "@pulumi/aws": "^4.0.0",
     "@pulumi/awsx": "^0.30.0",
     "@pulumi/github": "^4.5.0",

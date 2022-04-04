@@ -5,14 +5,14 @@
   "version": "0.0.1",
   "description": "AlgWiki electron app.",
   "keywords": [],
-  "homepage": "https://github.com/AlgWiki/AlgWiki/monorepo#readme",
+  "homepage": "https://github.com/AlgWiki/AlgWiki#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AlgWiki/AlgWiki/monorepo.git",
+    "url": "https://github.com/AlgWiki/AlgWiki.git",
     "directory": "packages/electron"
   },
   "bugs": {
-    "url": "https://github.com/AlgWiki/AlgWiki/monorepo/issues"
+    "url": "https://github.com/AlgWiki/AlgWiki/issues"
   },
   "author": "acheronfail <acheronfail@gmail.com>",
   "license": "MIT",

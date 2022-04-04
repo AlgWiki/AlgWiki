@@ -6,9 +6,9 @@ import { createLambdas, getPulumiRoute } from "./util/lambda";
 import * as netlify from "./util/netlify";
 
 const trimBaseDomain = (baseDomain: string, domain: string) => {
-  const normalized = domain.replace(/\.$/, "");
+  const normalized = domain.trim().replace(/\.$/, "");
   return normalized.endsWith(baseDomain)
-    ? normalized.substring(-baseDomain.length)
+    ? normalized.substring(0, -baseDomain.length)
     : normalized;
 };
 
